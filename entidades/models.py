@@ -13,8 +13,9 @@ from django.db import models
 
 class Estudiante(models.Model):
     tipo_sexo=(
-              ("M","Masculino")
-              ("F","Femenino"))
+              ("M","Masculino"),
+              ("F","Femenino"),
+              )
         
     USBID = models.CharField(max_length = 8,primary_key = True)
     nombre = models.CharField(max_length = 30)
@@ -30,8 +31,9 @@ class Estudiante(models.Model):
         
 class Tutor(models.Model):
     tipo_sexo=(
-              ("M","Masculino")
-              ("F","Femenino"))
+              ("M","Masculino"),
+              ("F","Femenino"),
+              )
     
     USBID = models.CharField(max_length = 20,primary_key = True)
     cedula = models.CharField(max_length = 8)    
@@ -53,9 +55,11 @@ class Proyecto(models.Model):
 
 class Cursa(models.Model):
     tipo_estado=(
-              ("R","Retirado")
-              ("C","En curso")
-              ("F","Finalizado"))
+              ("R","Retirado"),
+              ("C","En curso"),
+              ("F","Finalizado"),
+              )
+    
     estudiante= models.ForeignKey(Estudiante)    
     proyecto= models.ForeignKey(Proyecto)
     estado=models.CharField(max_length = 10, choices = tipo_estado)
