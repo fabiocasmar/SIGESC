@@ -1,16 +1,16 @@
 from django.shortcuts import render
-def estudiante(request):
+def estudiantes(request):
     context = {'msj':"Aqui va la vista inicial estudiante."}
-    return render(request, 'estudiante.html',context)
+    return render(request, 'estudiantes.html',context)
 
-def tutor(request):
+def tutores(request):
     context = {'msj':"Aqui va la vista inicial de tutor."}
-    return render(request, 'tutor.html',context)
+    return render(request, 'tutores.html',context)
 
 def cursa(request):
     context = {'msj':"Aqui va la vista inicial de cursa."}
     return render(request, 'cursa.html',context)
 
-def proyecto(request):
+def proyectos(request):
     context = {'msj':"Aqui va la vista inicial de proyecta."}
-    return render(request, 'proyecto.html',context)
+    return render(request, 'proyectos.html',context)

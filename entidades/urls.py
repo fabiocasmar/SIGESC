@@ -8,8 +8,8 @@ from django.conf.urls import patterns, url
 from entidades import views
 
 urlpatterns = patterns('',
-    url(r'^estudiante/$', views.estudiante, name='estudiante'),
-    url(r'^tutor/$', views.tutor, name='tutor'),
-    url(r'^proyecto/$', views.proyecto, name='proyecto'),
+    url(r'^estudiantes/$', views.estudiantes, name='estudiante'),
+    url(r'^tutores/$', views.tutores, name='tutor'),
+    url(r'^proyectos/$', views.proyectos, name='proyecto'),
     url(r'^cursa/$', views.cursa, name='cursa'),
 )
