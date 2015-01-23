@@ -1,13 +1,16 @@
-from django.shortcuts import render, HttpResponse
-
+from django.shortcuts import render
 def estudiante(request):
-    return HttpResponse('vista de estudiante')
+    context = {'msj':"Aqui va la vista inicial estudiante."}
+    return render(request, 'estudiante.html',context)
 
 def tutor(request):
-    return HttpResponse("vista de tutor")
+    context = {'msj':"Aqui va la vista inicial de tutor."}
+    return render(request, 'tutor.html',context)
 
 def cursa(request):
-    return HttpResponse("vista de cursa")
+    context = {'msj':"Aqui va la vista inicial de cursa."}
+    return render(request, 'cursa.html',context)
 
 def proyecto(request):
-    return HttpResponse('vista de proyecto')
+    context = {'msj':"Aqui va la vista inicial de proyecta."}
+    return render(request, 'proyecto.html',context)
