@@ -1,6 +1,10 @@
 from django.shortcuts import render
+from entidades.forms import *
+
+
 def estudiantes(request):
-    context = {'msj':"Aqui va la vista inicial estudiante."}
+    context = {'msj':"Aqui va la vista inicial estudiante.",
+               'form': EstudianteForm()}
     return render(request, 'estudiantes.html',context)
 
 def tutores(request):

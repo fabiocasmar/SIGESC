@@ -28,6 +28,9 @@ class Estudiante(models.Model):
     telefono = models.CharField(max_length = 12)
     direccion = models.CharField(max_length = 50)
     
+    def __str__(self):              # __unicode__ on Python 2
+        return self.nombre + self.apellido
+    
         
 class Tutor(models.Model):
     tipo_sexo=(
@@ -45,6 +48,10 @@ class Tutor(models.Model):
     telefono = models.CharField(max_length = 12)
     direccion = models.CharField(max_length = 50)
     
+    def __str__(self):              # __unicode__ on Python 2
+        return self.nombre + self.apellido
+
+    
 class Proyecto(models.Model):
     cod_proyecto = models.CharField(max_length = 7,primary_key = True)
     nombre = models.CharField(max_length = 30)
@@ -52,6 +59,10 @@ class Proyecto(models.Model):
     area = models.CharField(max_length = 40)
     estado = models.CharField(max_length = 10)
     tutor = models.ForeignKey(Tutor)
+    
+    def __str__(self):              # __unicode__ on Python 2
+        return self.cod_proyecto + self.nombre
+
 
 class Cursa(models.Model):
     tipo_estado=(
@@ -63,3 +74,6 @@ class Cursa(models.Model):
     estudiante= models.ForeignKey(Estudiante)    
     proyecto= models.ForeignKey(Proyecto)
     estado=models.CharField(max_length = 10, choices = tipo_estado)
+    
+    def __str__(self):              # __unicode__ on Python 2
+        return self.estado
