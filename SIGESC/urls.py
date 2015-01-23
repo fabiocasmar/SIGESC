@@ -1,11 +1,8 @@
 from django.conf.urls import patterns, include, url
-from entidades import views
 from django.contrib import admin
 
 urlpatterns = patterns('',
-    # Examples:
     url(r'^$', include('interfaz.urls')),
-    # url(r'^blog/', include('blog.urls')),
-
+    url(r'^', include('entidades.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )
