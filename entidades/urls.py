@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     url(r'^estudiantes/$', views.estudiantes, name='estudiante'),
     url(r'^estudiantes/(?P<ced>)\w+/$', views.estudiantesDetalles, name='detalles_estudiante'),
     url(r'^tutores/$', views.tutores, name='tutor'),
+    url(r'^tutores/(?P<ced>)\w+/$', views.tutorDetalles, name='detalles_tutor'),
     url(r'^proyectos/$', views.proyectos, name='proyecto'),
+    url(r'^proyectos/(?P<cod>)\w+/$', views.proyectoDetalles, name='detalles_proyecto'),
     url(r'^cursa/$', views.cursa, name='cursa'),
 )

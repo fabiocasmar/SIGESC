@@ -30,18 +30,67 @@ def estudiantesDetalles(request, ced):
         est.delete()
         context = {'msj': mensaje}
         return render(request, 'index.html', context)
-    print(est)
     context = {'est': est}
     return render(request, 'estudiante.html', context )
 
 def tutores(request):
-    context = {'msj':"Aqui va la vista inicial de tutor."}
-    return render(request, 'tutores.html',context)
+    if request.method == 'POST':
+        form = TutorForm(request.POST)
+        context = {'msj': "Tutor creado con exito.",
+                    'tutores': form}
+        if form.is_valid():
+            form.save()
+            return render(request, 'index.html', context )
+            
+        else:
+            context = {'msj': 'error'}
+            return render(request, 'tutores.html', context)
+    else:
+        tutores = Tutor.objects.all()
+        context = {'tutores': tutores,
+               'form': TutorForm()}
+        return render(request, 'tutores.html', context)
+
+def tutorDetalles(request, ced):
+     
+    tutor = Tutor.objects.get(pk = '11-111')
+    if request.method == 'POST':
+        mensaje= "Tutor eliminado con exito"
+        tutor.delete()
+        context = {'msj': mensaje}
+        return render(request, 'index.html', context)
+    context = {'tutor': tutor}
+    return render(request, 'tutor.html', context )
 
 def cursa(request):
     context = {'msj':"Aqui va la vista inicial de cursa."}
     return render(request, 'cursa.html',context)
 
 def proyectos(request):
-    context = {'msj':"Aqui va la vista inicial de proyecta."}
-    return render(request, 'proyectos.html',context)
+    if request.method == 'POST':
+        form = ProyectoForm(request.POST)
+        context = {'msj': "Proyecto creado con exito.",
+                    'proy': form}
+        if form.is_valid():
+            form.save()
+            return render(request, 'index.html', context )
+            
+        else:
+            context = {'msj': 'error'}
+            return render(request, 'proyectos.html', context)
+    else:
+        proy = Proyecto.objects.all()
+        context = {'proy': proy,
+               'form': ProyectoForm()}
+    return render(request, 'proyectos.html', context)
+
+def proyectoDetalles(request, cod):
+     
+    proy = Estudiante.objects.get(pk = cod)
+    if request.method == 'POST':
+        mensaje= "Proyecto eliminado con exito"
+        proy.delete()
+        context = {'msj': mensaje}
+        return render(request, 'index.html', context)
+    context = {'proy': proy}
+    return render(request, 'estudiante.html', context )

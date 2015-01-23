@@ -6,12 +6,12 @@ class EstudianteForm(ModelForm):
         model = Estudiante
         fields = '__all__'
         
-    def clean(self):
-        super(EstudianteForm, self).clean()
-
-        data = {}
-
-        for key, value in self.cleaned_data.items():
-            data[key] = value
-
-        return self.cleaned_data
+class TutorForm(ModelForm):
+    class Meta:
+        model = Tutor
+        fields= '__all__'
+        
+class ProyectoForm(ModelForm):
+        class Meta:
+            model = Proyecto
+            fields = '__all__'

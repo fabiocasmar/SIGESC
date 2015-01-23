@@ -2,11 +2,29 @@
 
 {% block contenido %}
 
-<div align="center">
-	<div class="col-md-3"><a href="#">Inicio</a></div>
-	<div class="col-md-3"><a href="estudiantes/">Estudiantes</a></div>
-	<div class="col-md-3"><a href="tutores/">Tutores</a></div>
-	<div class="col-md-3"><a href="#">Iniciar Sesion</a></div>	
-</div>
-
+	<div align="center">
+		<div class="col-md-2"><a href="http://127.0.0.1:8000/">Inicio</a></div>
+		<div class="col-md-3"><a href="http://127.0.0.1:8000/estudiantes/">Estudiantes</a></div>
+		<div class="col-md-2"><a href="http://127.0.0.1:8000/tutores/">Tutores</a></div>
+		<div class="col-md-3"><a href="http://127.0.0.1:8000/proyectos/">Proyectos</a></div>
+		<div class="col-md-2"><a href="#">Iniciar Sesion</a></div>	
+	</div>
+	<div class="col-md-6" style="text-align: left; margin-top: 44px">
+	<form enctype="multipart/form-data" method="post" action="">
+  		{% csrf_token %}
+		{{ form.as_p  }}
+		<input type="submit" value="registrarse"/>
+	</div>
+	<div class="col-md-6" style="text-align: left; margin-top: 44px; width: 50%">
+		<table>
+		<h3> Lista de tutores disponibles: </h3>
+		{% for tutor in tutores %}
+			<tr>
+				<td>
+					<a href="{{tutor.cedula}}/">{{tutor}}</a>
+				</td>
+			</tr>
+		{% endfor %}
+		</table>
+	</div>
 {% endblock %}

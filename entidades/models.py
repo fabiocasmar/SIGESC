@@ -49,7 +49,7 @@ class Tutor(models.Model):
     direccion = models.CharField(max_length = 50)
     
     def __str__(self):              # __unicode__ on Python 2
-        return self.nombre + self.apellido
+        return self.nombre + " " + self.apellido
 
     
 class Proyecto(models.Model):
@@ -61,7 +61,7 @@ class Proyecto(models.Model):
     tutor = models.ForeignKey(Tutor)
     
     def __str__(self):              # __unicode__ on Python 2
-        return self.cod_proyecto + self.nombre
+        return self.cod_proyecto + " " +self.nombre
 
 
 class Cursa(models.Model):
