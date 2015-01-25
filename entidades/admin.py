@@ -12,7 +12,15 @@ class adminTutor(admin.ModelAdmin):
 
 @admin.register(models.Estudiante)
 class adminEstudiante(admin.ModelAdmin):
-    pass
+    search_fields = ['USBID',
+                     'nombre',
+                     'cedula',
+                     'carrera',
+                     'sede',
+                     'email',
+                     'carrera',
+                     'sexo',
+                     'telefono']
 
 @admin.register(models.Proyecto)
 class adminProyecto(admin.ModelAdmin):
