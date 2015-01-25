@@ -12,10 +12,7 @@ Created on 22/1/2015
 from django.db import models
 
 class Estudiante(models.Model):
-    tipo_sexo=(
-              ("M","Masculino"),
-              ("F","Femenino"),
-              )
+    tipo_sexo=(("M","Masculino"), ("F","Femenino"),)
         
     USBID = models.CharField(max_length = 8,primary_key = True)
     nombre = models.CharField(max_length = 30)

@@ -30,7 +30,8 @@ STATICFILES_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(
         os.path.dirname(__file__),
-        'static',
+        'static', 
+    BASE_DIR + '/static/'
     ),
 )
 
