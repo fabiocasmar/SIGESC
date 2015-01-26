@@ -1,0 +1,115 @@
+.mainScreen {
+
+
+   width: 600px;
+   height: 800px;
+   margin:100px;   
+   border: 3px solid black;
+   border-radius: 25px; 
+   text-align:center;
+}
+
+#Image3 {
+  float: left; 
+  margin-right: 10px; 
+  margin-bottom: 10px;
+} 
+
+#background {
+   padding: 10;
+   height: 100%;
+   width: 110%;  
+   border-radius: 250px;
+   margin: 100px
+   width: 600px;
+   height: 800px;
+
+}
+
+#tittle {
+
+  position: relative;
+  bottom: 780px;
+  opacity: 1; 
+  
+}
+
+#proyectos{
+position: relative;
+}
+#areas{
+position: relative;
+}
+.lado{
+position:relative;
+top:-10px;
+left:90px;
+border:none;
+}
+
+.debajo{
+position:relative;
+top:400px;
+left:-160px;
+border:none;
+}
+
+.cebolla{
+position:relative;
+top:5px;
+left:100px;
+border:none;
+}
+
+.sobre {
+position:absolute;
+top:0px;
+left:0px;
+border:none;
+}
+
+.margin{ 
+  margin-left: 15px;  
+}
+
+.margin1{ 
+  margin-left: 35px;  
+}
+
+.margin2{ 
+  margin-left: 175px;  
+}
+
+.margin2_1{ 
+  margin-left: 170px;  
+}
+
+.margin2_2{ 
+  margin-left: 125px;  
+}
+
+
+.margin3_1{ 
+  margin-left: 190px;  
+}
+
+
+.margin3{ 
+  margin-left: 205px;  
+}
+
+.margin4{ 
+  margin-left: 420px;  
+}
+
+.margin5{ 
+  margin-left: 260px;  
+}
+
+.margin6{ 
+  margin-left: 255px;  
+}
+
+.margin7{ 
+  margin-left: 25px;  
+}
