@@ -1,0 +1,114 @@
+.mainScreen {
+
+
+   width: 600px;
+   height: 800px;
+   margin:50px;   
+   border: 3px solid black;
+   border-radius: 25px; 
+   text-align:center;
+   
+
+}
+
+#background {
+   padding: 0;
+   height: 100%;
+   width: 100%;  
+   border-radius: 25px;
+   overflow: hidden;
+}
+
+#play {
+
+   position:relative;
+   bottom: 770px;   
+}
+
+#Selection {
+
+  position:relative;
+  bottom: 730px;
+  left: 1px;
+  font-size: 0;
+  height: 100%;
+  line-height: 0;
+
+}
+
+#Stats {
+
+   position:relative;
+   bottom: 1300px;
+   height: 81.5%;
+
+}
+
+#down_button {
+
+   position:relative;
+   width: 41px;
+   height: 41px;
+   bottom: 1688px;
+   left: 275px;
+   cursor:pointer;
+
+}
+
+#achievements {
+  display: none;
+}
+
+
+table, th, td {
+
+text-align:left;
+
+
+}
+
+#rank tr:nth-child(even) {
+
+	background-color: #B8D9F9;
+   
+
+}
+
+#rank tr:nth-child(odd) {
+
+	background-color: white;
+
+}
+
+#achievements th {
+
+   background-color: #73DB7F;
+   font-size: 14px;
+}
+
+
+table#achievements>tbody>tr>td {
+
+border-top:none;
+
+}
+
+ table#achievements>thead>tr>th {
+border-bottom:none;
+
+} 
+
+#rank th {
+   background-color: #73DB7F;
+   font-size: 14px;
+}
+
+
+table {
+
+  position:relative;
+  bottom: 1687px;
+  border-spacing:50px;
+
+}
+
