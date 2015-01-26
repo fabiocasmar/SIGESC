@@ -13,13 +13,16 @@ from django.db import models
 
 class Estudiante(models.Model):
     tipo_sexo=(("M","Masculino"), ("F","Femenino"),)
+    tipo_carrera = (('0800','Ing. Computacion'),('0100','Ing. Mecanica'),('0200','Ing. Electrica'),('0300','Ing. Electronica'),
+                    ('0400','Ing. Produccion'),('0500','Ing. Materiales'),('0600','Ing. Quimica'),('0700','Ing. Geofisica'))
+    tipo_sede = (('S','Sartenejas'),('L','Litoral'))
         
     USBID = models.CharField(max_length = 8,primary_key = True)
     nombre = models.CharField(max_length = 30)
     apellido = models.CharField(max_length = 30)
     cedula = models.CharField(max_length = 8)
-    carrera = models.CharField(max_length = 30)
-    sede = models.CharField(max_length = 20)
+    carrera = models.CharField(max_length = 4,choices = tipo_carrera)
+    sede = models.CharField(max_length = 1, choices = tipo_sede)
     email = models.CharField(max_length = 30)
     sexo = models.CharField(max_length = 1, choices = tipo_sexo)
     telefono = models.CharField(max_length = 12)
@@ -30,16 +33,14 @@ class Estudiante(models.Model):
     
         
 class Tutor(models.Model):
-    tipo_sexo=(
-              ("M","Masculino"),
-              ("F","Femenino"),
-              )
+    tipo_sexo=(("M","Masculino"),("F","Femenino"))
+    tipo_sede = (('S','Sartenejas'),('L','Litoral'))
     
     USBID = models.CharField(max_length = 20,primary_key = True)
     cedula = models.CharField(max_length = 8)    
     nombre = models.CharField(max_length = 30)
     apellido = models.CharField(max_length = 30)
-    sede = models.CharField(max_length = 20)
+    sede = models.CharField(max_length = 1,choices = tipo_sede)
     email = models.CharField(max_length = 30)
     sexo = models.CharField(max_length = 1, choices = tipo_sexo)
     telefono = models.CharField(max_length = 12)
@@ -50,6 +51,7 @@ class Tutor(models.Model):
 
     
 class Proyecto(models.Model):
+    #tipo_sexo=(("A","Activo"),("",""))
     cod_proyecto = models.CharField(max_length = 7,primary_key = True)
     nombre = models.CharField(max_length = 30)
     descripcion = models.CharField(max_length = 100)
@@ -62,11 +64,7 @@ class Proyecto(models.Model):
 
 
 class Cursa(models.Model):
-    tipo_estado=(
-              ("R","Retirado"),
-              ("C","En curso"),
-              ("F","Finalizado"),
-              )
+    tipo_estado=(("R","Retirado"),("C","En curso"),("F","Finalizado"))
     
     estudiante= models.ForeignKey(Estudiante)    
     proyecto= models.ForeignKey(Proyecto)
