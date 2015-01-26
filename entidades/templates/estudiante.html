@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+	<div align="center">
+		<div class="col-md-2"><a href="http://127.0.0.1:8000/">Inicio</a></div>
+		<div class="col-md-3"><a href="http://127.0.0.1:8000/estudiantes/">Estudiantes</a></div>
+		<div class="col-md-2"><a href="http://127.0.0.1:8000/tutores/">Tutores</a></div>
+		<div class="col-md-3"><a href="http://127.0.0.1:8000/proyectos/">Proyectos</a></div>
+	<div class="col-md-2"><a href="#">Iniciar Sesion</a></div>
+	</div>
+	<div class="col-md-6" style="text-align: left; margin-top: 44px; width: 50%">
+		<table>
+		<h3> Detalles del estudiante: </h3>
+	    Nombre: {{ est.nombre }} {{est.apellido }} </br>
+	    Carnet: {{est.USBID}} </br>
+	    Cedula: {{est.cedula}} </br>
+	    Carrera: {{est.carrera}} </br>
+	    Email: {{est.email}}</br>
+	    Telefono: {{est.telefono}}</br>
+	    Direccion: {{est.direccion}}</br></br>
+	    
+		<form enctype="multipart/form-data" method="post" action="">
+		{% csrf_token %}
+		<input type="submit" value="Eliminar estudiante"/>
+		</table>
+	</div>
+{% endblock %}
