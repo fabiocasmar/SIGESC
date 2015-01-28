@@ -2,10 +2,6 @@
 <html lang="US">
    <head>
       <link rel="stylesheet" href="/home/daniel/Documentos/Sistemas/html/Pag_principal.css"> 
-      <link href="css/bootstrap-social.css" rel="stylesheet">
-      <link href="css/font-awesome.css" rel="stylesheet">
-      <script src="js/jquery-1.11.1.js"></script>
-      <meta name="viewport" content="width=device-width, initial-scale=1">
    </head>
   
 <style type="text/css">
@@ -46,7 +42,7 @@
 	    <input type="text"  name="username"><br>
 	    <h class="log" style="color:#A9A9A9">Contrase&ntilde;a:</h>
 	    <input type="password"  name="password">      <BR>
-	    <img class="ini" src="/home/daniel/Documentos/Sistemas/Interfaces_Usuario/log.png" width="120" height="25"/>
+	    <a href="Estudiante.html"><img class="ini" src="/home/daniel/Documentos/Sistemas/Interfaces_Usuario/log.png" width="50" height="25"/></a>
 	    <h class="clean" style="color:#808080">| Limpiar</h>
 	  </form>
 	</div>

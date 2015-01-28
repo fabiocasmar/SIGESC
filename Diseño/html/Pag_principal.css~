@@ -35,7 +35,7 @@
    background-color: #F5F5F5;
    border: 1px solid black;
    border-radius: 25px;
-   position: relative;
+   position: absolute;
    bottom: 345px;
    left: 900px;
    opacity: .8;
@@ -79,6 +79,7 @@ input[type="password"] {
   box-shadow: none;
   border-radius: none;
   text-align: left;
+  
 }
 .margin{ 
   margin-left: 15px;  
