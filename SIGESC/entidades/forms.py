@@ -15,3 +15,8 @@ class ProyectoForm(ModelForm):
         class Meta:
             model = Proyecto
             fields = '__all__'
+
+class ProponenteForm(ModelForm):
+        class Meta:
+            model = Proponente
+            fields = '__all__'
