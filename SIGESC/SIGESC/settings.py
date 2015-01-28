@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-...
+
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -103,3 +103,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = ("/var/www/SIGESC/static",)
+STATIC_ROOT = "/var/www/SIGESC/"
