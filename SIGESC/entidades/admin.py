@@ -31,6 +31,6 @@ class adminProyecto(admin.ModelAdmin):
     
 @admin.register(models.Proponente)  
 class adminProponente(admin.ModelAdmin):
-    list_display = ('tipo','id','nombre','apellido','email','sexo','telefono')
+    list_display = ('tipo_prop','id','nombre','apellido','email','sexo','telefono')
     search_fields = ('tipo','id','nombre','apellido','email','sexo','telefono')
-    list_filter = ('nombre',)
+    list_filter = ('tipo_prop',)
