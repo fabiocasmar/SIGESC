@@ -1,5 +1,5 @@
 from django.contrib import admin
-from entidades import models    
+from entidades import models
 
 # Register your models here.
 @admin.register(models.Cursa)
@@ -28,3 +28,9 @@ class adminProyecto(admin.ModelAdmin):
     list_display = ('tutor', 'area', 'nombre', 'cod_proyecto', 'estado' )
     search_fields = ('tutor', 'area', 'nombre', 'cod_proyecto', 'estado' )
     list_filter = ('area', 'estado')
+    
+@admin.register(models.Proponente)  
+class adminProponente(admin.ModelAdmin):
+    list_display = ('tipo_prop','id','nombre','apellido','email','sexo','telefono')
+    search_fields = ('tipo','id','nombre','apellido','email','sexo','telefono')
+    list_filter = ('tipo_prop',)

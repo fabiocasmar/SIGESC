@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<!DOCTYPE html>
+<!-- saved from url=(0039)http://getbootstrap.com/examples/theme/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">  
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Pag_principal.css"> 
+    <link rel="icon" href="//getbootstrap.com/favicon.ico">
+    
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap.css" rel="stylesheet">
+    <!-- Bootstrap theme -->
+    <link href="bootstrap-theme.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="theme.css" rel="stylesheet">
+    
+    <link href="bootstrap.js" rel="stylesheet">
+      
+    <link href="../fonts/glyphicons-halflings-regular.svg" rel="stylesheet">
+    <link href="../fonts/glyphicons-halflings-regular.eot" rel="stylesheet">    
+    <link href="../fonts/glyphicons-halflings-regular.ttf" rel="stylesheet">
+    <link href="../fonts/glyphicons-halflings-regular.woff" rel="stylesheet">
+    <link href="../fonts/glyphicons-halflings-regular.woff2" rel="stylesheet">
+  
+  </head>
+
+  <body role="document">
+	 <img class="top" class="img-responsive" src="../Interfaces_Usuario/top.png" width="100%" vspace="3"/>
+    <!-- Fixed navbar -->
+    
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+           <img class="img-responsive" src="../Interfaces_Usuario/home.png" width="100%"/>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="http://getbootstrap.com/examples/theme/#"> ¿Qui&eacute;nes somos?</a></li>
+            <li><a href="http://getbootstrap.com/examples/theme/#about">Formatos SC</a></li>
+            <li><a href="http://getbootstrap.com/examples/theme/#contact">Reglamentos SC</a></li>
+            <li><a href="http://getbootstrap.com/examples/theme/#contact">Decanato de extensi&oacute;n</a></li>
+
+            <li class="dropdown">
+              <a href="http://getbootstrap.com/examples/theme/#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Proyectos<span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="http://getbootstrap.com/examples/theme/#">Action</a></li>
+                <li><a href="http://getbootstrap.com/examples/theme/#">Another action</a></li>
+                <li><a href="http://getbootstrap.com/examples/theme/#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="http://getbootstrap.com/examples/theme/#">Separated link</a></li>
+                <li><a href="http://getbootstrap.com/examples/theme/#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+    
+    <!-- Contenido -->
+    <div class="row">
+      <div class="col-md-3 titulo-izquierdo"  style="color:#4682B4"><b>Noticias destacas</b><br><br>
+	 <p class="informacion" align="left" style="color:#1E90FF">Inscripciones abiertas<br>para el SC...</p>
+	 <p class="detalles" align="left" style="color:#808080">Revisa la lista de proyectos<br>y registrate ahora!</p>
+	 <button type="button" class="btn btn-lg btn-default">leer mas</button></div>
+	 
+      <div class="col-md-5">
+	   <img class="img-responsive" src="/home/daniel/Documentos/Sistemas/Interfaces_Usuario/estudiante.png" width="320" hspace="25"/></div>
+	
+	<div class="col-md-3 micontainer">
+	    <form>
+	      <br>
+	      <b><h class="acces" style="color:#4682B4">Acceso:</h><br></b>
+	      <h class="estudiante" style="color:#A9A9A9">Estudiante |</h><h class="cfcg" style="color:#A9A9A9">CFCG-SC  |</h><h class="otros" style="color:#A9A9A9">Otros miembros |</h><br>
+	      <br><b><h class="log" style="color:#A9A9A9">USBID:</h></b>
+	      <input type="text"  name="username"><br>
+	      <h class="log" style="color:#A9A9A9">Contrase&ntilde;a:</h>
+	      <input type="password"  name="password">      <BR>
+	      <a href="Estudiante.html"><img class="ini" class="img-responsive" src="/home/daniel/Documentos/Sistemas/Interfaces_Usuario/log.png" width="120" height="25"/></a>
+	      <h class="clean" style="color:#808080">| Limpiar</h>
+	    </form>
+	</div>
+    </div>
+    
+    
+    <div class="row">
+      <hr>
+    </div>
+    
+    <div class="row">
+      <div class="col-sm-3">
+	    <div class="list-group">
+	      <b><a href="http://getbootstrap.com/examples/theme/#" class="list-group-item active">
+		Proyectos
+	      </a></b>
+	     <a href="#" class="list-group-item">
+	     
+	     <span class="glyphicon glyphicon-music"></span> Ambientales<span class="badge">10</span> 
+	       <a href="#" class="list-group-item">
+	     <span class="glyphicon glyphicon-music"></span> Apoyo tecnol&oacute;gico<span class="badge">15</span> 
+	       <a href="#" class="list-group-item">
+	     <span class="glyphicon glyphicon-music"></span> Cultura <span class="badge">15</span> 
+	       <a href="#" class="list-group-item">
+	     <span class="glyphicon glyphicon-music"></span> Desarrollo sustentable <span class="badge">18</span> 
+	       <a href="#" class="list-group-item">
+	     <span class="glyphicon glyphicon-music"></span> Educativos <span class="badge">13</span> 
+	       <a href="#" class="list-group-item">
+	     <span class="glyphicon glyphicon-music"></span> Infraestrusctura <span class="badge">16</span> 
+	       <a href="#" class="list-group-item">
+	     <span class="glyphicon glyphicon-music"></span> Prevenci&oacute;n de emergencias <span class="badge">19</span> 
+	       <a href="#" class="list-group-item">
+	     <span class="glyphicon glyphicon-music"></span> Salud <span class="badge">16</span> 
+	       <a href="#" class="list-group-item">
+	     <span class="glyphicon glyphicon-music"></span> Seguridad industrial <span class="badge">17</span></a>
+	    </div>
+	  </div><!-- /.col-sm-4 -->
+	  
+
+	<br><div class="col-md-5 titulo-izquierdo"  style="color:#4682B4">Calidad del aire y su importancia para la vida
+	   <img class="img-responsive" align="center" src="../Interfaces_Usuario/arbol.png" vspace="40"/>
+	   <img class="img-responsive"  align="center" src="../Interfaces_Usuario/rollbar.png" hspace="120" />
+	</div>  	  
+	
+	<br><div class="col-md-3"> 
+		  <p class="row infproy" align="right">
+	      
+			Este proyecto consiste en ralizar<br> 
+			campa&ntilde;as de concientizacion<br> 
+			sobre la importancia de la calidad<br> 
+			del airey la responsabilidad de cada<br> 
+			uno de nosotros en la contaminaci&oacute;n<br><br><br>
+
+			Tutor: Yudith Cardinale.<br>
+		  </p>
+	     <div class="row link-proy" style="color:#4682B4" align="right">
+		<br><br	><b >Ver todos los proyectos >></b>
+	     </div>
+	</div>  
+    </div>
+    
+    
+    <div class="row">
+      <br><hr>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-8 bottom">
+	  <img src="../Interfaces_Usuario/info.png" align="left" height="60" />
+      </div>
+      <div class="col-md-3">
+	  <a href="http://www.usb.ve/"><img class="img-responsive" class="cebolla" src="../Interfaces_Usuario/cebolla.png" align="right" />
+      </div>
+      
+     </div>
+ 
+
+</html>
+
+
+{% endblock %}

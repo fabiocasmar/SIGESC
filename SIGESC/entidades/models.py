@@ -16,7 +16,7 @@ from django.core.exceptions import ValidationError
 def validarCarnet(carnet):
     
     if not re.match(r'[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9]',carnet):
-        raise ValidationError('%s Carnet no valido. Debe ser de la forma: XX-XXXXX' % carnet)
+        raise ValidationError(u'%s Carnet no valido. Debe ser de la forma: XX-XXXXX' % carnet)
     else:
         pass
         
@@ -84,3 +84,14 @@ class Cursa(models.Model):
     
     def __str__(self):              # __unicode__ on Python 2
         return self.estado
+    
+class Proponente(models.Model):
+    tipo_sexo=(("M","Masculino"),("F","Femenino"))
+    tipo = (("E","Estudiante"),("P","Profesor"),("C","Comunidad"))
+    tipo_prop = models.CharField(max_length = 15, choices = tipo, blank = False)
+    id = models.CharField(max_length = 8, blank = False,primary_key = True)    
+    nombre = models.CharField(max_length = 30, blank = False)
+    apellido = models.CharField(max_length = 30, blank = False)
+    email = models.EmailField(max_length = 30, blank = False)
+    sexo = models.CharField(max_length = 1, choices = tipo_sexo, blank = False)
+    telefono = models.CharField(max_length = 12, blank = False)
