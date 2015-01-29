@@ -94,3 +94,33 @@ def proyectoDetalles(request, cod):
         return render(request, 'index.html', context)
     context = {'proy': proy}
     return render(request, 'estudiante.html', context )
+
+
+
+def proponente(request):
+    if request.method == 'POST':
+        form = ProponenteForm(request.POST)
+        context = {'msj': "Proponente creado con exito.",
+                    'proponentes': form}
+        if form.is_valid():
+            form.save()
+            return render(request, 'index.html', context )
+
+        else:
+            context = {'msj': 'error'}
+            return render(request, 'proponentes.html', context)
+    else:
+        proy = Proponente.objects.all()
+        context = {'proponentes': proponentes,
+               'form': ProponenteForm()}
+    return render(request, 'proponentes.html', context)
+
+def proponenteDetalles(request, cod):
+    proponente = Proponente.objects.get(pk = cod)
+    if request.method == 'POST':
+        mensaje= "Propronente  eliminado con exito"
+        proponente.delete()
+        context = {'msj': mensaje}
+        return render(request, 'index.html', context)
+    context = {'proy': proy}
+    return render(request, 'proponente.html', context )
