@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from entidades.forms import *
 from entidades.models import *
-from entidades.models import Estudiante
-from entidades.models import Proponente
+from entidades.models import Estudiante, Proyecto
+from entidades.models import Proponente, Tutor
 from django.core import serializers
 
 def estudiantes(request):
@@ -16,26 +16,30 @@ def estudiantes(request):
             
         else:
             context = {'msj': 'error'}
-            return render(request, 'estudiantes.html', context)
+            return render(request, 'estudiante.html', context)
     else:
         est = Estudiante.objects.all()
         context = {'est': est,
                'form': EstudianteForm()}
     return render(request, 'estudiantes.html',context)
 
-def estudiantesDetalles(request):     
-    context = {
-               'form': EstudianteForm()}
-    return render(request, 'estudiante.html', context )
+def estudiantesDetalles(request, ced):
+    est = Estudiante.objects.get(cedula = ced)
+    if request.method == 'POST':
+        mensaje= "Estudiante eliminado con exito"
+        est.delete()
+        context = {'msj': mensaje}
+        return render(request, 'index.html', context)
+    context = {'est': est}
+    return render(request, 'estudiantes.html', context )
 
 def tutores(request):
     if request.method == 'POST':
         form = TutorForm(request.POST)
-        context = {'msj': "Tutor creado con exito.",
-                    'tutores': form}
+        context = {'msj': "Tutor creado con exito."}
         if form.is_valid():
             form.save()
-            return render(request, 'index.html', context )
+            return render(request, 'tutores.html', context )
             
         else:
             context = {'msj': 'error'}
@@ -46,14 +50,13 @@ def tutores(request):
                'form': TutorForm()}
         return render(request, 'tutores.html', context)
 
-def tutorDetalles(request, ced):
-     
-    tutor = Tutor.objects.get(pk = '11-111')
+def tutorDetalles(request, ced):  
+    tutor = Tutor.objects.get(cedula = ced)
     if request.method == 'POST':
         mensaje= "Tutor eliminado con exito"
         tutor.delete()
         context = {'msj': mensaje}
-        return render(request, 'index.html', context)
+        return render(request, 'tutores.html', context)
     context = {'tutor': tutor}
     return render(request, 'tutor.html', context )
 
@@ -80,32 +83,30 @@ def proyectos(request):
     return render(request, 'proyectos.html', context)
 
 def proyectoDetalles(request, cod):
-     
-    proy = Estudiante.objects.get(pk = cod)
+    proy = Proyecto.objects.get(pk=cod)
     if request.method == 'POST':
         mensaje= "Proyecto eliminado con exito"
         proy.delete()
         context = {'msj': mensaje}
         return render(request, 'index.html', context)
     context = {'proy': proy}
-    return render(request, 'estudiante.html', context )
+    return render(request, 'proyecto.html', context )
 
 
 
 def proponentes(request):
     if request.method == 'POST':
         form = ProponenteForm(request.POST)
-        context = {'msj': "Proponente creado con exito.",
-                    'proponentes': form}
+        context = {'msj': "Proponente creado con exito."}
         if form.is_valid():
             form.save()
-            return render(request, 'index.html', context )
+            return render(request, 'proponentes.html', context )
 
         else:
             context = {'msj': 'error'}
             return render(request, 'proponentes.html', context)
     else:
-        proy = Proponente.objects.all()
+        proponentes = Proponente.objects.all()
         context = {'proponentes': proponentes,
                'form': ProponenteForm()}
     return render(request, 'proponentes.html', context)
@@ -113,9 +114,9 @@ def proponentes(request):
 def proponenteDetalles(request, cod):
     proponente = Proponente.objects.get(pk = cod)
     if request.method == 'POST':
-        mensaje= "Propronente  eliminado con exito"
+        mensaje= "Proponente  eliminado con exito"
         proponente.delete()
         context = {'msj': mensaje}
-        return render(request, 'index.html', context)
-    context = {'proy': proy}
+        return render(request, 'proponentes.html', context)
+    context = {'proponente': proponente}
     return render(request, 'proponente.html', context )
