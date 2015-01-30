@@ -23,8 +23,7 @@ def estudiantes(request):
                'form': EstudianteForm()}
     return render(request, 'estudiantes.html',context)
 
-def estudiantesDetalles(request, ced):
-     
+def estudiantesDetalles(request, ced):     
     est = Estudiante.objects.get(pk = '08-1383')
     if request.method == 'POST':
         mensaje= "estudiante eliminado con exito"
