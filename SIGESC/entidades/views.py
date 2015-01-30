@@ -2,6 +2,7 @@ from django.shortcuts import render
 from entidades.forms import *
 from entidades.models import *
 from entidades.models import Estudiante
+from entidades.models import Proponente
 from django.core import serializers
 
 def estudiantes(request):
@@ -97,7 +98,7 @@ def proyectoDetalles(request, cod):
 
 
 
-def proponente(request):
+def proponentes(request):
     if request.method == 'POST':
         form = ProponenteForm(request.POST)
         context = {'msj': "Proponente creado con exito.",

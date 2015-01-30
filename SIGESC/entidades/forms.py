@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+
 from entidades.models import *
 
 class EstudianteForm(ModelForm):
@@ -12,11 +13,22 @@ class TutorForm(ModelForm):
         fields= '__all__'
         
 class ProyectoForm(ModelForm):
-        class Meta:
-            model = Proyecto
-            fields = '__all__'
+    class Meta:
+        model = Proyecto
+        fields = '__all__'
 
 class ProponenteForm(ModelForm):
-        class Meta:
-            model = Proponente
-            fields = '__all__'
+    class Meta:
+        model = Proponente
+        fields = '__all__'
+            
+class SedeForm(ModelForm):
+    class Meta:
+        model = Sede
+        fields = '__all__'
+
+class AreaForm(ModelForm):
+    class Meta:
+        model = Area
+        fields = '__all__'
+            

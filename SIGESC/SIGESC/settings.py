@@ -105,3 +105,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = ("/var/www/SIGESC/static",)
 STATIC_ROOT = "/var/www/SIGESC/"
+MEDIA_URL = '/media/'
