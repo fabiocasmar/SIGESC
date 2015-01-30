@@ -24,7 +24,7 @@ def estudiantes(request):
     return render(request, 'estudiantes.html',context)
 
 def estudiantesDetalles(request):     
-    context = {'est': "est",
+    context = {
                'form': EstudianteForm()}
     return render(request, 'estudiante.html', context )
 
