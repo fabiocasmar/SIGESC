@@ -23,14 +23,9 @@ def estudiantes(request):
                'form': EstudianteForm()}
     return render(request, 'estudiantes.html',context)
 
-def estudiantesDetalles(request, ced):     
-    est = Estudiante.objects.get(pk = '08-1383')
-    if request.method == 'POST':
-        mensaje= "estudiante eliminado con exito"
-        est.delete()
-        context = {'msj': mensaje}
-        return render(request, 'index.html', context)
-    context = {'est': est}
+def estudiantesDetalles(request):     
+    context = {'est': "est",
+               'form': EstudianteForm()}
     return render(request, 'estudiante.html', context )
 
 def tutores(request):
