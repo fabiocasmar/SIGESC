@@ -24,16 +24,12 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,'templates'),
 )
 
-STATICFILES_DIRS = (
-    # Put strings here, like "/home/html/static" or "C:/www/django/static".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join(
-        os.path.dirname(__file__),
-        'static', 
-    BASE_DIR + '/static/'
-    ),
-)
+
+SETTINGS_DIR = os.path.dirname(__file__)
+PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
+PROJECT_PATH = os.path.abspath(PROJECT_PATH)
+
+STATIC_PATH = os.path.join(PROJECT_PATH,'static')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'teoq+!-1@20@qwe$k8+1*+ns=0u*ybf%9*en*xe@*3q5-=x+7n'
@@ -103,6 +99,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = ("/var/www/SIGESC/static",)
-STATIC_ROOT = "/var/www/SIGESC/"
 MEDIA_URL = '/media/'
