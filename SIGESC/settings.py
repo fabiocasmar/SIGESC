@@ -19,10 +19,14 @@ TEMPLATE_DIRS = ( os.path.join(BASE_DIR, 'SIGESC/templates/'),
                   os.path.dirname(BASE_DIR) + '/SIGESC/templates/',)
 
 
-STATIC_URL = '/static/'
-STATIC_ROOT = location('public/static')
+SETTINGS_DIR = os.path.dirname(__file__)
+PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
+PROJECT_PATH = os.path.abspath(PROJECT_PATH)
+
+STATIC_PATH = os.path.join(PROJECT_PATH,'static')
+
 STATICFILES_DIRS = (
-    location('static/'),
+    STATIC_PATH,
 )
 
 STATICFILES_FINDERS = (
@@ -30,6 +34,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
+STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = location('public/media')
 
