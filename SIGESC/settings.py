@@ -11,25 +11,27 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+location = lambda x: os.path.join(
+    os.path.dirname(os.path.realpath(__file__)), x)
 
 
+TEMPLATE_DIRS = ( os.path.join(BASE_DIR, 'SIGESC/templates/'),
+                  os.path.dirname(BASE_DIR) + '/SIGESC/templates/',)
 
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+
+STATIC_URL = '/static/'
+STATIC_ROOT = location('public/static')
+STATICFILES_DIRS = (
+    location('static/'),
 )
 
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR,'templates'),
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-
-SETTINGS_DIR = os.path.dirname(__file__)
-PROJECT_PATH = os.path.join(SETTINGS_DIR, os.pardir)
-PROJECT_PATH = os.path.abspath(PROJECT_PATH)
-
-STATIC_PATH = os.path.join(PROJECT_PATH,'static')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = location('public/media')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'teoq+!-1@20@qwe$k8+1*+ns=0u*ybf%9*en*xe@*3q5-=x+7n'
@@ -98,5 +100,3 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
