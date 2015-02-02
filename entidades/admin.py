@@ -15,6 +15,18 @@ class adminTutor(admin.ModelAdmin):
     search_fields = ('USBID', 'nombre', 'cedula', 'sede',
                      'email', 'telefono')
     list_filter = ('sede',)
+    
+@admin.register(models.Estado)
+class adminEstado(admin.ModelAdmin):
+    list_display = ('nombre',)
+    search_fields = ('nombre',)
+    list_filter = ('nombre',)
+
+@admin.register(models.Comunidad)
+class adminComunidad(admin.ModelAdmin):
+    list_display = ('nombre','estado')
+    search_fields = ('nombre','estado')
+    list_filter = ('estado',)
 
 @admin.register(models.Estudiante)
 class adminEstudiante(admin.ModelAdmin):
@@ -23,11 +35,18 @@ class adminEstudiante(admin.ModelAdmin):
                      'email', 'carrera', 'telefono')
     list_filter = ('sede', 'carrera',)
 
+@admin.register(models.CaracteristicasProyecto)
+class adminCaracteristicasProyecto(admin.ModelAdmin):
+    list_display = ('proyecto','version','area', 'nombre','proponente','estado', 'fecha_inicio', 'fecha_fin')
+    search_fields = ('proyecto','version', 'area', 'nombre','proponente', 'estado', 'fecha_inicio', 'fecha_fin')
+    list_filter = ('proyecto','area', 'estado')
+
+
 @admin.register(models.Proyecto)
 class adminProyecto(admin.ModelAdmin):
-    list_display = ('tutor','area', 'nombre', 'cod_proyecto', 'estado')
-    search_fields = ('tutor', 'area', 'nombre', 'cod_proyecto', 'estado')
-    list_filter = ('area', 'estado')
+    list_display = ('cod_proyecto',)
+    search_fields = ('cod_proyecto',)
+    list_filter = ('cod_proyecto',)
     
 @admin.register(models.Proponente)  
 class adminProponente(admin.ModelAdmin):

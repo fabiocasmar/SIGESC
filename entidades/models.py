@@ -81,20 +81,42 @@ class Proponente(models.Model):
     
     def __str__(self):              # __unicode__ on Python 2
         return self.id + " " +self.nombre
-    
+
 class Proyecto(models.Model):
+    cod_proyecto = models.CharField(max_length = 7,blank = False,primary_key = True)
+    def __str__(self):              # __unicode__ on Python 2
+        return self.cod_proyecto
+    
+class Estado(models.Model):
+    nombre = models.CharField(primary_key = True,blank = False,max_length = 20)
+    def __str__(self):              # __unicode__ on Python 2
+        return self.nombre
+    
+class Comunidad(models.Model):
+    nombre = models.CharField(max_length = 25, blank = False,)
+    estado = models.ForeignKey(Estado,default = None, blank = False)
+    descripcion = models.TextField(max_length = 400, blank = False)
+    cantidadBeneficiados = models.IntegerField(blank = False)
+    def __str__(self):              # __unicode__ on Python 2
+        return self.nombre
+
+class CaracteristicasProyecto(models.Model):
     tipo_estado_proyecto=(("A","Abierto"),("C","Cerrado"),('P','En Proceso'))
     
-    cod_proyecto = models.CharField(max_length = 7,primary_key = True)
+    proyecto = models.ForeignKey(Proyecto, blank = False,default = None)
     nombre = models.CharField(max_length = 30, blank = False)
     descripcion = models.CharField(max_length = 100, blank = False)
     area = models.ForeignKey(Area, blank = False)
     estado = models.CharField(max_length = 10, blank = False, choices = tipo_estado_proyecto)
-    tutor =      models.ForeignKey(Tutor)
-    
-    
+    tutor =      models.ForeignKey(Tutor,blank = False)
+    fecha_inicio = models.DateTimeField(blank = False)
+    fecha_fin = models.DateTimeField(blank = False)
+    version= models.CharField(max_length = 10, blank = False,primary_key = True)
+    comunidad = models.ForeignKey(Comunidad,default = None)
+    proponente = models.ForeignKey(Proponente,default = None)
     def __str__(self):              # __unicode__ on Python 2
-        return self.cod_proyecto + " " +self.nombre
+        return self.nombre + " " +self.version
+    
 
 
 class Cursa(models.Model):
