@@ -2,6 +2,8 @@
 
 {% block contenido %}
 
+{% load bootstrap %}
+
 	<div align="center">
 		<div class="col-md-2"><a href="../">Inicio</a></div>
 		<div class="col-md-2"><a href="../estudiantes/">Estudiantes</a></div>
@@ -15,7 +17,7 @@
 	<div class="col-md-6" style="text-align: left; margin-top: 44px">
 	<form enctype="multipart/form-data" method="post" action="">
   		{% csrf_token %}
-		{{ form.as_p  }}
+		{{ form|bootstrap }}
 		<input type="submit" value="registrarse"/>
 	</div>
 	<div class="col-md-6" style="text-align: left; margin-top: 44px; width: 50%">

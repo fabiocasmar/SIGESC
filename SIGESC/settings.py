@@ -35,6 +35,7 @@ STATICFILES_FINDERS = (
 )
 
 STATIC_URL = '/static/'
+STATIC_ROOT = location('public/static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = location('public/media')
 
@@ -58,6 +59,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrapform',
     'entidades',
     'interfaz',
 )
