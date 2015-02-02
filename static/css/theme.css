@@ -3,6 +3,14 @@ body {
   padding-bottom: 30px;
 }
 
+.navbar-default{
+	background-image: linear-gradient(to bottom, #3498db 0%, #3498db 100%) !important; 
+}
+
+a{
+	color:white !important;
+}
+
 .theme-dropdown .dropdown-menu {
   position: static;
   display: block;
