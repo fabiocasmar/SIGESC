@@ -7,7 +7,7 @@ body {
 	background-image: linear-gradient(to bottom, #3498db 0%, #3498db 100%) !important; 
 }
 
-a{
+.navbar a{
 	color:white !important;
 }
 

@@ -1,6 +1,4 @@
 .mainScreen {
-
-
    width: 600px;
    height: 800px;
    margin:100px;   
@@ -25,15 +23,33 @@
 } 
 
 .micontainer {
-   width: 400%; 
    background-color: #F5F5F5;
    border: 1px solid black;
-   border-radius: 25px;
+   border-radius: 10px;
    position: relative;
    opacity: .8;
    height: 230px;
+   width:300px;
+   float:right;
 }
 
+.home{
+	margin-top:8px;
+	margin-left:3px;
+}
+
+@media (max-width: 767px) {
+	.micontainer {
+   		background-color: #F5F5F5;
+	   	border: 1px solid black;
+   		border-radius: 10px;
+   		position: relative;
+   		opacity: .8;
+   		width:300px;
+		float:none;
+}	
+	
+}
 
 .loggin {
   position:absolute
@@ -213,10 +229,12 @@ input[type="password"] {
 
 .infproy{ 
   position:relative;
-  padding-top:140px;
+  padding-top:60px;
   font-family: sans-serif;
   font-size: 14px;
-
+  text-align: justify;
+  text-justify: inter-word;
+  width:300px;
 }
 
 .rollb{ 
@@ -303,6 +321,14 @@ border:none;
 .link-proy{ 
   font-size:16px;
   font-color:#4682B4;
+}
+
+.container-princ {
+  padding-top: 20px;
+  padding-right: 15px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .clean{ 
