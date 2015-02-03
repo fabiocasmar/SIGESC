@@ -12,11 +12,11 @@ def estudiantes(request):
                     'est': form}
         if form.is_valid():
             est = form.save()
-            return render(request, 'index.html', context )
+            return render(request, 'estudiantes.html', context )
             
         else:
             context = {'msj': 'error'}
-            return render(request, 'estudiante.html', context)
+            return render(request, 'estudiantes.html', context)
     else:
         est = Estudiante.objects.all()
         context = {'est': est,
@@ -29,9 +29,9 @@ def estudiantesDetalles(request, ced):
         mensaje= "Estudiante eliminado con exito"
         est.delete()
         context = {'msj': mensaje}
-        return render(request, 'index.html', context)
+        return render(request, 'estudiantes.html', context)
     context = {'est': est}
-    return render(request, 'estudiantes.html', context )
+    return render(request, 'estudiante.html', context )
 
 def tutores(request):
     if request.method == 'POST':
@@ -67,11 +67,10 @@ def cursa(request):
 def proyectos(request):
     if request.method == 'POST':
         form = ProyectoForm(request.POST)
-        context = {'msj': "Proyecto creado con exito.",
-                    'proy': form}
+        context = {'msj': "Proyecto creado con exito.",}
         if form.is_valid():
             form.save()
-            return render(request, 'index.html', context )
+            return render(request, 'proyecto.html', context )
             
         else:
             context = {'msj': 'error'}
@@ -83,15 +82,14 @@ def proyectos(request):
     return render(request, 'proyectos.html', context)
 
 def proyectoDetalles(request, cod):
-    proy = Proyecto.objects.get(pk=cod)
+    proyecto = Proyecto.objects.get(cod_proyecto=cod)
     if request.method == 'POST':
         mensaje= "Proyecto eliminado con exito"
-        proy.delete()
+        proyecto.delete()
         context = {'msj': mensaje}
-        return render(request, 'index.html', context)
-    context = {'proy': proy}
+        return render(request, 'proyectos.html', context)
+    context = {'proyecto': proyecto}
     return render(request, 'proyecto.html', context )
-
 
 
 def proponentes(request):

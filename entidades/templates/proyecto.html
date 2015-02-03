@@ -13,12 +13,12 @@
 	{{ msj }}
 		<table>
 		<h3> Detalles del proyecto: </h3>
-	    Nombre: {{ proy.nombre }} </br>
-	    Codigo: {{proy.codigo}} </br>
-	    Descripcion: {{proy.descripcion}} </br>
-	    Area: {{proy.area}} </br>
-	    Tutor: {{proy.tutor}}</br>
-	    Estado: {{proy.estado}}</br></br>
+	    Nombre: {{ proyecto.nombre }} </br>
+	    Codigo: {{proyecto.codigo}} </br>
+	    Descripcion: {{proyecto.descripcion}} </br>
+	    Area: {{proyecto.area}} </br>
+	    Tutor: {{proyecto.tutor}}</br>
+	    Estado: {{proyecto.estado}}</br></br>
 	    
 		<form enctype="multipart/form-data" method="post" action="">
 		{% csrf_token %}
