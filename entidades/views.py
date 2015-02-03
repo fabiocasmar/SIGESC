@@ -12,10 +12,11 @@ def estudiantes(request):
                     'est': form}
         if form.is_valid():
             est = form.save()
+            context = {'form' : form}
             return render(request, 'estudiantes.html', context )
-            
         else:
-            context = {'msj': 'error'}
+            context = {'msj': 'error',
+                       'form' : form}
             return render(request, 'estudiantes.html', context)
     else:
         est = Estudiante.objects.all()
@@ -39,10 +40,11 @@ def tutores(request):
         context = {'msj': "Tutor creado con exito."}
         if form.is_valid():
             form.save()
-            return render(request, 'tutores.html', context )
-            
+            context = {'form' : form}
+            return render(request, 'tutores.html', context)
         else:
-            context = {'msj': 'error'}
+            context = {'msj'  : 'error', 
+                       'form' : form}
             return render(request, 'tutores.html', context)
     else:
         tutores = Tutor.objects.all()
@@ -55,7 +57,7 @@ def tutorDetalles(request, ced):
     if request.method == 'POST':
         mensaje= "Tutor eliminado con exito"
         tutor.delete()
-        context = {'msj': mensaje}
+        context = {'msj': mensaje, 'form': TutorForm()}
         return render(request, 'tutores.html', context)
     context = {'tutor': tutor}
     return render(request, 'tutor.html', context )
@@ -73,7 +75,8 @@ def proyectos(request):
             return render(request, 'proyecto.html', context )
             
         else:
-            context = {'msj': 'error'}
+            context = {'msj': 'error', 
+                     'form' : form}
             return render(request, 'proyectos.html', context)
     else:
         proy = Proyecto.objects.all()

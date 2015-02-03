@@ -369,4 +369,6 @@ border:none;
    top:-50px; 
 }
 
-
+.form-control{
+  width: 80% !important; 
+}
