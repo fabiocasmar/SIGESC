@@ -12,6 +12,21 @@ class TutorForm(ModelForm):
         model = Tutor
         fields= '__all__'
         
+class EstadoForm(ModelForm):
+    class Meta:
+        model = Estado
+        fields= '__all__'
+        
+class ComunidadForm(ModelForm):
+    class Meta:
+        model = Comunidad
+        fields= '__all__'        
+        
+class CaracteristicasProyectoForm(ModelForm):
+    class Meta:
+        model = CaracteristicasProyecto
+        fields = '__all__'
+        
 class ProyectoForm(ModelForm):
     class Meta:
         model = Proyecto
