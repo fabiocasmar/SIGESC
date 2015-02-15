@@ -10,6 +10,10 @@ def index():
 def error():
     return dict()
 
+def estudiantes():
+    form = SQLFORM.smartgrid(db.t_estudiante,onupdate=auth.archive)
+    return dict(form=form, est=db().select(db.t_estudiante.ALL))
+
 @auth.requires_login()
 def estado_manage():
     form = SQLFORM.smartgrid(db.t_estado,onupdate=auth.archive)
