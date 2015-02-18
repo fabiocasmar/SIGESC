@@ -1,0 +1,21 @@
+(dp1
+S'output'
+p2
+S"<type 'exceptions.TypeError'> 'SQLALL' object is not iterable"
+p3
+sS'layer'
+p4
+S'/home/fabio/web2py/applications/SIGESC/controllers/default.py'
+p5
+sS'code'
+p6
+S'# -*- coding: utf-8 -*-\n### required - do no delete\ndef user(): return dict(form=auth())\ndef download(): return response.download(request,db)\ndef call(): return service()\n### end requires\ndef index():\n    return dict()\n\ndef error():\n    return dict()\n\ndef estudiantes():\n    form = SQLFORM(db.t_estudiante.ALL)\n    return dict(form=form)\n#    form = SQLFORM.smartgrid(db.t_estudiante,onupdate=auth.archive)\n#    return dict(form=form, est=db().select(db.t_estudiante.ALL))\n\n@auth.requires_login()\ndef estado_manage():\n    form = SQLFORM.smartgrid(db.t_estado,onupdate=auth.archive)\n    return locals()\n\n@auth.requires_login()\ndef sede_manage():\n    form = SQLFORM.smartgrid(db.t_sede,onupdate=auth.archive)\n    return locals()\n\n@auth.requires_login()\ndef comunidad_manage():\n    form = SQLFORM.smartgrid(db.t_comunidad,onupdate=auth.archive)\n    return locals()\n\n@auth.requires_login()\ndef area_manage():\n    form = SQLFORM.smartgrid(db.t_area,onupdate=auth.archive)\n    return locals()\n\n@auth.requires_login()\ndef sexo_manage():\n    form = SQLFORM.smartgrid(db.t_sexo,onupdate=auth.archive)\n    return locals()\n\n@auth.requires_login()\ndef estudiante_manage():\n    form = SQLFORM.smartgrid(db.t_estudiante,onupdate=auth.archive)\n    return locals()\n\n@auth.requires_login()\ndef proponente_manage():\n    form = SQLFORM.smartgrid(db.t_proponente,onupdate=auth.archive)\n    return locals()\n\n@auth.requires_login()\ndef tutor_manage():\n    form = SQLFORM.smartgrid(db.t_tutor,onupdate=auth.archive)\n    return locals()\n\n@auth.requires_login()\ndef proyecto_manage():\n    form = SQLFORM.smartgrid(db.t_proyecto,onupdate=auth.archive)\n    return locals()\n\n@auth.requires_login()\ndef condicion_manage():\n    form = SQLFORM.smartgrid(db.t_condicion,onupdate=auth.archive)\n    return locals()\n\n@auth.requires_login()\ndef caracterisicas_manage():\n    form = SQLFORM.smartgrid(db.t_caracterisicas,onupdate=auth.archive)\n    return locals()\n\n@auth.requires_login()\ndef cursa_manage():\n    form = SQLFORM.smartgrid(db.t_cursa,onupdate=auth.archive)\n    return locals()\n\n@auth.requires_login()\ndef carrera_manage():\n    form = SQLFORM.smartgrid(db.t_carrera,onupdate=auth.archive)\n    return locals()\n\n@auth.requires_login()\ndef tipoprop_manage():\n    form = SQLFORM.smartgrid(db.t_tipoprop,onupdate=auth.archive)\n    return locals()\n\n@auth.requires_login()\ndef relacionestproy_manage():\n    form = SQLFORM.smartgrid(db.t_relacionestproy,onupdate=auth.archive)\n    return locals()\n\nresponse._vars=response._caller(estudiantes)\n'
+p7
+sS'snapshot'
+p8
+(dp9
+sS'traceback'
+p10
+S'Traceback (most recent call last):\n  File "/home/fabio/web2py/gluon/restricted.py", line 224, in restricted\n    exec ccode in environment\n  File "/home/fabio/web2py/applications/SIGESC/controllers/default.py", line 94, in <module>\n  File "/home/fabio/web2py/gluon/globals.py", line 393, in <lambda>\n    self._caller = lambda f: f()\n  File "/home/fabio/web2py/applications/SIGESC/controllers/default.py", line 14, in estudiantes\n    form = SQLFORM(db.t_estudiante.ALL)\n  File "/home/fabio/web2py/gluon/sqlhtml.py", line 1076, in __init__\n    fields = [f.name for f in table if\nTypeError: \'SQLALL\' object is not iterable\n'
+p11
+s.

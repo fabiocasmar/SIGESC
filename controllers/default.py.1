@@ -11,22 +11,22 @@ def error():
     return dict()
 
 def estudiantes():
-    form = SQLFORM(db.t_estudiante)
+    form = SQLFORM(db.t_estudiante,onupdate=auth.archive)
 #    return dict(form=form)
 #    form = SQLFORM.smartgrid(db.t_estudiante,onupdate=auth.archive)
     return dict(form=form, est=db().select(db.t_estudiante.ALL))
 
 def proponentes():
-    form = SQLFORM(db.t_proponente)
+    form = SQLFORM(db.t_proponente,onupdate=auth.archive)
 #    return dict(form=form)
 #    form = SQLFORM.smartgrid(db.t_proponente,onupdate=auth.archive)
-    return dict(form=form, proponentes=db().select(db.t_proponente.ALL))
+    return dict(form=form, proponente=db().select(db.t_proponente.ALL))
 
-def tutores():
-    form = SQLFORM(db.t_tutor)
+def estudiantes():
+    form = SQLFORM(db.t_estudiante,onupdate=auth.archive)
 #    return dict(form=form)
-#    form = SQLFORM.smartgrid(db.t_proponente,onupdate=auth.archive)
-    return dict(form=form, tutores=db().select(db.t_tutor.ALL))
+#    form = SQLFORM.smartgrid(db.t_estudiante,onupdate=auth.archive)
+    return dict(form=form, est=db().select(db.t_estudiante.ALL))
 
 
 @auth.requires_login()
@@ -37,8 +37,8 @@ def estado_manage():
 #@auth.requires_login()
 
 def sedes():
-    form = SQLFORM(db.t_sede)
-    return dict(form=form, sedes=db().select(db.t_sede.ALL))
+    form = SQLFORM(db.t_sede,onupdate=auth.archive)
+    return dict(form=form, sede=db().select(db.t_sede.ALL))
 
 def areas():
     form = SQLFORM(db.t_area,onupdate=auth.archive)

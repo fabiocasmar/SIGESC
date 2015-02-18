@@ -102,11 +102,11 @@
 	<div class="row">
 	      <div class="col-md-2">
 
-		<img src="{{=URL('static', 'img/prop1.png')}}" class="img-responsive" id="proponente"/>
+		<img src="{{=URL('static', 'img/prop1.png')}}" class="img-responsive" id="tutores"/>
 	      </div>
 	      
 	      <div class="col-md-3 subtitulo" style="color:#4682B4">
-		<b><i>Home</b></i>
+		<b><i>Home/Estudiantes</b></i>
 	      </div>
 	      
 	      <div class="col-md-6" align="right">
@@ -124,22 +124,22 @@
 		<div class="row">
 			<div class="col-md-6" style="text-align: left">
 				<div class="row">
-					<i class="fa fa-pencil-square-o fa-3x" style="color: #4682B4"></i><h class="reg"> Registro de Poponentes</h><br> 
+					<i class="fa fa-pencil-square-o fa-3x" style="color: #4682B4"></i><h class="reg"> Registro de Sedes</h><br> 
 		      	</div>
 					{{=form}}
 			</div>
 	
 			<div class="col-md-6" style="text-align: left; margin-top: 44px; width: 50%">
 				<div class="row">
-					<i class="fa fa-list-alt fa-3x" style="color: #4682B4"></i> <h class="reg">Poponentes registrados</h>      
+					<i class="fa fa-list-alt fa-3x" style="color: #4682B4"></i> <h class="reg">Sedes registrados</h>      
 				</div>
 				
 				<div class="row">
 					<table id="props" class="table table-condensed">		
-								{{ for proponente in proponentes:}}
+								{{ for sede in sedes:}}
 							<tr>
 								<td>
-									<a href="{{=URL(r=request,f='proponentesDetalles',args=proponente.id)}}">{{=proponente.f_nombre}}</a>
+									<a href="{{=URL(r=request,f='sedesDetalles',args=sede.id)}}">{{=sede.f_nombre}}</a>
 								</td>
 							</tr>
 						{{ pass }}
