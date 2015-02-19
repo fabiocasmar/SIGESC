@@ -10,6 +10,9 @@ def index():
 def error():
     return dict()
 
+def vista_admin():
+	return dict()
+
 def estudiantes():
     form = SQLFORM(db.t_estudiante)
 #    return dict(form=form)
@@ -28,6 +31,9 @@ def tutores():
 #    form = SQLFORM.smartgrid(db.t_proponente,onupdate=auth.archive)
     return dict(form=form, tutores=db().select(db.t_tutor.ALL))
 
+def proyectos():
+    form = SQLFORM(db.t_proyecto)
+    return dict(form=form, proyectos=db().select(db.t_proyecto.ALL))
 
 @auth.requires_login()
 def estado_manage():

@@ -37,7 +37,7 @@ def estado_manage():
 #@auth.requires_login()
 
 def sedes():
-    form = SQLFORM(db.t_sede,onupdate=auth.archive)
+    form = SQLFORM(db.t_sede)
     return dict(form=form, sedes=db().select(db.t_sede.ALL))
 
 def areas():

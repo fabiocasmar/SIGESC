@@ -98,7 +98,7 @@
     
     <!-- Contenido -->
     <div class="micontainer">
-      <form>
+      <form method="post" action="{{=URL('vista_admin')}}">
         <br>
         <b>
           <h class="acces" style="color:#4682B4">
@@ -120,13 +120,13 @@
         <input type="password"  name="password">
         
         <BR>
-        <a href="estudiantes">
+        <input type="submit" class="btn btn-lg2 btn-default ini">
+        <!--<a href="{{=URL('vista_admin')}}">
           <img class="ini" class="img-responsive" src="{{=URL('static', 'img/log.png')}}" width="120" height="25"/>
-        </a>
+        </a>-->
         <h class="clean" style="color:#808080">
           | Limpiar
-        </h>
-        
+        </h>        
       </form>
 	</div>
     <div class="row">
