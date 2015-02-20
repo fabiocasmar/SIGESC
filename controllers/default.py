@@ -131,4 +131,16 @@ def estudiantesDetalles():
 def proponentesDetalles():
     x = long (request.args[0])
     return dict(rows = db(db.t_proponente.id==x).select())
+    
+def proyectosDetalles():
+    x = long (request.args[0])
+    return dict(rows = db(db.t_proyecto.id==x).select())
+    
+def tutoresDetalles():
+    x = long (request.args[0])
+    return dict(rows = db(db.t_tutor.id==x).select())
+    
+def areasDetalles():
+    x = long (request.args[0])
+    return dict(rows = db(db.t_tutor.id==x).select())
 
