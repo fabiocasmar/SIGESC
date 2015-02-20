@@ -1,3 +1,4 @@
+import re
 # -*- coding: utf-8 -*-
 ### required - do no delete
 def user(): return dict(form=auth())
@@ -14,41 +15,96 @@ def vista_admin():
 	return dict()
 
 def estudiantes():
+    def my_form_processing(form):
+        if not re.match('\d{2}-\d{5}$', form.vars.f_usbid):
+            form.errors.f_usbid = 'El formato válido de carnet es: 00-00000'
+        if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
+            form.errors.f_cedula = 'El formato válido de cédula es: 1232382'
+        if not re.match('(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', form.vars.f_email):
+            form.errors.f_email = 'El formato válido de email es example@example.com'
+        if not re.match('\d{7,13}', form.vars.f_telefono):
+            form.errors.f_telefono = 'El formato válido de telefono es 08002023223'
+
     form = SQLFORM(db.t_estudiante)
-#    return dict(form=form)
-#    form = SQLFORM.smartgrid(db.t_estudiante,onupdate=auth.archive)
+    if form.process(onvalidation=my_form_processing).accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
     return dict(form=form, est=db().select(db.t_estudiante.ALL))
 
 def proponentes():
+    def my_form_processing(form):
+        if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
+            form.errors.f_cedula = 'El formato válido de cédula es: 1232382'
+        if not re.match('(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', form.vars.f_email):
+            form.errors.f_email = 'El formato válido de email es example@example.com'
+        if not re.match('\d{7,13}', form.vars.f_telefono):
+            form.errors.f_telefono = 'El formato válido de telefono es 08002023223'
+
     form = SQLFORM(db.t_proponente)
-#    return dict(form=form)
-#    form = SQLFORM.smartgrid(db.t_proponente,onupdate=auth.archive)
+    if form.process(onvalidation=my_form_processing).accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
     return dict(form=form, proponentes=db().select(db.t_proponente.ALL))
 
+
 def tutores():
+    def my_form_processing(form):
+        if not re.match('\d{2}-\d{5}$', form.vars.f_usbid):
+            form.errors.f_usbid = 'El formato válido de carnet es: 00-00000'
+        if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
+            form.errors.f_cedula = 'El formato válido de cédula es: 1232382'
+        if not re.match('(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', form.vars.f_email):
+            form.errors.f_email = 'El formato válido de email es example@example.com'
+        if not re.match('\d{7,13}', form.vars.f_telefono):
+            form.errors.f_telefono = 'El formato válido de telefono es 08002023223'
     form = SQLFORM(db.t_tutor)
-#    return dict(form=form)
-#    form = SQLFORM.smartgrid(db.t_proponente,onupdate=auth.archive)
+    if form.process(onvalidation=my_form_processing).accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
     return dict(form=form, tutores=db().select(db.t_tutor.ALL))
 
-def proyectos():
-    form = SQLFORM(db.t_proyecto)
-    return dict(form=form, proyectos=db().select(db.t_proyecto.ALL))
 
 @auth.requires_login()
 def estado_manage():
     form = SQLFORM.smartgrid(db.t_estado,onupdate=auth.archive)
-    return locals()
+    return dict(form=form)
 
 #@auth.requires_login()
 
 def sedes():
+    def my_form_processing(form):
+        if not re.match('^[A-Za-z]*$', form.vars.f_nombre):
+            form.errors.f_nombre = 'Sólo puede contener letras'
     form = SQLFORM(db.t_sede)
+    if form.process(onvalidation=my_form_processing).accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'    
     return dict(form=form, sedes=db().select(db.t_sede.ALL))
 
 def areas():
+    def my_form_processing(form):
+        if not re.match('^[A-Za-z]*$', form.vars.f_nombre):
+            form.errors.f_nombre = 'Sólo puede contener letras'
     form = SQLFORM(db.t_area,onupdate=auth.archive)
-    return dict(form=form, area=db().select(db.t_area.ALL))
+    if form.process(onvalidation=my_form_processing).accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+    return dict(form=form, areas=db().select(db.t_area.ALL))
 
 def sede_manage():
     form = SQLFORM.smartgrid(db.t_sede,onupdate=auth.archive)
@@ -69,9 +125,14 @@ def sexo_manage():
     form = SQLFORM.smartgrid(db.t_sexo,onupdate=auth.archive)
     return locals()
 
-@auth.requires_login()
 def estudiante_manage():
-    form = SQLFORM.smartgrid(db.t_estudiante,onupdate=auth.archive)
+    form = SQLFORM.smartgrid(db.t_estudiante.id==request.args(0))
+    if form.process().accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
     return locals()
 
 @auth.requires_login()
