@@ -122,6 +122,13 @@ def relacionestproy_manage():
 #@auth.requires_login()
 def sedesDetalles():
     x = long (request.args[0])
-    #form = SQLFORM(db.t_sede)
-    #return dict(form=form, sede=db(db.t_sede.id==x).select())
     return dict(rows = db(db.t_sede.id==x).select())
+    
+def estudiantesDetalles():
+    x = long (request.args[0])
+    return dict(rows = db(db.t_estudiante.id==x).select())
+    
+def proponentesDetalles():
+    x = long (request.args[0])
+    return dict(rows = db(db.t_proponente.id==x).select())
+
