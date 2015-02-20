@@ -179,3 +179,28 @@ def tipoprop_manage():
 def relacionestproy_manage():
     form = SQLFORM.smartgrid(db.t_relacionestproy,onupdate=auth.archive)
     return locals()
+
+def sedesDetalles():
+    x = long (request.args[0])
+    return dict(rows = db(db.t_sede.id==x).select())
+    
+def estudiantesDetalles():
+    x = long (request.args[0])
+    return dict(rows = db(db.t_estudiante.id==x).select())
+    
+def proponentesDetalles():
+    x = long (request.args[0])
+    return dict(rows = db(db.t_proponente.id==x).select())
+    
+def proyectosDetalles():
+    x = long (request.args[0])
+    return dict(rows = db(db.t_proyecto.id==x).select())
+    
+def tutoresDetalles():
+    x = long (request.args[0])
+    return dict(rows = db(db.t_tutor.id==x).select())
+    
+def areasDetalles():
+    x = long (request.args[0])
+    return dict(rows = db(db.t_tutor.id==x).select())
+

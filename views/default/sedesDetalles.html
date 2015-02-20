@@ -106,7 +106,7 @@
 	      </div>
 	      
 	      <div class="col-md-3 subtitulo" style="color:#4682B4">
-		<b><i>Home</b></i>
+		<b><i>Home/Estudiantes</b></i>
 	      </div>
 	      
 	      <div class="col-md-6" align="right">
@@ -121,25 +121,25 @@
     
 	{{if globals().get('msj', False):}} <p><strong>{{=msj}}</strong></p>
 	{{else:}}
-		<div class="row">
-			<div class="col-md-6" style="text-align: left">
-				<div class="row">
-					<i class="fa fa-pencil-square-o fa-3x" style="color: #4682B4"></i><h class="reg"> Registro de Proyecto</h><br> 
-		      	</div>
-					{{=form}}
-			</div>
 	
 			<div class="col-md-6" style="text-align: left; margin-top: 44px; width: 50%">
 				<div class="row">
-					<i class="fa fa-list-alt fa-3x" style="color: #4682B4"></i> <h class="reg">Proyectos registrados</h>      
+					<i class="fa fa-list-alt fa-3x" style="color: #4682B4"></i> <h class="reg">Informacion de la sede</h>      
 				</div>
 				
 				<div class="row">
 					<table id="props" class="table table-condensed">		
-								{{ for proyecto in proyectos:}}
+
 							<tr>
 								<td>
-									<a href="{{=URL(r=request,f='proyectosDetalles',args=proyecto.id)}}">{{=proyecto.id}}</a>
+									{{=SQLTABLE(rows,headers={'t_sede.id':'Id ',
+																't_sede.f_nombre':'Nombre',
+																't_sede.is_active':'Esta activa',
+																't_sede.created_on':'Fecha de creacion',
+																't_sede.created_by':'Creada por',
+																't_sede.modified_on':'Fecha de Modificacion',
+																't_sede.modified_by':'Modificada por'} ) 
+									}}
 								</td>
 							</tr>
 						{{ pass }}
