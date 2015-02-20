@@ -13,7 +13,6 @@ def error():
 
 def vista_admin():
 	return dict()
-
 def estudiantes():
     def my_form_processing(form):
         if not re.match('\d{2}-\d{5}$', form.vars.f_usbid):
@@ -82,7 +81,7 @@ def estado_manage():
 
 def sedes():
     def my_form_processing(form):
-        if not re.match('^[A-Za-z]*$', form.vars.f_nombre):
+        if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_nombre):
             form.errors.f_nombre = 'Sólo puede contener letras'
     form = SQLFORM(db.t_sede)
     if form.process(onvalidation=my_form_processing).accepted:
@@ -95,7 +94,7 @@ def sedes():
 
 def areas():
     def my_form_processing(form):
-        if not re.match('^[A-Za-z]*$', form.vars.f_nombre):
+        if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_nombre):
             form.errors.f_nombre = 'Sólo puede contener letras'
     form = SQLFORM(db.t_area,onupdate=auth.archive)
     if form.process(onvalidation=my_form_processing).accepted:
@@ -104,7 +103,7 @@ def areas():
         response.flash = 'form has errors'
     else:
         response.flash = 'please fill out the form'
-    return dict(form=form, areas=db().select(db.t_area.ALL))
+    return dict(form=form, area=db().select(db.t_area.ALL))
 
 def sede_manage():
     form = SQLFORM.smartgrid(db.t_sede,onupdate=auth.archive)
