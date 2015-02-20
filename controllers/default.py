@@ -118,3 +118,10 @@ def tipoprop_manage():
 def relacionestproy_manage():
     form = SQLFORM.smartgrid(db.t_relacionestproy,onupdate=auth.archive)
     return locals()
+    
+#@auth.requires_login()
+def sedesDetalles():
+    x = long (request.args[0])
+    #form = SQLFORM(db.t_sede)
+    #return dict(form=form, sede=db(db.t_sede.id==x).select())
+    return dict(rows = db(db.t_sede.id==x).select())
