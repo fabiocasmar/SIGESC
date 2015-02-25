@@ -1,5 +1,5 @@
 (dp1
-S'f_sexo'
+S'f_email'
 p2
 (dp3
 S'length'
@@ -13,14 +13,14 @@ p6
 I7
 sS'sql'
 p7
-S'INTEGER REFERENCES t_sexo (id) ON DELETE CASCADE'
+S'CHAR(512) NOT NULL'
 p8
 sS'notnull'
 p9
 I01
 sS'type'
 p10
-S'reference t_sexo'
+S'string'
 p11
 ssS'modified_by'
 p12
@@ -30,7 +30,7 @@ I512
 sg5
 I00
 sg6
-I13
+I14
 sg7
 S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
 p14
@@ -47,7 +47,7 @@ I512
 sg5
 I00
 sg6
-I14
+I15
 sg7
 S'INTEGER REFERENCES t_proponente (id) ON DELETE CASCADE'
 p18
@@ -64,31 +64,31 @@ I512
 sg5
 I00
 sg6
-I5
+I6
 sg7
 S'CHAR(512) NOT NULL'
 p22
 sg9
 I01
 sg10
-S'string'
+g11
+ssS'f_user'
 p23
-ssS'created_by'
-p24
-(dp25
+(dp24
 g4
 I512
 sg5
 I00
 sg6
-I11
+I3
 sg7
 S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
-p26
+p25
 sg9
-I00
+I01
 sg10
-g15
+S'reference auth_user'
+p26
 ssS'is_active'
 p27
 (dp28
@@ -97,7 +97,7 @@ I512
 sg5
 I00
 sg6
-I9
+I10
 sg7
 S'CHAR(1)'
 p29
@@ -106,7 +106,7 @@ I00
 sg10
 S'boolean'
 p30
-ssS'f_nombre'
+ssS'created_by'
 p31
 (dp32
 g4
@@ -114,15 +114,15 @@ I512
 sg5
 I00
 sg6
-I4
+I12
 sg7
-S'CHAR(512) NOT NULL'
+S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
 p33
 sg9
-I01
+I00
 sg10
-g23
-ssS'f_email'
+g15
+ssS'f_sexo'
 p34
 (dp35
 g4
@@ -130,66 +130,67 @@ I512
 sg5
 I00
 sg6
-I6
+I8
 sg7
-S'CHAR(512) NOT NULL'
+S'INTEGER REFERENCES t_sexo (id) ON DELETE CASCADE'
 p36
 sg9
 I01
 sg10
-g23
-ssS'created_on'
+S'reference t_sexo'
 p37
-(dp38
+ssS'created_on'
+p38
+(dp39
 g4
 I512
 sg5
 I00
 sg6
-I10
+I11
 sg7
 S'TIMESTAMP'
-p39
+p40
 sg9
 I00
 sg10
 S'datetime'
-p40
-ssS'f_cedula'
 p41
-(dp42
+ssS'f_nombre'
+p42
+(dp43
 g4
 I512
 sg5
 I00
 sg6
-I3
+I5
 sg7
 S'CHAR(512) NOT NULL'
-p43
+p44
 sg9
 I01
 sg10
-g23
+g11
 ssS'modified_on'
-p44
-(dp45
+p45
+(dp46
 g4
 I512
 sg5
 I00
 sg6
-I12
+I13
 sg7
 S'TIMESTAMP'
-p46
+p47
 sg9
 I00
 sg10
-g40
+g41
 ssS'f_tipoprop'
-p47
-(dp48
+p48
+(dp49
 g4
 I512
 sg5
@@ -198,31 +199,31 @@ sg6
 I2
 sg7
 S'INTEGER REFERENCES t_tipoprop (id) ON DELETE CASCADE'
-p49
+p50
 sg9
 I01
 sg10
 S'reference t_tipoprop'
-p50
-ssS'f_telefono'
 p51
-(dp52
+ssS'f_telefono'
+p52
+(dp53
 g4
 I512
 sg5
 I00
 sg6
-I8
+I9
 sg7
 S'CHAR(512) NOT NULL'
-p53
+p54
 sg9
 I01
 sg10
-g23
+g11
 ssS'id'
-p54
-(dp55
+p55
+(dp56
 g4
 I512
 sg5
@@ -231,9 +232,26 @@ sg6
 I1
 sg7
 S'INTEGER PRIMARY KEY AUTOINCREMENT'
-p56
+p57
 sg9
 I00
 sg10
-g54
+S'id'
+p58
+ssS'f_cedula'
+p59
+(dp60
+g4
+I512
+sg5
+I00
+sg6
+I4
+sg7
+S'CHAR(512) NOT NULL'
+p61
+sg9
+I01
+sg10
+g11
 ss.

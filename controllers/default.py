@@ -5,14 +5,32 @@ def user(): return dict(form=auth())
 def download(): return response.download(request,db)
 def call(): return service()
 ### end requires
-def index():
-    return dict()
+def index():  
+    form=auth.login()
+    return dict(form=form)
+
 
 def error():
     return dict()
+#auth.add_membership(auth.id_group('Proponentes'))
+@auth.requires_login()
+def vista_admin():    
+    msj= 'Bienvenido %s %s' % (auth.user.first_name,auth.user.last_name)
+    if auth.has_membership('Proponentes'):
+    	
+    	redirect(URL('proponentes'))
 
-def vista_admin():
-	return dict()
+    if auth.has_membership('Estudiantes'):
+    	redirect(URL('estudiantes'))
+    
+    form=auth.profile()
+    return dict(msj=msj, form=form)
+  
+'''
+
+
+
+'''
 def estudiantes():
     def my_form_processing(form):
         if not re.match('\d{2}-\d{5}$', form.vars.f_usbid):
@@ -24,13 +42,22 @@ def estudiantes():
         if not re.match('\d{7,13}', form.vars.f_telefono):
             form.errors.f_telefono = 'El formato válido de telefono es 08002023223'
 
-    form = SQLFORM(db.t_estudiante)
-    if form.process(onvalidation=my_form_processing).accepted:
-        response.flash = 'form accepted'
-    elif form.errors:
-        response.flash = 'form has errors'
-    else:
-        response.flash = 'please fill out the form'
+    form = SQLFORM(db.t_estudiante,
+    	fields = ['f_usbid','f_cedula', 'f_carrera', 'f_sede', 'f_sexo', 'f_telefono', 'f_direccion'])
+
+    user = db.auth_user[auth.user.id]
+    form.vars.f_user = user
+    form.vars.f_email = auth.user.email
+    form.vars.f_nombre = auth.user.first_name
+    form.vars.f_apellido = auth.user.last_name
+    if request.env.request_method =='POST':
+	    if form.process(onvalidation=my_form_processing).accepted:
+	        response.flash = 'form accepted'
+	        return dict(est=db().select(db.t_estudiante.ALL))
+	    elif form.errors:
+	        response.flash = 'form has errors'
+	    else:
+	        response.flash = 'please fill out the form'
     return dict(form=form, est=db().select(db.t_estudiante.ALL))
 
 def proponentes():

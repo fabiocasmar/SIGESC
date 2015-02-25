@@ -79,7 +79,8 @@
     
      <!-- Contenido -->
     <div class="row">
-	  <div class="col-md-2 botones">	      
+	  <div class="col-md-2 botones">
+	  	  {{ block funcionesrol }}	      
 	      <br><div class="row">
 		  <button type="button" onclick="location.href='{{=URL('areas')}}'" align="left" class="btn btn-lg1 btn-default">
 		    <!--<img src="{{=URL('static', 'img/inscribir_proy.png')}}" height="45" />-->
@@ -152,20 +153,24 @@
 		    <h class="tittle-accion">Caracteristicas
 		  </button>
 	      </div><br>-->
+	      {{ end }}
 	  </div>
       
     
-	  <div class="col-md-9" align="left" >
+	  <div class="col-md-9" align="left">
 	  	{{ block subcontenido }}
-		 <h id="breadcrumb" style="color:#4682B4" ><b>Home</h></b>
+	  	
+		<h id="breadcrumb" style="color:#4682B4" ><b>{{=msj}}</h></b><br>
+		<a href="{{=URL('default', 'user', args='logout')}}"><img class="sobre" src="{{=URL('static', 'img/salida_icon.png')}}" hspace="765" vspace="0"/></a>
+	  	
 		
-		<img class="sobre" src="{{=URL('static', 'img/foto.png')}}" height="180" width="150" vspace="80" hspace="100"/>
-		<img class="sobre" src="{{=URL('static', 'img/info_perfil.png')}}" height="90" width="300" hspace="260" vspace="170"/>
-		<img class="sobre" src="{{=URL('static', 'img/salida_icon.png')}}" hspace="765" vspace="0"/>
+		<!--<img class="sobre" src="{{=URL('static', 'img/foto.png')}}" height="180" width="150" vspace="80" hspace="100"/>
+		<img class="sobre" src="{{=URL('static', 'img/info_perfil.png')}}" height="90" width="300" hspace="260" vspace="170"/>-->
+		
 		<br />
-		
 		<div class="row">
-		  <table id="rank" class="table table-condensed">
+			{{=form}}
+		  <!--<table id="rank" class="table table-condensed">
 		      <thead>
 			  <tr>
 			      <th><i class="fa fa-briefcase"></i>Proyectos</i></th>
@@ -197,7 +202,7 @@
 			    <td><B><P style="color:#00008B"  align="right">Total horas= 94<br>Horas restantes= 26</P></B>
 			    </td>
 			  </tr> 
-		  </table>
+		  </table>-->
 	      </div>
 	  </div>
     </div>

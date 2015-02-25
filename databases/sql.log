@@ -474,3 +474,19 @@ CREATE TABLE t_cursa_archive(
     current_record INTEGER REFERENCES t_cursa (id) ON DELETE CASCADE
 );
 success!
+timestamp: 2015-02-25T02:26:54.312000
+ALTER TABLE t_proponente ADD f_user INTEGER REFERENCES auth_user (id) ON DELETE CASCADE;
+success!
+timestamp: 2015-02-25T02:26:54.546000
+ALTER TABLE t_proponente_archive ADD f_user INTEGER REFERENCES auth_user (id) ON DELETE CASCADE;
+success!
+timestamp: 2015-02-25T03:12:44.031000
+ALTER TABLE t_estudiante ADD f_user INTEGER REFERENCES auth_user (id) ON DELETE CASCADE;
+success!
+timestamp: 2015-02-25T03:12:44.359000
+ALTER TABLE t_estudiante_archive ADD f_user INTEGER REFERENCES auth_user (id) ON DELETE CASCADE;
+success!
+success!
+success!
+success!
+success!
