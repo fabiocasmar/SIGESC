@@ -30,6 +30,14 @@
 
     <script type="text/javascript" src="{{=URL('static', 'js/jquery-1.11.2.js')}}">
     </script>
+	
+    <script type="text/javascript">
+		function mostrar_form(){
+		document.getElementById('formulario').style.display = 'block';
+		}
+	</script>	
+     
+     
     
     <!-- Custom styles for this template -->
     
@@ -62,7 +70,8 @@
             <span class="icon-bar">
             </span>
           </button>
-          <img class="home" src="{{=URL('static', 'img/home.png')}}" />
+<a href="https://sc.cesma.usb.ve/SIGESC/default/vista_admin"><img class="home" src="/SIGESC/static/img/home.png">
+</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -97,55 +106,68 @@
         <!--/.nav-collapse -->
       </div>
     </nav>
-    
- <!--Content -->
-	<div class="row">
-	      <div class="col-md-2">
 
-		<img src="{{=URL('static', 'img/prop1.png')}}" class="img-responsive" id="tutores"/>
-	      </div>
-	      
-	      <div class="col-md-3 subtitulo" style="color:#4682B4">
-		<b><i>Home</b></i>
-	      </div>
-	      
-	      <div class="col-md-6" align="right">
-
-		<img class="exit" src="{{=URL('static', 'img/salida_icon.png')}}"/>
-	      </div>
-	</div>
-	
-	<div class="row" id="line">
-	   <hr>
-	</div>
-    
+    <!-- Contenido -->
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-md-2">
+                <img src="{{=URL('static', 'estudiantes.png')}}" class="img-responsive" width="150" height="110"/>
+            </div>
+            <div class="col-md-4" align="left">
+                <h4 style="color:#4682B4">Home / Admin / Estudiantes </h4>
+            </div>
+            <div class="col-md-6" align="right">
+                <a href=".">Salida <img src="{{=URL('static', 'img/salida_icon.png')}}"/></a>
+            </div>
+        </div>
+        <hr>
+    </div>
 	{{if globals().get('msj', False):}} <p><strong>{{=msj}}</strong></p>
 	{{else:}}
-		<div class="row">
-			<div class="col-md-6" style="text-align: left">
-				<div class="row">
-					<i class="fa fa-pencil-square-o fa-3x" style="color: #4682B4"></i><h class="reg"> Registro de estudiante</h><br> 
-		      	</div>
-					{{=form}}
-			</div>
+		
+    <div class="col-sm-12">
+    <div class="row">
+        <div class="col-md-7">
+            <table class="table table-condensed" id="estuds">
+                <thead>
+                    <tr>
+                        <th> Estudiantes registrados</i></th>
+                        <th align="right"></th>
+                        <th align="right"></th>
+                        <th align="right"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ for estudiante in est:}}
+                    <tr>
+                        <td>
+                            <a href="{{=URL(r=request,f='estudiantesDetalles',args=estudiante.id)}}">{{=estudiante.f_nombre}}</a>
+                        </td>
+                        <td>
+                         <a href="{{=URL(r=request,f='estudiantesDetalles',args=estudiante.id)}}"><i class="glyphicon glyphicon-search"></i></a>
+                        </td>
+                        <td>
+                        <a href="{{=URL(r=request,f='estudiantesDetalles',args=estudiante.id)}}"><i class="glyphicon glyphicon-pencil"></i></a>
+                        </td>
+                        <td>
+                        <a href="{{=URL(r=request,f='estudiantesDetalles',args=estudiante.id)}}"><i class="glyphicon glyphicon-trash"></i></a>
+                        </td>
+                    </tr>
+                    {{ pass }}
+                </tbody>
+            </table>
+        </div>
 	
-			<div class="col-md-6" style="text-align: left; margin-top: 44px; width: 50%">
-				<div class="row">
-					<i class="fa fa-list-alt fa-3x" style="color: #4682B4"></i> <h class="reg">Estudiantes registrados</h>      
-				</div>
-				
-				<div class="row">
-					<table id="props" class="table table-condensed">		
-								{{ for estudiante in est:}}
-							<tr>
-								<td>
-									<a href="{{=URL(r=request,f='estudiantesDetalles',args=estudiante.id)}}">{{=estudiante.f_nombre}}</a>
-								</td>
-							</tr>
-						{{ pass }}
-					</table>
-				</div>
-			</div>
-	</div>
+        <div class="col-md-5">
+             <button class="btn btn-success registrar" style="width: 240px;" onclick="mostrar_form()" align="right">
+                 <i class="glyphicon glyphicon-plus-sign"></i> <b>Registrar un nuevo esudiante</b>
+            </button>
+            
+            <div class="form" id="formulario" style="display:none">
+					{{=form}}
+            </div>
+        </div>
+    </div>
+    </div>
 	{{ pass }}
 {{ end }}

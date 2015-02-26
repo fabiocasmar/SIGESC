@@ -54,8 +54,9 @@ def proponentes():
 
 def tutores():
     def my_form_processing(form):
-        if not re.match('\d{2}-\d{5}$', form.vars.f_usbid):
-            form.errors.f_usbid = 'El formato válido de carnet es: 00-00000'
+        if form.vars.f_usbid:
+            if not re.match('\d{2}-\d{5}$', form.vars.f_usbid) and not re.match('[a-zA-Z0-9_.+-]+', form.vars.f_usbid):
+                form.errors.f_usbid = 'usbid invalido'
         if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
             form.errors.f_cedula = 'El formato válido de cédula es: 1232382'
         if not re.match('(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', form.vars.f_email):
@@ -103,7 +104,7 @@ def areas():
         response.flash = 'form has errors'
     else:
         response.flash = 'please fill out the form'
-    return dict(form=form, area=db().select(db.t_area.ALL))
+    return dict(form=form, areas=db().select(db.t_area.ALL))
 
 def sede_manage():
     form = SQLFORM.smartgrid(db.t_sede,onupdate=auth.archive)
@@ -181,7 +182,18 @@ def relacionestproy_manage():
 
 def sedesDetalles():
     x = long (request.args[0])
-    return dict(rows = db(db.t_sede.id==x).select())
+    #return dict(rows = db(db.t_sede.id==x).select())
+    record = db.t_sede(request.args[0])
+    form = SQLFORM(db.t_sede, record, deletable = True)
+    if form.process().accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    elif not record:
+        return dict('La sede ha sido eliminada')
+    return dict(form = form,rows = db(db.t_sede.id==x).select())
+
+
     
 def estudiantesDetalles():
     x = long (request.args[0])
@@ -201,5 +213,4 @@ def tutoresDetalles():
     
 def areasDetalles():
     x = long (request.args[0])
-    return dict(rows = db(db.t_tutor.id==x).select())
-
+    return dict(rows = db(db.t_area.id==x).select())
