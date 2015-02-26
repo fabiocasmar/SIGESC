@@ -137,7 +137,7 @@ db.define_table('t_proponente_archive',db.t_proponente,Field('current_record','r
 
 ########################################
 db.define_table('t_project',
-    Field('f_codigo',type ='id', notnull=True,
+    Field('f_codigo',type ='string', notnull=True,
           label=T('Codigo')),
    # Field('f_proyecto', type='reference t_proyecto', notnull=True,
     #      label=T('Proyecto')),
@@ -155,7 +155,7 @@ db.define_table('t_project',
           label=T('Fechaini')),
     Field('f_fechafin', type='date',notnull=True,
           label=T('Fechafin')),
-    Field('f_version',type ='id',notnull=True,
+    Field('f_version',type ='string',notnull=True,
           label=T('Version')),
     Field('f_comunidad', type='reference t_comunidad', notnull=True,
           label=T('Comunidad')),
