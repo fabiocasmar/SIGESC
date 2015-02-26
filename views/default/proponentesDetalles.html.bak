@@ -145,11 +145,14 @@
 								{{ for proyecto in proyectos:}}
 							<tr>
 								<td>
-									<a href="{{=URL(r=request,f='proyectoDetalles',args=proyecto.id)}}">{{=proyecto.f_nombre}}</a>
+									<a href="{{=URL(r=request,f='proyectosDetalles',args=proyecto.id)}}">{{=proyecto.f_nombre}}</a>
 								</td>
 							</tr>
 						{{ pass }}
                         </table>
+                    </div>
+                    <div class="col-md-6">
+                        <a href="{{=URL(r=request,f='proyectos')}}">{{=proyecto.f_nombre}}</a>
                     </div>
 				</div>
 			</div>
