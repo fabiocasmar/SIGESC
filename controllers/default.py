@@ -227,7 +227,7 @@ def proponentesDetalles():
     
 def proyectosDetalles():
     x = long (request.args[0])
-    return dict(rows = db(db.t_proyecto.id==x).select())
+    return dict(rows = db(db.t_project.id==x).select())
     
 def tutoresDetalles():
     x = long (request.args[0])
