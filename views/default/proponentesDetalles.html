@@ -129,28 +129,28 @@
 				</div>
 				
 				<div class="row">
-					<table id="props" class="table table-condensed">		
+                    <div class="col-md-6">
+                        <table id="props" class="table table-condensed">		
 
+                                <tr>
+                                    <td>
+                                        {{=form}}
+                                    </td>
+                                </tr>
+                            {{ pass }}
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <table id="props" class="table table-condensed">		
+								{{ for proyecto in proyectos:}}
 							<tr>
 								<td>
-									{{=SQLTABLE(rows,headers={'t_proponente.id':'Id',
-																't_proponente.f_tipoprop':'Tipo de proponente',
-																't_proponente.f_nombre':'Nombre',
-																't_proponente.f_apellido':'Apellido',
-																't_proponente.f_cedula':'Cedula',
-																't_proponente.f_email':'Correo electronico',
-																't_proponente.f_sexo':'Sexo',
-																't_proponente.f_telefono':'Telefono',
-																't_proponente.is_active':'Esta activo',
-																't_proponente.created_on':'Fecha de creacion',
-																't_proponente.created_by':'Creado por',
-																't_proponente.modified_on':'Fecha de modificacion',
-																't_proponente.modified_by':'Modificado por'}) 
-									}}
+									<a href="{{=URL(r=request,f='proyectosDetalles',args=proyecto.id)}}">{{=proyecto.f_nombre}}</a>
 								</td>
 							</tr>
 						{{ pass }}
-					</table>
+                        </table>
+                    </div>
 				</div>
 			</div>
 	</div>
