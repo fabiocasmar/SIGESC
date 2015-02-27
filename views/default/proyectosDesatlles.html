@@ -119,13 +119,10 @@
            <h4 style="color:#337AB7"><i class="glyphicon glyphicon-briefcase"></i> Menú</h4>
             <hr>
              <ul class="nav nav-stacked">
-                <li>
+                 <li>
                       <a href="{{=URL('estudiantes')}}">
                          <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Volver a Estudiantes</a>
                      <a href="{{=URL('proyectos')}}">
-                      <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Áreas </a>
-                      <a href="{{=URL('areas')}}">
-
                          <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Proyectos </a>
                       <a href="{{=URL('proponentes')}}">
                          <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Proponentes </a>
@@ -147,16 +144,19 @@
                     <div class="panel-body">
                         <table class="table table-striped">
 
-                            {{for estudiante in rows:}}
-                            <tr><td><b>USBID:</b> {{=estudiante.f_usbid}}</td></tr>
-                            <tr><td><b>Nombre:</b> {{=estudiante.f_nombre}}</td></tr>
-                            <tr><td><b>Apellido:</b> {{=estudiante.f_apellido}}</td></tr>
-                            <tr><td><b>Cédula:</b> {{=estudiante.f_cedula}}</td></tr>
-                            <tr><td><b>Carrera:</b> {{=estudiante.f_carrera}}</td></tr>
-                            <tr><td><b>Sede:</b> {{=estudiante.f_sede}}</td></tr>
-                            <tr><td><b>Sexo:</b> {{=estudiante.f_sexo}}</td></tr>
-                            <tr><td><b>Teléfono:</b> {{=estudiante.f_telefono}}</td></tr>
-                            <tr><td><b>Dirección:</b> {{=estudiante.f_direccion}}</td></tr>
+                            {{for proyecto in rows:}}
+                            <tr><td><b>Código:</b> {{=proyecto.f_codigo}}</td></tr>
+                            <tr><td><b>Nombre:</b> {{=proyecto.f_nombre}}</td></tr>
+                            <tr><td><b>Descipción:</b> {{=proyecto.f_descripcion}}</td></tr>
+                            <tr><td><b>Área:</b> {{=proyecto.f_area}}</td></tr>
+                            <tr><td><b>Estado:</b> {{=proyecto.f_estado}}</td></tr>
+                            <tr><td><b>Tutor:</b> {{=proyecto.f_tutor}}</td></tr>
+                            <tr><td><b>Fecha de Inicio:</b> {{=proyecto.f_fechaini}}</td></tr>
+                            <tr><td><b>Fecha de Finalización:</b> {{=proyecto.f_fechafin}}</td></tr>
+                            <tr><td><b>Fecha de Finalización:</b> {{=proyecto.f_fechafin}}</td></tr>
+                            <tr><td><b>Version:</b> {{=proyecto.f_version}}</td></tr>
+                            <tr><td><b>Comunidad:</b> {{=proyecto.f_comunidad}}</td></tr>
+                            <tr><td><b>Proponente:</b> {{=proyecto.f_proponente}}</td></tr>
                           {{pass}}
 
                         </table>
@@ -164,7 +164,6 @@
                 </div>
             </div>
         </div>
-
 
       </div>
 	{{ pass }}
