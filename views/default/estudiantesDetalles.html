@@ -162,6 +162,27 @@
             </div>
         </div>
 
+         <div class="col-md-6" style="text-align: left; margin-top: 44px; width: 50%">
+        <div class="row">
+          <i class="fa fa-list-alt fa-3x" style="color: #4682B4"></i> <h class="reg">Seleccione el proyecto en el que desea inscribirse</h>      
+        </div>
+      
+        <div class="row">
+          <table id="props" class="table table-condensed">    
+                {{ for proyecto in proyectos:}}
+              <tr>
+                <td>
+                  <a href="{{=URL(r=request,f='cursa',args=[proyecto.id,estudianteID])}}">{{=proyecto.f_nombre}}</a>
+                </td>
+                <td>
+                  <span>{{=proyecto.f_descripcion}}<span>
+                </td>
+              </tr>
+            {{ pass }}
+          </table>
+        </div>
+      </div> 
+
       </div>
 	{{ pass }}
 {{ end }}
