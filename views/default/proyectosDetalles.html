@@ -62,7 +62,8 @@
             <span class="icon-bar">
             </span>
           </button>
-          <img class="home" src="{{=URL('static', 'img/home.png')}}" />
+    <a href="https://sc.cesma.usb.ve/SIGESC/default/vista_admin"><img class="home" src="/SIGESC/static/img/home.png">
+</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -124,7 +125,7 @@
 	
 			<div class="col-md-6" style="text-align: left; margin-top: 44px; width: 50%">
 				<div class="row">
-					<i class="fa fa-list-alt fa-3x" style="color: #4682B4"></i> <h class="reg">Informacion de la sede</h>      
+					<i class="fa fa-list-alt fa-3x" style="color: #4682B4"></i> <h class="reg">Información del proyecto</h>      
 				</div>
 				
 				<div class="row">
@@ -132,14 +133,7 @@
 
 							<tr>
 								<td>
-									{{=SQLTABLE(rows,headers={'t_proyecto.id':'Id',
-																't_proyecto.f_codigo':'Codigo',
-																't_proyecto.is_active':'Esta activo',
-																't_proyecto.created_on':'Fecha de creacion',
-																't_proyecto.created_by':'Creado por',
-																't_proyecto.modified_on':'Fecha de modificacion',
-																't_proyecto.modified_by':'Modificado por' } ) 
-									}}
+									{{=form}}
 								</td>
 							</tr>
 						{{ pass }}

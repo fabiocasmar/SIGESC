@@ -23,7 +23,7 @@ db.define_table('t_sexo_archive',db.t_sexo,Field('current_record','reference t_s
 
 ########################################
 db.define_table('t_tutor',
-    Field('f_usbid', type='string', notnull=True,
+    Field('f_usbid', type='string', notnull=False,
           label=T('Usbid')),
     Field('f_cedula', type='string', notnull=True,
           label=T('Cedula')),
@@ -58,14 +58,14 @@ db.define_table('t_tipoprop',
 db.define_table('t_tipoprop_archive',db.t_tipoprop,Field('current_record','reference t_tipoprop',readable=False,writable=False))
 
 ########################################
-db.define_table('t_proyecto',
-    Field('f_codigo', type='string', notnull=True,
-          label=T('Codigo')),
-    auth.signature,
-    format='%(f_codigo)s',
-    migrate=settings.migrate)
+#db.define_table('t_proyecto',
+#    Field('f_codigo', type='string', notnull=True,
+#          label=T('Codigo')),
+#    auth.signature,
+#    format='%(f_codigo)s',
+#    migrate=settings.migrate)
 
-db.define_table('t_proyecto_archive',db.t_proyecto,Field('current_record','reference t_proyecto',readable=False,writable=False))
+#db.define_table('t_proyecto_archive',db.t_proyecto,Field('current_record','reference t_proyecto',readable=False,writable=False))
 
 ########################################
 db.define_table('t_area',
@@ -137,12 +137,13 @@ db.define_table('t_proponente',
 db.define_table('t_proponente_archive',db.t_proponente,Field('current_record','reference t_proponente',readable=False,writable=False))
 
 ########################################
-db.define_table('t_caracterisicas',
-    Field('f_proyecto', type='reference t_proyecto', notnull=True,
-          label=T('Proyecto')),
+db.define_table('t_project',
+    Field('f_codigo',type ='string', notnull=True,
+          label=T('Codigo')),
+   # Field('f_proyecto', type='reference t_proyecto', notnull=True,
+    #      label=T('Proyecto')),
     Field('f_nombre', type='string', notnull=True,
-          label=T('Nombre')),
-
+          label=T('Nombre'),default = ''),
     Field('f_descripcion', type='text', notnull=True,
           label=T('Descripcion')),
     Field('f_area', type='reference t_area', notnull=True,
@@ -153,19 +154,20 @@ db.define_table('t_caracterisicas',
           label=T('Tutor')),
     Field('f_fechaini', type='date', notnull=True,
           label=T('Fechaini')),
-    Field('f_fechafin', type='date', notnull=True,
+    Field('f_fechafin', type='date',notnull=True,
           label=T('Fechafin')),
-    Field('f_version', type='string', notnull=True,
+    Field('f_version',type ='string',notnull=True,
           label=T('Version')),
     Field('f_comunidad', type='reference t_comunidad', notnull=True,
           label=T('Comunidad')),
     Field('f_proponente', type='reference t_proponente', notnull=True,
           label=T('Proponente')),
     auth.signature,
-    format='%(f_proyecto)s',
+    format='%(f_codigo)s',
+    #primarykey=['f_version','f_codigo'],
     migrate=settings.migrate)
-
-db.define_table('t_caracterisicas_archive',db.t_caracterisicas,Field('current_record','reference t_caracterisicas',readable=False,writable=False))
+db.define_table('t_project_archive',db.t_project,Field('current_record','reference t_project',readable=False,writable=False))
+#db.define_table('t_caracteristicas_archive',db.t_caracteristicas,Field('current_record','reference t_caracteristicas',readable=False,writable=False))
 
 ########################################
 db.define_table('t_carrera',
@@ -220,8 +222,8 @@ db.define_table('t_relacionestproy_archive',db.t_relacionestproy,Field('current_
 db.define_table('t_cursa',
     Field('f_estudiante', type='reference t_estudiante', notnull=True,
           label=T('Estudiante')),
-    Field('f_proyecto', type='reference t_proyecto', notnull=True,
-          label=T('Proyecto')),
+    Field('f_project', type='reference t_project', notnull=True,
+          label=T('Project')),
     Field('f_state', type='reference t_relacionestproy', notnull=True,
           label=T('State')),
     auth.signature,
