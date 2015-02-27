@@ -56,7 +56,7 @@ I01
 sg10
 S'reference t_area'
 p19
-ssS'is_active'
+ssS'f_fechaini'
 p20
 (dp21
 g4
@@ -64,14 +64,14 @@ I512
 sg5
 I00
 sg6
-I11
+I7
 sg7
-S'CHAR(1)'
+S'DATE NOT NULL'
 p22
 sg9
-I00
+I01
 sg10
-S'boolean'
+S'date'
 p23
 ssS'f_version'
 p24
@@ -113,7 +113,7 @@ I01
 sg10
 S'reference t_estado'
 p37
-ssS'f_fechaini'
+ssS'is_active'
 p38
 (dp39
 g4
@@ -121,14 +121,14 @@ I512
 sg5
 I00
 sg6
-I7
+I11
 sg7
-S'DATE NOT NULL'
+S'CHAR(1)'
 p40
 sg9
-I01
+I00
 sg10
-S'date'
+S'boolean'
 p41
 ssS'created_on'
 p42
@@ -147,7 +147,7 @@ I00
 sg10
 S'datetime'
 p45
-ssS'created_by'
+ssS'f_nombre'
 p46
 (dp47
 g4
@@ -155,14 +155,14 @@ I512
 sg5
 I00
 sg6
-I13
+I2
 sg7
-S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
+S'CHAR(512) NOT NULL'
 p48
 sg9
-I00
+I01
 sg10
-S'reference auth_user'
+S'string'
 p49
 ssS'modified_on'
 p50
@@ -235,10 +235,11 @@ p69
 sg9
 I00
 sg10
-g49
-ssS'f_fechafin'
+S'reference auth_user'
 p70
-(dp71
+ssS'f_fechafin'
+p71
+(dp72
 g4
 I512
 sg5
@@ -247,14 +248,14 @@ sg6
 I8
 sg7
 S'DATE NOT NULL'
-p72
+p73
 sg9
 I01
 sg10
-g41
+g23
 ssS'f_comunidad'
-p73
-(dp74
+p74
+(dp75
 g4
 I512
 sg5
@@ -263,15 +264,15 @@ sg6
 I9
 sg7
 S'INTEGER REFERENCES t_comunidad (id) ON DELETE CASCADE'
-p75
+p76
 sg9
 I01
 sg10
 S'reference t_comunidad'
-p76
-ssS'f_proponente'
 p77
-(dp78
+ssS'f_proponente'
+p78
+(dp79
 g4
 I512
 sg5
@@ -280,29 +281,28 @@ sg6
 I10
 sg7
 S'INTEGER REFERENCES t_proponente (id) ON DELETE CASCADE'
-p79
+p80
 sg9
 I01
 sg10
 S'reference t_proponente'
-p80
-ssS'f_nombre'
 p81
-(dp82
+ssS'created_by'
+p82
+(dp83
 g4
 I512
 sg5
 I00
 sg6
-I2
+I13
 sg7
-S'CHAR(512) NOT NULL'
-p83
-sg9
-I01
-sg10
-S'string'
+S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
 p84
+sg9
+I00
+sg10
+g70
 ssS'f_tutor'
 p85
 (dp86
