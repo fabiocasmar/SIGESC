@@ -109,6 +109,44 @@ def areas():
         response.flash = 'please fill out the form'
     return dict(form=form, areas=db().select(db.t_area.ALL))
 
+def proyectos():
+    def my_form_processing(form):
+        if not re.match('\d{4}', form.vars.f_codigo):
+            form.errors.f_codigo = 'El formato válido del código son 4 dígitos'
+        if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_nombre):
+            form.errors.f_nombre = 'Sólo puede contener letras'
+        if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_descripcion):
+            form.errors.f_descripcion = 'Sólo puede contener letras'
+        if not re.match('\d{2}', form.vars.f_version):
+            form.errors.f_codigo = 'El formato válido de la versión son 2 dígitos'
+    form = SQLFORM(db.t_project,onupdate=auth.archive) 
+    if form.process(onvalidation=my_form_processing).accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+    return dict(form=form, proyectos=db().select(db.t_project.ALL))
+
+
+def cursa():
+    idProyecto = long(request.args[0])
+    idEstudiante = long(request.args[1])
+    estado = db(db.t_relacionestproy).select().first()
+    form = SQLFORM(db.t_cursa,fields = ['f_estudiante','f_project','f_state']) 
+    form.vars.f_estudiante = idEstudiante
+    form.vars.f_project = idProyecto
+    form.vars.f_state = estado 
+
+    if form.process(keepvalues=True).accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+
+    return dict(form=form,proyectos=db(db.t_project.id==idProyecto).select(),cursan=db(db.t_cursa.ALL),estudianteID=idEstudiante)
+
 def sede_manage():
     form = SQLFORM.smartgrid(db.t_sede,onupdate=auth.archive)
     return locals()
