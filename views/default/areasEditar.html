@@ -30,20 +30,6 @@
 
     <script type="text/javascript" src="{{=URL('static', 'js/jquery-1.11.2.js')}}">
     </script>
-      
-    <script type="text/javascript">
-		function mostrar_form(){
-		document.getElementById('formulario').style.display = 'block';
-		document.getElementById('up').style.display = 'block';
-		}
-	</script>
-      
-      <script type="text/javascript">
-		function ocultar_form(){
-		document.getElementById('formulario').style.display = 'none';
-		document.getElementById('up').style.display = 'none';
-		}
-	</script>	
     
     <!-- Custom styles for this template -->
     
@@ -77,7 +63,7 @@
             </span>
           </button>
 <a href="https://sc.cesma.usb.ve/SIGESC/default/vista_admin"><img class="home" src="/SIGESC/static/img/home.png">
-</a>
+</a>/>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -101,7 +87,7 @@
                 Decanato de extensión
               </a>
             </li>
-			<li>
+      <li>
               <a href="http://getbootstrap.com/examples/theme/#contact">
                 Proyectos
               </a>
@@ -112,15 +98,14 @@
         <!--/.nav-collapse -->
       </div>
     </nav>
-    
- <!--Content -->
-<div class="col-sm-12">
+
+    <div class="col-sm-12">
         <div class="row">
             <div class="col-md-2">
-                <img src="{{=URL('static', 'sedes.png')}}" class="img-responsive" width="150" height="110"/>
+                <img src="{{=URL('static', 'estudiantes.png')}}" class="img-responsive" width="150" height="110"/>
             </div>
             <div class="col-md-4" align="left">
-                <h4 style="color:#4682B4"><a href=".">Home</a> /<a href="{{=URL('vista_admin')}}"> Admin </a> / <a href="#">Sedes </a></h4>
+               <h4 style="color:#4682B4"><a href=".">Home</a> /<a href="{{=URL('vista_admin')}}"> Admin </a> / <a href="#">Proyectos </a> </h4>
             </div>
             <div class="col-md-6" align="right">
                 <a href=".">Salida <img src="{{=URL('static', 'img/salida_icon.png')}}"/></a>
@@ -128,53 +113,47 @@
         </div>
         <hr>
     </div>
-    
-	{{if globals().get('msj', False):}} <p><strong>{{=msj}}</strong></p>
-	{{else:}}
-    <div class="col-sm-12">
-    <div class="row">
-        <div class="col-md-7">
-            <table class="table table-condensed" id="estuds">
-                <thead>
-                    <tr>
-                        <th> Sedes existentes</i></th>
-                        <th align="right"></th>
-                        <th align="right"></th>
-                        <th align="right"></th>
-                    </tr>
-                </thead>
-                <tbody>		
-                    {{ for sede in sedes:}}
-                    <tr>
-                        <td>
-                            <a href="{{=URL(r=request,f='sedesDetalles',args=sede.id)}}">{{=sede.f_nombre}}</a>
-                        </td>
-                        <td>
-                         <a href="{{=URL(r=request,f='sedesDetalles',args=sede.id)}}"><i class="glyphicon glyphicon-search"></i></a>
-                        </td>
-                        <td>
-                        <a href="{{=URL(r=request,f='sedesEditar',args=sede.id)}}"><i class="glyphicon glyphicon-pencil"></i></a>
-                        </td>
-                        <td>
-                        <a href="{{=URL(r=request,f='sedesEditar',args=sede.id)}}"><i class="glyphicon glyphicon-trash"></i></a>
-                        </td>
-                    </tr>
-                    {{ pass }}
-                </tbody>
-            </table>
-				</div>
-			<div class="col-md-5">
-             <button class="btn btn-success registrar" style="width: 240px;" onclick="mostrar_form()" align="right">
-                 <i class="glyphicon glyphicon-plus-sign"></i> <b>Registrar una nueva sede</b>
-            </button>
-                        <button class="btn btn-warning" id="up" style="width: 100px; display:none" onclick="ocultar_form()">
-                 </i> <b>Ocultar </b><i class="glyphicon glyphicon-chevron-up"></i>
-            </button>
-            <div class="form sede_form" id="formulario" style="display:none">
-					{{=form}}
+
+   <div class="col-sm-12">
+       <div class="col-md-3">
+           <h4 style="color:#337AB7"><i class="glyphicon glyphicon-briefcase"></i> Menú</h4>
+            <hr>
+             <ul class="nav nav-stacked">
+                 <li>
+                      <a href="{{=URL('estudiantes')}}">
+                         <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Volver a Estudiantes</a>
+                     <a href="{{=URL('proyectos')}}">
+                         <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Proyectos </a>
+                     <a href="{{=URL('areas')}}">
+                         <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Áreas </a>
+                      <a href="{{=URL('proponentes')}}">
+                         <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Proponentes </a>
+                      <a href="{{=URL('sedes')}}">
+                          <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Sedes</a>
+                     <a href="{{=URL('tutores')}}">
+                          <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Tutores</a>
+                 </li>
+             </ul>
+       </div>
+        {{if globals().get('msj', False):}} <p><strong>{{=msj}}</strong></p>
+        {{else:}}
+        <div class="col-md-5">
+            <div class="row">
+                <div class="panel panel-primary">
+                    <div class="panel-heading class=detalles">
+                       <b><h class="detalles" >Editar el proyecto</b></h>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
+
+                            {{=form}}
+                          
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    </div>
-	{{ pass }}
+
+      </div>
+  {{ pass }}
 {{ end }}

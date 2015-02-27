@@ -235,30 +235,106 @@ def sedesDetalles():
     return dict(form = form,rows = db(db.t_sede.id==x).select())
 
 
-    
+def estudianteProyectos():
+    x = long (request.args[0])
+    #return dict(rows = db(db.t_estudiante.id==x).select())
+    return dict(rows = db(db.t_estudiante.id==x).select(),proyectos=db().select(db.t_project.ALL),estudianteID=x)   
+
 def estudiantesDetalles():
     x = long (request.args[0])
     #return dict(rows = db(db.t_estudiante.id==x).select())
     return dict(rows = db(db.t_estudiante.id==x).select())
 
-def estudianteProyectos():
-    x = long (request.args[0])
-    #return dict(rows = db(db.t_estudiante.id==x).select())
-    return dict(rows = db(db.t_estudiante.id==x).select(),proyectos=db().select(db.t_project.ALL),estudianteID=x)
-    
-
-def proponentesDetalles():
-    x = long (request.args[0])
-    return dict(rows = db(db.t_proponente.id==x).select())
-    
-def proyectosDetalles():
-    x = long (request.args[0])
-    return dict(rows = db(db.t_project.id==x).select())
-    
 def tutoresDetalles():
     x = long (request.args[0])
     return dict(rows = db(db.t_tutor.id==x).select())
-    
+
+def proyectosDetalles():
+    x = long (request.args[0])
+    return dict(rows = db(db.t_project.id==x).select())    
+
+def proponentesDetalles():
+    x = long (request.args[0])
+    return dict(rows = db(db.t_proponente.id==x).select())    
+
 def areasDetalles():
     x = long (request.args[0])
-    return dict(rows = db(db.t_area.id==x).select())
+    return dict(rows = db(db.t_area.id==x).select())    
+
+def estudiantesEditar():
+    x = long (request.args[0])
+    #return dict(rows = db(db.t_sede.id==x).select())
+    record = db.t_estudiante(request.args[0])
+    form = SQLFORM(db.t_estudiante, record, deletable = True)
+    if form.process().accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    elif not record:
+        return dict('La sede ha sido eliminada')
+    return dict(form = form)
+
+def areasEditar():
+    x = long (request.args[0])
+    #return dict(rows = db(db.t_sede.id==x).select())
+    record = db.t_area(request.args[0])
+    form = SQLFORM(db.t_area, record, deletable = True)
+    if form.process().accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    elif not record:
+        return dict('La sede ha sido eliminada')
+    return dict(form = form)
+
+def sedesEditar():
+    x = long (request.args[0])
+    #return dict(rows = db(db.t_sede.id==x).select())
+    record = db.t_sede(request.args[0])
+    form = SQLFORM(db.t_sede, record, deletable = True)
+    if form.process().accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    elif not record:
+        return dict('La sede ha sido eliminada')
+    return dict(form = form)
+
+def proponentesEditar():
+    x = long (request.args[0])
+    #return dict(rows = db(db.t_sede.id==x).select())
+    record = db.t_proponente(request.args[0])
+    form = SQLFORM(db.t_proponente, record, deletable = True)
+    if form.process().accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    elif not record:
+        return dict('La sede ha sido eliminada')
+    return dict(form = form)
+
+def tutoresEditar():
+    x = long (request.args[0])
+    #return dict(rows = db(db.t_sede.id==x).select())
+    record = db.t_tutor(request.args[0])
+    form = SQLFORM(db.t_tutor, record, deletable = True)
+    if form.process().accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    elif not record:
+        return dict('El tutor ha sido eliminado')
+    return dict(form = form)
+
+def proyectosEditar():
+    x = long (request.args[0])
+    #return dict(rows = db(db.t_sede.id==x).select())
+    record = db.t_project(request.args[0])
+    form = SQLFORM(db.t_project, record, deletable = True)
+    if form.process().accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    elif not record:
+        return dict('La sede ha sido eliminada')
+    return dict(form = form)
