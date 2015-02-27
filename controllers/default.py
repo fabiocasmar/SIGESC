@@ -5,30 +5,84 @@ def user(): return dict(form=auth())
 def download(): return response.download(request,db)
 def call(): return service()
 ### end requires
-def index():  
-    form=auth.login()
-    return dict(form=form)
+def index():
+	form=auth.login()
+	return dict(form=form)
 
 
 def error():
     return dict()
-#auth.add_membership(auth.id_group('Proponentes'))
+
 @auth.requires_login()
 def vista_admin():    
-    msj= 'Bienvenido %s %s' % (auth.user.first_name,auth.user.last_name)
-    if auth.has_membership('Proponentes'):
-    	
-    	redirect(URL('proponentes'))
+    msj= 'Bienvenid@ %s %s' % (auth.user.first_name,auth.user.last_name)
+
+    if auth.has_membership('Proponentes'):    	
+    	redirect(URL('vista_proponente'))
 
     if auth.has_membership('Estudiantes'):
-    	redirect(URL('estudiantes'))
-    
-    form=auth.profile()
-    return dict(msj=msj, form=form)
-  
-'''
+    	redirect(URL('vista_estudiante'))
 
-'''
+    return dict(msj=msj)
+
+@auth.requires_membership('Proponentes')
+def vista_proponente():
+	def my_form_processing(form):
+		if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
+			form.errors.f_cedula = 'El formato válido de cédula es: 1232382'
+		if not re.match('(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', form.vars.f_email):
+			form.errors.f_email = 'El formato válido de email es example@example.com'
+		if not re.match('\d{7,13}', form.vars.f_telefono):
+			form.errors.f_telefono = 'El formato válido de telefono es 08002023223'
+
+	msj = 'Bienvenid@ %s %s' % (auth.user.first_name,auth.user.last_name)
+	form = SQLFORM(db.t_proponente,
+		fields = ['f_tipoprop','f_cedula', 'f_sexo', 'f_telefono'])
+
+	user = db.auth_user[auth.user.id]
+	form.vars.f_user = user
+	form.vars.f_email = auth.user.email
+	form.vars.f_nombre = auth.user.first_name
+	form.vars.f_apellido = auth.user.last_name
+	if form.process(onvalidation=my_form_processing, keepvalues=True).accepted:
+		response.flash = 'form accepted'
+	elif form.errors:
+		response.flash = 'form has errors'
+	else:
+		response.flash = 'please fill out the form'
+	return dict(form=form, bienvenida=msj)
+
+@auth.requires_membership('Estudiantes')
+def vista_estudiante():
+	def my_form_processing(form):
+		if not re.match('\d{2}-\d{5}$', form.vars.f_usbid):
+			form.errors.f_usbid = 'El formato válido de carnet es: 00-00000'
+		if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
+			form.errors.f_cedula = 'El formato válido de cédula es: 1232382'
+		if not re.match('(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', form.vars.f_email):
+			form.errors.f_email = 'El formato válido de email es example@example.com'
+		if not re.match('\d{7,13}', form.vars.f_telefono):
+			form.errors.f_telefono = 'El formato válido de telefono es 08002023223'
+
+	msj = 'Bienvenid@ %s %s' % (auth.user.first_name,auth.user.last_name)
+	form = SQLFORM(db.t_estudiante,
+    	fields = ['f_usbid','f_cedula', 'f_carrera', 'f_sede', 'f_sexo', 'f_telefono', 'f_direccion'])
+
+	user = db.auth_user[auth.user.id]
+	form.vars.f_user = user
+	form.vars.f_email = auth.user.email
+	form.vars.f_nombre = auth.user.first_name
+	form.vars.f_apellido = auth.user.last_name
+	if request.env.request_method =='POST':
+	    if form.process(onvalidation=my_form_processing, keepvalues=True).accepted:
+	        response.flash = 'form accepted'
+	    elif form.errors:
+	        response.flash = 'form has errors'
+	    else:
+	        response.flash = 'please fill out the form'
+	return dict(form=form, bienvenida=msj)
+
+@auth.requires_membership('Administrador')
 def estudiantes():
     def my_form_processing(form):
         if not re.match('\d{2}-\d{5}$', form.vars.f_usbid):
@@ -58,6 +112,7 @@ def estudiantes():
 	        response.flash = 'please fill out the form'
     return dict(form=form, est=db().select(db.t_estudiante.ALL))
 
+@auth.requires_membership('Administrador')
 def proponentes():
     def my_form_processing(form):
         if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
@@ -76,6 +131,7 @@ def proponentes():
         response.flash = 'please fill out the form'
     return dict(form=form, proponentes=db().select(db.t_proponente.ALL))
 
+@auth.requires_membership('Administrador')
 def proponenteDetalles():
     def my_form_processing(form):
         if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
@@ -94,7 +150,7 @@ def proponenteDetalles():
         response.flash = 'please fill out the form'
     return dict(form=form, proponentes=db().select(db.t_proponente.ALL))
 
-
+@auth.requires_membership('Administrador')
 def tutores():
     def my_form_processing(form):
         if form.vars.f_usbid:
