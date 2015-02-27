@@ -63,7 +63,7 @@ I01
 sg21
 S'reference t_area'
 p26
-ssS'is_active'
+ssS'f_fechaini'
 p27
 (dp28
 g15
@@ -71,14 +71,14 @@ I512
 sg16
 I00
 sg17
-I12
+I7
 sg18
-S'CHAR(1)'
+S'DATE NOT NULL'
 p29
 sg20
-I00
+I01
 sg21
-S'boolean'
+S'date'
 p30
 ssS'f_version'
 p31
@@ -114,7 +114,7 @@ I01
 sg21
 S'reference t_estado'
 p38
-ssS'f_fechaini'
+ssS'is_active'
 p39
 (dp40
 g15
@@ -122,14 +122,14 @@ I512
 sg16
 I00
 sg17
-I7
+I12
 sg18
-S'DATE NOT NULL'
+S'CHAR(1)'
 p41
 sg20
-I01
+I00
 sg21
-S'date'
+S'boolean'
 p42
 ssS'created_on'
 p43
@@ -148,7 +148,7 @@ I00
 sg21
 S'datetime'
 p46
-ssS'f_nombre'
+ssS'created_by'
 p47
 (dp48
 g15
@@ -156,14 +156,14 @@ I512
 sg16
 I00
 sg17
-I2
+I14
 sg18
-S'CHAR(512) NOT NULL'
+S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
 p49
 sg20
-I01
+I00
 sg21
-S'string'
+S'reference auth_user'
 p50
 ssS'modified_on'
 p51
@@ -235,11 +235,10 @@ p69
 sg20
 I00
 sg21
-S'reference auth_user'
-p70
+g50
 ssS'f_fechafin'
-p71
-(dp72
+p70
+(dp71
 g15
 I512
 sg16
@@ -248,14 +247,14 @@ sg17
 I8
 sg18
 S'DATE NOT NULL'
-p73
+p72
 sg20
 I01
 sg21
-g42
+g30
 ssS'f_comunidad'
-p74
-(dp75
+p73
+(dp74
 g15
 I512
 sg16
@@ -264,15 +263,15 @@ sg17
 I10
 sg18
 S'INTEGER REFERENCES t_comunidad (id) ON DELETE CASCADE'
-p76
+p75
 sg20
 I01
 sg21
 S'reference t_comunidad'
-p77
+p76
 ssS'f_proponente'
-p78
-(dp79
+p77
+(dp78
 g15
 I512
 sg16
@@ -281,51 +280,52 @@ sg17
 I11
 sg18
 S'INTEGER REFERENCES t_proponente (id) ON DELETE CASCADE'
-p80
+p79
 sg20
 I01
 sg21
 S'reference t_proponente'
-p81
+p80
 ssS'nversion'
-p82
-(dp83
+p81
+(dp82
 S'sortable'
-p84
+p83
 I9
 sS'sql'
-p85
+p84
 S'INTEGER NOT NULL'
-p86
+p85
 sS'length'
-p87
+p86
 I512
 sS'notnull'
-p88
+p87
 I01
 sS'unique'
-p89
+p88
 I00
 sS'type'
-p90
+p89
 S'integer'
+p90
+ssS'f_nombre'
 p91
-ssS'created_by'
-p92
-(dp93
+(dp92
 g15
 I512
 sg16
 I00
 sg17
-I14
+I2
 sg18
-S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
-p94
+S'CHAR(512) NOT NULL'
+p93
 sg20
-I00
+I01
 sg21
-g70
+S'string'
+p94
 ssS'f_tutor'
 p95
 (dp96
@@ -346,18 +346,18 @@ p98
 ssS'codigo'
 p99
 (dp100
-g84
+g83
 I1
-sg85
+sg84
 S'CHAR(512) NOT NULL'
 p101
-sg87
+sg86
 I512
-sg88
+sg87
 I01
-sg89
+sg88
 I00
-sg90
+sg89
 S'string'
 p102
 ssS'f_name'
