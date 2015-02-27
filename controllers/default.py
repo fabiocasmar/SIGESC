@@ -1,4 +1,5 @@
 import re
+from gluon.tools import Crud
 # -*- coding: utf-8 -*-
 ### required - do no delete
 def user(): return dict(form=auth())
@@ -136,7 +137,6 @@ def proyectos():
             form.errors.f_descripcion = 'Sólo puede contener letras'
         if not re.match('\d{2}', form.vars.f_version):
             form.errors.f_codigo = 'El formato válido de la versión son 2 dígitos'
-
     form = SQLFORM(db.t_project,onupdate=auth.archive) 
     if form.process(onvalidation=my_form_processing).accepted:
         response.flash = 'form accepted'
@@ -146,6 +146,14 @@ def proyectos():
         response.flash = 'please fill out the form'
     return dict(form=form, proyectos=db().select(db.t_project.ALL))
 
+
+def cursa():
+    idEstudiante = long(request.args[1])
+    idProyecto = long(request.args[0])
+    form = SQLFORM(db.t_cursa,onupdate=auth.archive) 
+    #form.vars.f_project.id = idProyecto
+    #form.vars.f_estudiante.id = 6 
+    return dict(form=form,proyectos=db(db.t_project.id==idProyecto).select())
 
 def sede_manage():
     form = SQLFORM.smartgrid(db.t_sede,onupdate=auth.archive)
@@ -236,7 +244,7 @@ def sedesDetalles():
 
 def estudiantesDetalles():
     x = long (request.args[0])
-    return dict(rows = db(db.t_estudiante.id==x).select())
+    return dict(rows = db(db.t_estudiante.id==x).select(),proyectos=db().select(db.t_project.ALL))
     
 def proponentesDetalles():
     x = long (request.args[0])
@@ -263,9 +271,10 @@ def proyectosDetalles():
     elif form.errors:
         response.flash = 'form has errors'
     elif not record:
-        return dict('La sede ha sido eliminada')
+        return dict('El proyecto ha sido eliminado')
     return dict(form = form)
     
+
 def tutoresDetalles():
     x = long (request.args[0])
     return dict(rows = db(db.t_tutor.id==x).select())
