@@ -72,25 +72,18 @@
     </nav>
 
     <!-- Contenido -->
-    
     <div class="col-sm-12">
         <div class="row">
             <div class="col-md-11">
-            	{{ block vista_actores_detalles }}
-                <h4 style="color:#4682B4">Home</h4><br>
-                <h4 style="color:#4682B4">{{=msj}}</h4>
-                <a href="{{=URL('default', 'user', args='logout')}}"><img class="sobre" src="{{=URL('static', 'img/salida_icon.png')}}" hspace="765" vspace="0"/></a>
-                {{ end }}
+                <h4 style="color:#4682B4">SIGESC / Home / Admin </h4>
                 <hr>
             </div>
             <div class="col-md-1" align="right">
-                
+                <a href="."> Salir <img src="{{=URL('static', 'img/salida_icon.png')}}"/></a>
             </div>
         </div>
     </div>
-    
     <div class="col-sm-10">
-    	{{ block funciones_vista_actores }}
         <div class="row">
             <div class="col-md-4">
                 <img class="img-responsive" src="{{=URL('static', 'estudiantes.png')}}" height="155" width="265"/>
@@ -106,7 +99,7 @@
             </div>
             <div class="col-md-3">
                 <div class="row">
-                      <button class="btn btn-primary boton_link" onclick="location.href='{{=URL('estudiantes')}}'" style="width: 250px; height:30px" margin-top="70px">
+                      <button class="btn btn-primary boton_link"  onclick="location.href='{{=URL('estudiantes')}}'" style="width: 250px; height:30px" margin-top="70px">
                           Ir a Estudiantes  >></button>
                 </div>
             </div>
@@ -128,7 +121,7 @@
             </div>
              <div class="col-md-3">
                 <div class="row">
-                      <button class="btn btn-primary boton_link" onclick="location.href='{{=URL('proyectos')}}'" style="width: 250px; height:30px" margin-top="70px">
+                      <button onclick="location.href='{{=URL('proyectos')}}'" class="btn btn-primary boton_link" style="width: 250px; height:30px" margin-top="70px">
                           Ir a Áreas de Proyectos  >> </button>
                 </div>
             </div>
@@ -150,7 +143,7 @@
             </div>
                           <div class="col-md-3">
                 <div class="row">
-                      <button class="btn btn-primary boton_link" onclick="location.href='{{=URL('sedes')}}'" style="width: 250px; height:30px" margin-top="70px">
+                      <button onclick="location.href='{{=URL('sedes')}}'" class="btn btn-primary boton_link" style="width: 250px; height:30px" margin-top="70px">
                           Ir a Sedes  >> </button>
                 </div>
             </div>
@@ -172,7 +165,7 @@
             </div>
              <div class="col-md-3">
                 <div class="row">
-                      <button class="btn btn-primary boton_link" onclick="location.href='{{=URL('proponentes')}}'" style="width: 250px; height:30px" margin-top="70px">
+                      <button  onclick="location.href='{{=URL('proponentes')}}'" class="btn btn-primary boton_link" style="width: 250px; height:30px" margin-top="70px">
                           Ir a Proponentes  >> </button>
                 </div>
             </div>
@@ -194,15 +187,13 @@
             </div>
              <div class="col-md-3">
                 <div class="row">
-                      <button class="btn btn-primary boton_link" onclick="location.href='{{=URL('tutores')}}'" style="width: 250px; height:30px" margin-top="70px">
+                      <button onclick="location.href='{{=URL('tutores')}}'" class="btn btn-primary boton_link" style="width: 250px; height:30px" margin-top="70px">
                           Ir a Tutores  >> </button>
                 </div>
             </div>
         </div>
         <hr>
-
     </div>
-
     
     <div class="col-md-2" align="right">
         <div class="row">
@@ -221,6 +212,5 @@
             <br><br><img class="img-responsive" src="{{=URL('static', 'aporte.png')}}" height="50" width="150"/><br>
         </div>
     </div>
-    {{end}}
 </html>
 {{ end }}

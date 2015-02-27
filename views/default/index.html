@@ -13,32 +13,32 @@
     
     <link rel="icon" href="http://getbootstrap.com/favicon.ico">
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css'%}">
-    <link href="{{=URL('static', 'css/font-awesome.min.css', scheme='http')}}" rel="stylesheet" type="text/css" />
+    <link href="{{=URL('static', 'css/font-awesome.min.css', scheme='https')}}" rel="stylesheet" type="text/css" />
 
-    <link href="{{=URL('static', 'css/bootstrap.min.css', scheme='http')}}" rel="stylesheet" type="text/css" />
-    <link href="{{=URL('static', 'css/Pag_principal.css', scheme='http')}}" rel="stylesheet" type="text/css" />
+    <link href="{{=URL('static', 'css/bootstrap.min.css', scheme='https')}}" rel="stylesheet" type="text/css" />
+    <link href="{{=URL('static', 'css/Pag_principal.css', scheme='https')}}" rel="stylesheet" type="text/css" />
     <link rel="icon" href="//getbootstrap.com/favicon.ico">
     
     <!-- Bootstrap core CSS -->
     <!--<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">-->
-    <link href="{{=URL('static', 'css/bootstrap.css', scheme='http')}}" rel="stylesheet" type="text/css" />
+    <link href="{{=URL('static', 'css/bootstrap.css', scheme='https')}}" rel="stylesheet" type="text/css" />
     <!-- Bootstrap theme -->
     <!--<link href="{% static 'css/bootstrap-theme.css' %}" rel="stylesheet">-->
-	<link href="{{=URL('static', 'css/bootstrap-theme.css', scheme='http')}}" rel="stylesheet" type="text/css" />
+	<link href="{{=URL('static', 'css/bootstrap-theme.css', scheme='https')}}" rel="stylesheet" type="text/css" />
     <!--<script type="text/javascript" src="{% static 'js/jquery-1.11.2.js'%}">
     </script>-->
     <link href="{{=URL('static', 'js/jquery-1.11.2.js')}}" type="text/javascript" />
     
     <!-- Custom styles for this template -->
-    <link href="{{=URL('static', 'css/theme.css', scheme='http')}}" rel="stylesheet" />
-    <link href="{{=URL('static', 'js/bootstrap.js', scheme='http')}}" rel="stylesheet" />
+    <link href="{{=URL('static', 'css/theme.css', scheme='https')}}" rel="stylesheet" />
+    <link href="{{=URL('static', 'js/bootstrap.js', scheme='https')}}" rel="stylesheet" />
     
-    <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.svg', scheme='http')}}" rel="stylesheet"/>
-    <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.eot', scheme='http')}}" rel="stylesheet" />
+    <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.svg', scheme='https')}}" rel="stylesheet"/>
+    <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.eot', scheme='https')}}" rel="stylesheet" />
 
-    <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.ttf', scheme='http')}}" rel="stylesheet" />
-    <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.woff', scheme='http')}}" rel="stylesheet" />
-    <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.woff2', scheme='http')}}" rel="stylesheet" />
+    <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.ttf', scheme='https')}}" rel="stylesheet" />
+    <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.woff', scheme='https')}}" rel="stylesheet" />
+    <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.woff2', scheme='https')}}" rel="stylesheet" />
     
   </head>
   
@@ -98,8 +98,7 @@
     
     <!-- Contenido -->
     <div class="micontainer">
-      {{ include 'default/user.html'}}
-      <!--<form method="post" action="{{=URL('vista_admin')}}">
+      <form method="post" action="{{=URL('vista_admin')}}">
         <br>
         <b>
           <h class="acces" style="color:#4682B4">
@@ -122,10 +121,13 @@
         
         <BR>
         <input type="submit" class="btn btn-lg2 btn-default ini">
+        <!--<a href="{{=URL('vista_admin')}}">
+          <img class="ini" class="img-responsive" src="{{=URL('static', 'img/log.png')}}" width="120" height="25"/>
+        </a>-->
         <h class="clean" style="color:#808080">
           | Limpiar
         </h>        
-      </form>-->
+      </form>
 	</div>
     <div class="row">
       <div class="col-md-3"  style="color:#4682B4">
@@ -290,3 +292,4 @@
                 </html>
                 
                 {{ end }}
+                

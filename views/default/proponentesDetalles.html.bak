@@ -62,8 +62,7 @@
             <span class="icon-bar">
             </span>
           </button>
-<a href="https://sc.cesma.usb.ve/SIGESC/default/vista_admin"><img class="home" src="/SIGESC/static/img/home.png">
-</a>>
+          <img class="home" src="{{=URL('static', 'img/home.png')}}" />
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -129,31 +128,28 @@
 				</div>
 				
 				<div class="row">
-                    <div class="col-md-6">
-                        <table id="props" class="table table-condensed">		
+					<table id="props" class="table table-condensed">		
 
-                                <tr>
-                                    <td>
-                                        {{=form}}
-                                    </td>
-                                </tr>
-                            {{ pass }}
-                        </table>
-                    </div>
-                    <div class="col-md-6">
-                        <table id="props" class="table table-condensed">		
-								{{ for proyecto in proyectos:}}
 							<tr>
 								<td>
-									<a href="{{=URL(r=request,f='proyectosDetalles',args=proyecto.id)}}">{{=proyecto.f_nombre}}</a>
+									{{=SQLTABLE(rows,headers={'t_proponente.id':'Id',
+																't_proponente.f_tipoprop':'Tipo de proponente',
+																't_proponente.f_nombre':'Nombre',
+																't_proponente.f_apellido':'Apellido',
+																't_proponente.f_cedula':'Cedula',
+																't_proponente.f_email':'Correo electronico',
+																't_proponente.f_sexo':'Sexo',
+																't_proponente.f_telefono':'Telefono',
+																't_proponente.is_active':'Esta activo',
+																't_proponente.created_on':'Fecha de creacion',
+																't_proponente.created_by':'Creado por',
+																't_proponente.modified_on':'Fecha de modificacion',
+																't_proponente.modified_by':'Modificado por'}) 
+									}}
 								</td>
 							</tr>
 						{{ pass }}
-                        </table>
-                    </div>
-                    <div class="col-md-6">
-                        <a href="{{=URL(r=request,f='proyectos')}}">{{=proyecto.f_nombre}}</a>
-                    </div>
+					</table>
 				</div>
 			</div>
 	</div>
