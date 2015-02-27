@@ -23,7 +23,7 @@ db.define_table('t_sexo_archive',db.t_sexo,Field('current_record','reference t_s
 
 ########################################
 db.define_table('t_tutor',
-    Field('f_usbid', type='string', notnull=True,
+    Field('f_usbid', type='string', notnull=False,
           label=T('Usbid')),
     Field('f_cedula', type='string', notnull=True,
           label=T('Cedula')),
@@ -183,7 +183,8 @@ db.define_table('t_estudiante',
     Field('f_usbid', type='string', notnull=True,
           label=T('Usbid')),
     Field('f_nombre', type='string', notnull=True,
-          label=T('Nombre')),
+          label=T('Nombre'),
+          error_message = T('Pedro Perez')),
     Field('f_apellido', type='string', notnull=True,
           label=T('Apellido')),
     Field('f_cedula', type='string', notnull=True,

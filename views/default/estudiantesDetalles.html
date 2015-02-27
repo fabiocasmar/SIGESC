@@ -87,7 +87,7 @@
                 Decanato de extensión
               </a>
             </li>
-			     <li>
+			<li>
               <a href="http://getbootstrap.com/examples/theme/#contact">
                 Proyectos
               </a>
@@ -98,84 +98,69 @@
         <!--/.nav-collapse -->
       </div>
     </nav>
-    
+
     <div class="col-sm-12">
         <div class="row">
             <div class="col-md-2">
                 <img src="{{=URL('static', 'estudiantes.png')}}" class="img-responsive" width="150" height="110"/>
             </div>
             <div class="col-md-4" align="left">
-                <h4 style="color:#4682B4">Home / Estudiantes </h4>
+               <h4 style="color:#4682B4"><a href=".">Home</a> /<a href="{{=URL('vista_admin')}}"> Admin </a> / <a href="#">Estudiantes </a> </h4>
             </div>
             <div class="col-md-6" align="right">
-                <a href="."><img src="{{=URL('static', 'img/salida_icon.png')}}"/></a>
+                <a href=".">Salida <img src="{{=URL('static', 'img/salida_icon.png')}}"/></a>
             </div>
         </div>
         <hr>
     </div>
-	{{if globals().get('msj', False):}} <p><strong>{{=msj}}</strong></p>
-	{{else:}}
-	<div class="col-sm-12">
-    <div class="row">
-        <div class="col-md-6">
-            <table class="table table-condensed" id="estuds">
-                <thead>
-                    <tr>
-                        <th> Detalles del estudiante</i></th>
 
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                          {{=SQLTABLE(rows,headers={'t_estudiante.id':'Id',
-                          't_estudiante.f_usbid':'USBID',
-                          't_estudiante.f_user':'Nombre de usuario',
-                          't_estudiante.f_nombre':'Nombre',
-                          't_estudiante.f_apellido':'Apellido',
-                          't_estudiante.f_cedula':'Cedula',
-                          't_estudiante.f_carrera':'Carrera',
-                          't_estudiante.f_sede':'Sede',
-                          't_estudiante.f_email':'Correo electronico',
-                          't_estudiante.f_sexo':'Sexo',
-                          't_estudiante.f_telefono':'Telefono',
-                          't_estudiante.f_direccion':'Direccion',
-                          't_estudiante.is_active':'Esta activo',
-                          't_estudiante.created_on':'Fecha de creacion',
-                          't_estudiante.created_by':'Creado por',
-                          't_estudiante.modified_on':'Fecha de modificacion',
-                          't_estudiante.modified_by':'Modificado por' })
-                          }}
-                  </tr>
-                  {{ pass }}
-                </tbody>
-            </table>
-        </div>
-    
+   <div class="col-sm-12">
+       <div class="col-md-3">
+           <h4 style="color:#337AB7"><i class="glyphicon glyphicon-briefcase"></i> Menú</h4>
+            <hr>
+             <ul class="nav nav-stacked">
+                 <li>
+                      <a href="{{=URL('estudiantes')}}">
+                         <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Volver a Estudiantes</a>
+                     <a href="{{=URL('proyectos')}}">
+                         <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Proyectos </a>
+                      <a href="{{=URL('proponentes')}}">
+                         <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Proponentes </a>
+                      <a href="{{=URL('sedes')}}">
+                          <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Sedes</a>
+                     <a href="{{=URL('tutores')}}">
+                          <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Tutores</a>
+                 </li>
+             </ul>
+       </div>
+        {{if globals().get('msj', False):}} <p><strong>{{=msj}}</strong></p>
+        {{else:}}
         <div class="col-md-5">
-            {{=rows}}
-        </div>
+            <div class="row">
+                <div class="panel panel-primary">
+                    <div class="panel-heading class=detalles">
+                       <b><h class="detalles" >Detalles del estudiante</b></h>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
 
-      <div class="col-md-6" style="text-align: left; margin-top: 44px; width: 50%">
-        <div class="row">
-          <i class="fa fa-list-alt fa-3x" style="color: #4682B4"></i> <h class="reg">Seleccione el proyecto en el que desea inscribirse</h>      
+                            {{for estudiante in rows:}}
+                            <tr><td><b>USBID:</b> {{=estudiante.f_usbid}}</td></tr>
+                            <tr><td><b>Nombre:</b> {{=estudiante.f_nombre}}</td></tr>
+                            <tr><td><b>Apellido:</b> {{=estudiante.f_apellido}}</td></tr>
+                            <tr><td><b>Cédula:</b> {{=estudiante.f_cedula}}</td></tr>
+                            <tr><td><b>Carrera:</b> {{=estudiante.f_carrera}}</td></tr>
+                            <tr><td><b>Sede:</b> {{=estudiante.f_sede}}</td></tr>
+                            <tr><td><b>Sexo:</b> {{=estudiante.f_sexo}}</td></tr>
+                            <tr><td><b>Teléfono:</b> {{=estudiante.f_telefono}}</td></tr>
+                            <tr><td><b>Dirección:</b> {{=estudiante.f_direccion}}</td></tr>
+                          {{pass}}
+
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-      
-        <div class="row">
-          <table id="props" class="table table-condensed">    
-                {{ for proyecto in proyectos:}}
-              <tr>
-                <td>
-                  <a href="{{=URL(r=request,f='cursa',args=[proyecto.id])}}">{{=proyecto.f_nombre}}</a>
-                </td>
-                <td>
-                  <span>{{=proyecto.f_descripcion}}<span>
-                  <span>{{=t_estudiante.id}}</span>
-                </td>
-              </tr>
-            {{ pass }}
-          </table>
-        </div>
-      </div> 
 
       </div>
 	{{ pass }}

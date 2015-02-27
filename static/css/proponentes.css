@@ -9,6 +9,33 @@
    text-align:center;
 }
 
+.formulario{
+  position:relative;
+  margin-top:10px;
+  
+}
+
+.detalles{
+  margin-bottom:0px;
+  margin-top:0px;
+  font-size: 24px;
+}
+
+.help{
+color:#c0c0c0;
+
+}
+.campos{
+    width:300px;
+   margin-bottom:5px;
+    margin-top:-10px;
+}
+#up{
+  position:relative;
+  margin-top:-35px;
+  margin-left:260px;
+}
+
 
 .barra {
   position:absolute;
@@ -276,7 +303,7 @@ border:none;
 
 .detalles{
   width:300;
-  font-size:14px;
+  font-size:20px;
 }
 
 .acces{ 
@@ -381,10 +408,6 @@ border:none;
    font-size:16px;
 }
 
-.registrar{
-   margin-left:150px;
-   position:relative;
-}
 
 
 #proponentes{

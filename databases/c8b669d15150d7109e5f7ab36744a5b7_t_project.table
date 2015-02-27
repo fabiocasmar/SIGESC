@@ -34,7 +34,7 @@ p16
 I00
 sS'sortable'
 p17
-I4
+I3
 sS'sql'
 p18
 S'TEXT NOT NULL'
@@ -54,7 +54,7 @@ I512
 sg16
 I00
 sg17
-I5
+I4
 sg18
 S'INTEGER REFERENCES t_area (id) ON DELETE CASCADE'
 p25
@@ -63,7 +63,7 @@ I01
 sg21
 S'reference t_area'
 p26
-ssS'f_fechaini'
+ssS'is_active'
 p27
 (dp28
 g15
@@ -71,14 +71,14 @@ I512
 sg16
 I00
 sg17
-I8
+I12
 sg18
-S'DATE NOT NULL'
+S'CHAR(1)'
 p29
 sg20
-I01
+I00
 sg21
-S'date'
+S'boolean'
 p30
 ssS'f_version'
 p31
@@ -88,14 +88,14 @@ I512
 sg16
 I00
 sg17
-I10
+I9
 sg18
-S'CHAR(512) NOT NULL'
+S'INTEGER PRIMARY KEY AUTOINCREMENT'
 p33
 sg20
 I01
 sg21
-S'string'
+S'id'
 p34
 ssS'f_estado'
 p35
@@ -105,7 +105,7 @@ I512
 sg16
 I00
 sg17
-I6
+I5
 sg18
 S'INTEGER REFERENCES t_estado (id) ON DELETE CASCADE'
 p37
@@ -114,7 +114,7 @@ I01
 sg21
 S'reference t_estado'
 p38
-ssS'is_active'
+ssS'f_fechaini'
 p39
 (dp40
 g15
@@ -122,14 +122,14 @@ I512
 sg16
 I00
 sg17
-I13
+I7
 sg18
-S'CHAR(1)'
+S'DATE NOT NULL'
 p41
 sg20
-I00
+I01
 sg21
-S'boolean'
+S'date'
 p42
 ssS'created_on'
 p43
@@ -139,7 +139,7 @@ I512
 sg16
 I00
 sg17
-I14
+I13
 sg18
 S'TIMESTAMP'
 p45
@@ -148,7 +148,7 @@ I00
 sg21
 S'datetime'
 p46
-ssS'created_by'
+ssS'f_nombre'
 p47
 (dp48
 g15
@@ -156,14 +156,14 @@ I512
 sg16
 I00
 sg17
-I15
+I2
 sg18
-S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
+S'CHAR(512) NOT NULL'
 p49
 sg20
-I00
+I01
 sg21
-S'reference auth_user'
+S'string'
 p50
 ssS'modified_on'
 p51
@@ -173,7 +173,7 @@ I512
 sg16
 I00
 sg17
-I16
+I15
 sg18
 S'TIMESTAMP'
 p53
@@ -184,6 +184,29 @@ g46
 ssS'id'
 p54
 (dp55
+S'sortable'
+p56
+I12
+sS'sql'
+p57
+S'INTEGER NOT NULL'
+p58
+sS'length'
+p59
+I512
+sS'notnull'
+p60
+I01
+sS'unique'
+p61
+I00
+sS'type'
+p62
+S'integer'
+p63
+ssS'f_codigo'
+p64
+(dp65
 g15
 I512
 sg16
@@ -192,61 +215,12 @@ sg17
 I1
 sg18
 S'INTEGER PRIMARY KEY AUTOINCREMENT'
-p56
-sg20
-I00
-sg21
-S'id'
-p57
-ssS'f_codigo'
-p58
-(dp59
-g15
-I512
-sg16
-I00
-sg17
-I2
-sg18
-S'CHAR(512) NOT NULL'
-p60
+p66
 sg20
 I01
 sg21
 g34
 ssS'modified_by'
-p61
-(dp62
-g15
-I512
-sg16
-I00
-sg17
-I17
-sg18
-S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
-p63
-sg20
-I00
-sg21
-g50
-ssS'f_fechafin'
-p64
-(dp65
-g15
-I512
-sg16
-I00
-sg17
-I9
-sg18
-S'DATE NOT NULL'
-p66
-sg20
-I01
-sg21
-g30
-ssS'f_comunidad'
 p67
 (dp68
 g15
@@ -254,16 +228,16 @@ I512
 sg16
 I00
 sg17
-I11
+I16
 sg18
-S'INTEGER REFERENCES t_comunidad (id) ON DELETE CASCADE'
+S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
 p69
 sg20
-I01
+I00
 sg21
-S'reference t_comunidad'
+S'reference auth_user'
 p70
-ssS'f_proponente'
+ssS'f_fechafin'
 p71
 (dp72
 g15
@@ -271,109 +245,142 @@ I512
 sg16
 I00
 sg17
-I12
+I8
 sg18
-S'INTEGER REFERENCES t_proponente (id) ON DELETE CASCADE'
+S'DATE NOT NULL'
 p73
 sg20
 I01
 sg21
-S'reference t_proponente'
+g42
+ssS'f_comunidad'
 p74
-ssS'nversion'
-p75
-(dp76
-S'sortable'
-p77
-I9
-sS'sql'
-p78
-S'INTEGER NOT NULL'
-p79
-sS'length'
-p80
-I512
-sS'notnull'
-p81
-I01
-sS'unique'
-p82
-I00
-sS'type'
-p83
-S'integer'
-p84
-ssS'f_nombre'
-p85
-(dp86
+(dp75
 g15
 I512
 sg16
 I00
 sg17
-I3
+I10
 sg18
-S'CHAR(512) NOT NULL'
-p87
+S'INTEGER REFERENCES t_comunidad (id) ON DELETE CASCADE'
+p76
 sg20
 I01
 sg21
-g34
-ssS'f_tutor'
-p88
-(dp89
+S'reference t_comunidad'
+p77
+ssS'f_proponente'
+p78
+(dp79
 g15
 I512
 sg16
 I00
 sg17
-I7
+I11
+sg18
+S'INTEGER REFERENCES t_proponente (id) ON DELETE CASCADE'
+p80
+sg20
+I01
+sg21
+S'reference t_proponente'
+p81
+ssS'nversion'
+p82
+(dp83
+S'sortable'
+p84
+I9
+sS'sql'
+p85
+S'INTEGER NOT NULL'
+p86
+sS'length'
+p87
+I512
+sS'notnull'
+p88
+I01
+sS'unique'
+p89
+I00
+sS'type'
+p90
+S'integer'
+p91
+ssS'created_by'
+p92
+(dp93
+g15
+I512
+sg16
+I00
+sg17
+I14
+sg18
+S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
+p94
+sg20
+I00
+sg21
+g70
+ssS'f_tutor'
+p95
+(dp96
+g15
+I512
+sg16
+I00
+sg17
+I6
 sg18
 S'INTEGER REFERENCES t_tutor (id) ON DELETE CASCADE'
-p90
+p97
 sg20
 I01
 sg21
 S'reference t_tutor'
-p91
-ssS'codigo'
-p92
-(dp93
-g77
-I1
-sg78
-S'CHAR(512) NOT NULL'
-p94
-sg80
-I512
-sg81
-I01
-sg82
-I00
-sg83
-S'string'
-p95
-ssS'f_name'
-p96
-(dp97
-S'sortable'
 p98
+ssS'codigo'
+p99
+(dp100
+g84
+I1
+sg85
+S'CHAR(512) NOT NULL'
+p101
+sg87
+I512
+sg88
+I01
+sg89
+I00
+sg90
+S'string'
+p102
+ssS'f_name'
+p103
+(dp104
+S'sortable'
+p105
 I2
 sS'sql'
-p99
+p106
 S'CHAR(512) NOT NULL'
-p100
+p107
 sS'length'
-p101
+p108
 I512
 sS'notnull'
-p102
+p109
 I01
 sS'unique'
-p103
+p110
 I00
 sS'type'
-p104
+p111
 S'string'
-p105
+p112
 ss.

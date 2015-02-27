@@ -79,14 +79,14 @@
                 <hr>
             </div>
             <div class="col-md-1" align="right">
-                <img src="{{=URL('static', 'img/salida_icon.png')}}"/>
+                <a href="."> Salir<img src="{{=URL('static', 'img/salida_icon.png')}}"/></a>
             </div>
         </div>
     </div>
     <div class="col-sm-10">
         <div class="row">
             <div class="col-md-4">
-                <img src="{{=URL('static', 'estudiantes.png')}}" height="155" width="265"/>
+                <img class="img-responsive" src="{{=URL('static', 'estudiantes.png')}}" height="155" width="265"/>
             </div>
             <div class="col-md-4">
                 <h3 onclick="location.href='{{=URL('estudiantes')}}'"><a href="#"> Estudiantes</h3></a>
@@ -99,7 +99,7 @@
             </div>
             <div class="col-md-3">
                 <div class="row">
-                      <button class="btn btn-primary boton_link" style="width: 250px; height:30px" margin-top="70px">
+                      <button class="btn btn-primary boton_link"  onclick="location.href='{{=URL('estudiantes')}}'" style="width: 250px; height:30px" margin-top="70px">
                           Ir a Estudiantes  >></button>
                 </div>
             </div>
@@ -108,7 +108,7 @@
         
         <div class="row">
             <div class="col-md-4">
-                <img src="{{=URL('static', 'proyectos.png')}}" height="155" width="265"/>
+                <img class="img-responsive" src="{{=URL('static', 'proyectos.png')}}" height="155" width="265"/>
             </div>
             <div class="col-md-4">
                 <h3 onclick="location.href='{{=URL('proyectos')}}'"><a href="#"> Áreas de proyecto</h3></a>
@@ -121,7 +121,7 @@
             </div>
              <div class="col-md-3">
                 <div class="row">
-                      <button class="btn btn-primary boton_link" style="width: 250px; height:30px" margin-top="70px">
+                      <button onclick="location.href='{{=URL('proyectos')}}'" class="btn btn-primary boton_link" style="width: 250px; height:30px" margin-top="70px">
                           Ir a Áreas de Proyectos  >> </button>
                 </div>
             </div>
@@ -130,7 +130,7 @@
          
         <div class="row">
             <div class="col-md-4">
-                <img src="{{=URL('static', 'sedes.png')}}" height="155" width="265"/>
+                <img class="img-responsive" src="{{=URL('static', 'sedes.png')}}" height="155" width="265"/>
             </div>
             <div class="col-md-4">
                 <h3 onclick="location.href='{{=URL('sedes')}}'"><a href="#"> Sedes</h3></a>
@@ -143,7 +143,7 @@
             </div>
                           <div class="col-md-3">
                 <div class="row">
-                      <button class="btn btn-primary boton_link" style="width: 250px; height:30px" margin-top="70px">
+                      <button onclick="location.href='{{=URL('sedes')}}'" class="btn btn-primary boton_link" style="width: 250px; height:30px" margin-top="70px">
                           Ir a Sedes  >> </button>
                 </div>
             </div>
@@ -152,7 +152,7 @@
         
         <div class="row">
             <div class="col-md-4">
-                <img src="{{=URL('static', 'proponente.png')}}" height="155" width="265"/>
+                <img class="img-responsive" src="{{=URL('static', 'proponente.png')}}" height="155" width="265"/>
             </div>
             <div class="col-md-4">
                 <h3 onclick="location.href='{{=URL('proponentes')}}'"> <a href="#"> Proponentes</h3></a>
@@ -165,7 +165,7 @@
             </div>
              <div class="col-md-3">
                 <div class="row">
-                      <button class="btn btn-primary boton_link" style="width: 250px; height:30px" margin-top="70px">
+                      <button  onclick="location.href='{{=URL('proponentes')}}'" class="btn btn-primary boton_link" style="width: 250px; height:30px" margin-top="70px">
                           Ir a Proponentes  >> </button>
                 </div>
             </div>
@@ -174,7 +174,7 @@
         
         <div class="row">
             <div class="col-md-4">
-                <img src="{{=URL('static', 'tutor.png')}}" height="155" width="265"/>
+                <img class="img-responsive" src="{{=URL('static', 'tutor.png')}}" height="155" width="265"/>
             </div>
             <div class="col-md-4">
                 <h3 onclick="location.href='{{=URL('tutores')}}'"> <a href="#">Tutores</h3></a>
@@ -187,7 +187,7 @@
             </div>
              <div class="col-md-3">
                 <div class="row">
-                      <button class="btn btn-primary boton_link" style="width: 250px; height:30px" margin-top="70px">
+                      <button onclick="location.href='{{=URL('tutores')}}'" class="btn btn-primary boton_link" style="width: 250px; height:30px" margin-top="70px">
                           Ir a Tutores  >> </button>
                 </div>
             </div>
@@ -197,19 +197,19 @@
     
     <div class="col-md-2" align="right">
         <div class="row">
-            <br><img src="{{=URL('static', 'somosUsb.png')}}" height="50" width="150"/><br>
+            <br><img class="img-responsive" src="{{=URL('static', 'somosUsb.png')}}" height="50" width="150"/><br>
         </div>
         <div class="row">
-            <br><br><img src="{{=URL('static', 'calendario.png')}}" height="50" width="150"/><br>
+            <br><br><img class="img-responsive" src="{{=URL('static', 'calendario.png')}}" height="50" width="150"/><br>
         </div>
         <div class="row">
-            <br><br><img src="{{=URL('static', 'preguntas.png')}}" height="50" width="150"/><br>
+            <br><br><img class="img-responsive" src="{{=URL('static', 'preguntas.png')}}" height="50" width="150"/><br>
         </div>
         <div class="row">
-            <br><br><img src="{{=URL('static', 'reglamento.png')}}" height="50" width="150"/><br>
+            <br><br><img class="img-responsive" src="{{=URL('static', 'reglamento.png')}}" height="50" width="150"/><br>
         </div>
         <div class="row">
-            <br><br><img src="{{=URL('static', 'aporte.png')}}" height="50" width="150"/><br>
+            <br><br><img class="img-responsive" src="{{=URL('static', 'aporte.png')}}" height="50" width="150"/><br>
         </div>
     </div>
 </html>

@@ -1,5 +1,5 @@
 (dp1
-S'f_email'
+S'f_sexo'
 p2
 (dp3
 S'length'
@@ -13,14 +13,14 @@ p6
 I7
 sS'sql'
 p7
-S'CHAR(512) NOT NULL'
+S'INTEGER REFERENCES t_sexo (id) ON DELETE CASCADE'
 p8
 sS'notnull'
 p9
 I01
 sS'type'
 p10
-S'string'
+S'reference t_sexo'
 p11
 ssS'modified_by'
 p12
@@ -30,7 +30,7 @@ I512
 sg5
 I00
 sg6
-I14
+I13
 sg7
 S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
 p14
@@ -47,31 +47,31 @@ I512
 sg5
 I00
 sg6
-I6
+I5
 sg7
 S'CHAR(512) NOT NULL'
 p18
 sg9
 I01
 sg10
-g11
-ssS'f_user'
+S'string'
 p19
-(dp20
+ssS'created_by'
+p20
+(dp21
 g4
 I512
 sg5
 I00
 sg6
-I3
+I11
 sg7
 S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
-p21
-sg9
-I01
-sg10
-S'reference auth_user'
 p22
+sg9
+I00
+sg10
+g15
 ssS'is_active'
 p23
 (dp24
@@ -80,7 +80,7 @@ I512
 sg5
 I00
 sg6
-I10
+I9
 sg7
 S'CHAR(1)'
 p25
@@ -97,15 +97,15 @@ I512
 sg5
 I00
 sg6
-I5
+I4
 sg7
 S'CHAR(512) NOT NULL'
 p29
 sg9
 I01
 sg10
-g11
-ssS'f_sexo'
+g19
+ssS'f_email'
 p30
 (dp31
 g4
@@ -113,35 +113,50 @@ I512
 sg5
 I00
 sg6
-I8
+I6
 sg7
-S'INTEGER REFERENCES t_sexo (id) ON DELETE CASCADE'
+S'CHAR(512) NOT NULL'
 p32
 sg9
 I01
 sg10
-S'reference t_sexo'
-p33
+g19
 ssS'created_on'
-p34
-(dp35
+p33
+(dp34
 g4
 I512
 sg5
 I00
 sg6
-I11
+I10
 sg7
 S'TIMESTAMP'
-p36
+p35
 sg9
 I00
 sg10
 S'datetime'
+p36
+ssS'f_cedula'
 p37
-ssS'created_by'
-p38
-(dp39
+(dp38
+g4
+I512
+sg5
+I00
+sg6
+I3
+sg7
+S'CHAR(512) NOT NULL'
+p39
+sg9
+I01
+sg10
+g19
+ssS'modified_on'
+p40
+(dp41
 g4
 I512
 sg5
@@ -149,31 +164,15 @@ I00
 sg6
 I12
 sg7
-S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
-p40
-sg9
-I00
-sg10
-g15
-ssS'modified_on'
-p41
-(dp42
-g4
-I512
-sg5
-I00
-sg6
-I13
-sg7
 S'TIMESTAMP'
-p43
+p42
 sg9
 I00
 sg10
-g37
+g36
 ssS'f_tipoprop'
-p44
-(dp45
+p43
+(dp44
 g4
 I512
 sg5
@@ -182,31 +181,31 @@ sg6
 I2
 sg7
 S'INTEGER REFERENCES t_tipoprop (id) ON DELETE CASCADE'
-p46
+p45
 sg9
 I01
 sg10
 S'reference t_tipoprop'
-p47
+p46
 ssS'f_telefono'
-p48
-(dp49
+p47
+(dp48
 g4
 I512
 sg5
 I00
 sg6
-I9
+I8
 sg7
 S'CHAR(512) NOT NULL'
-p50
+p49
 sg9
 I01
 sg10
-g11
+g19
 ssS'id'
-p51
-(dp52
+p50
+(dp51
 g4
 I512
 sg5
@@ -215,26 +214,9 @@ sg6
 I1
 sg7
 S'INTEGER PRIMARY KEY AUTOINCREMENT'
-p53
+p52
 sg9
 I00
 sg10
-S'id'
-p54
-ssS'f_cedula'
-p55
-(dp56
-g4
-I512
-sg5
-I00
-sg6
-I4
-sg7
-S'CHAR(512) NOT NULL'
-p57
-sg9
-I01
-sg10
-g11
+g50
 ss.
