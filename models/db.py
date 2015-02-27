@@ -43,12 +43,12 @@ response.generic_patterns = ['*'] if request.is_local else []
 
 from gluon.tools import Auth, Service, PluginManager
 
-auth = Auth(db)
+auth=Auth(globals(),db)
 service = Service()
 plugins = PluginManager()
 
 ## create all tables needed by auth if not custom tables
-auth.define_tables(username=False, signature=False)
+auth.define_tables(username=True, signature=False)
 
 ## configure email
 mail = auth.settings.mailer
@@ -60,6 +60,11 @@ mail.settings.login = 'username:password'
 auth.settings.registration_requires_verification = False
 auth.settings.registration_requires_approval = False
 auth.settings.reset_password_requires_verification = True
+auth.settings.login_next=URL(r=request, c='default', f='vista_admin')
+
+#Crear grupos para permitir el uso de vistas
+auth.settings.create_user_groups = False
+auth.settings.everybody_group_id = auth.id_group('Proponente')
 
 ## if you need to use OpenID, Facebook, MySpace, Twitter, Linkedin, etc.
 ## register with janrain.com, write your domain:api_key in private/janrain.key
