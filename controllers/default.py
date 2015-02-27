@@ -238,7 +238,7 @@ def sedesDetalles():
 def estudianteProyectos():
     x = long (request.args[0])
     #return dict(rows = db(db.t_estudiante.id==x).select())
-    return dict(rows = db(db.t_estudiante.id==x).select(),proyectos=db().select(db.t_project.ALL),estudianteID=x)   
+    return dict(rows = db(db.t_estudiante.id==x).select(),estudianteID=x)
 
 def estudiantesDetalles():
     x = long (request.args[0])

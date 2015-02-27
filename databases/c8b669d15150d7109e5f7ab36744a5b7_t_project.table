@@ -1,75 +1,77 @@
 (dp1
-S'accnum'
+S'f_estado'
 p2
 (dp3
-S'sortable'
+S'length'
 p4
-I12
-sS'sql'
+I512
+sS'unique'
 p5
-S'INTEGER'
+I00
+sS'sortable'
 p6
-sS'length'
+I5
+sS'sql'
 p7
-S'_id'
+S'INTEGER REFERENCES t_estado (id) ON DELETE CASCADE'
 p8
 sS'notnull'
 p9
-I00
-sS'unique'
+I01
+sS'type'
 p10
-I00
-sS'type'
+S'reference t_estado'
 p11
-S'integer'
-p12
 ssS'f_descripcion'
-p13
-(dp14
-S'length'
-p15
+p12
+(dp13
+g4
 I32768
-sS'unique'
-p16
+sg5
 I00
-sS'sortable'
-p17
+sg6
 I3
-sS'sql'
-p18
+sg7
 S'TEXT NOT NULL'
-p19
-sS'notnull'
-p20
+p14
+sg9
 I01
-sS'type'
-p21
+sg10
 S'text'
-p22
+p15
 ssS'f_area'
-p23
-(dp24
-g15
+p16
+(dp17
+g4
 I512
-sg16
+sg5
 I00
-sg17
+sg6
 I4
-sg18
+sg7
 S'INTEGER REFERENCES t_area (id) ON DELETE CASCADE'
-p25
-sg20
+p18
+sg9
 I01
-sg21
+sg10
 S'reference t_area'
+<<<<<<< HEAD
 p26
 ssS'f_fechaini'
 p27
 (dp28
 g15
+=======
+p19
+ssS'f_fechaini'
+p20
+(dp21
+g4
+>>>>>>> c6cd7215a6dcafa34c5dd88f7fa6e113851c2af0
 I512
-sg16
+sg5
 I00
+<<<<<<< HEAD
 sg17
 I7
 sg18
@@ -80,47 +82,67 @@ I01
 sg21
 S'date'
 p30
+=======
+sg6
+I7
+sg7
+S'DATE NOT NULL'
+p22
+sg9
+I01
+sg10
+S'date'
+p23
+>>>>>>> c6cd7215a6dcafa34c5dd88f7fa6e113851c2af0
 ssS'f_version'
-p31
-(dp32
-g15
+p24
+(dp25
+g4
 I512
-sg16
+sg5
 I00
-sg17
+sg6
 I9
-sg18
+sg7
 S'INTEGER PRIMARY KEY AUTOINCREMENT'
-p33
-sg20
+p26
+sg9
 I01
-sg21
+sg10
 S'id'
+p27
+ssS'accnum'
+p28
+(dp29
+S'sortable'
+p30
+I12
+sS'sql'
+p31
+S'INTEGER'
+p32
+sS'length'
+p33
+S'_id'
 p34
-ssS'f_estado'
+sS'notnull'
 p35
-(dp36
-g15
-I512
-sg16
 I00
-sg17
-I5
-sg18
-S'INTEGER REFERENCES t_estado (id) ON DELETE CASCADE'
+sS'unique'
+p36
+I00
+sS'type'
 p37
-sg20
-I01
-sg21
-S'reference t_estado'
+S'integer'
 p38
 ssS'is_active'
 p39
 (dp40
-g15
+g4
 I512
-sg16
+sg5
 I00
+<<<<<<< HEAD
 sg17
 I12
 sg18
@@ -129,32 +151,43 @@ p41
 sg20
 I00
 sg21
+=======
+sg6
+I12
+sg7
+S'CHAR(1)'
+p41
+sg9
+I00
+sg10
+>>>>>>> c6cd7215a6dcafa34c5dd88f7fa6e113851c2af0
 S'boolean'
 p42
 ssS'created_on'
 p43
 (dp44
-g15
+g4
 I512
-sg16
+sg5
 I00
-sg17
+sg6
 I13
-sg18
+sg7
 S'TIMESTAMP'
 p45
-sg20
+sg9
 I00
-sg21
+sg10
 S'datetime'
 p46
 ssS'created_by'
 p47
 (dp48
-g15
+g4
 I512
-sg16
+sg5
 I00
+<<<<<<< HEAD
 sg17
 I14
 sg18
@@ -163,23 +196,33 @@ p49
 sg20
 I00
 sg21
+=======
+sg6
+I14
+sg7
+S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
+p49
+sg9
+I00
+sg10
+>>>>>>> c6cd7215a6dcafa34c5dd88f7fa6e113851c2af0
 S'reference auth_user'
 p50
 ssS'modified_on'
 p51
 (dp52
-g15
+g4
 I512
-sg16
+sg5
 I00
-sg17
+sg6
 I15
-sg18
+sg7
 S'TIMESTAMP'
 p53
-sg20
+sg9
 I00
-sg21
+sg10
 g46
 ssS'id'
 p54
@@ -207,47 +250,56 @@ p63
 ssS'f_codigo'
 p64
 (dp65
-g15
+g4
 I512
-sg16
+sg5
 I00
-sg17
+sg6
 I1
-sg18
+sg7
 S'INTEGER PRIMARY KEY AUTOINCREMENT'
 p66
-sg20
+sg9
 I01
-sg21
-g34
+sg10
+g27
 ssS'modified_by'
 p67
 (dp68
-g15
+g4
 I512
-sg16
+sg5
 I00
-sg17
+sg6
 I16
-sg18
+sg7
 S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
 p69
-sg20
+sg9
 I00
+<<<<<<< HEAD
 sg21
+=======
+sg10
+>>>>>>> c6cd7215a6dcafa34c5dd88f7fa6e113851c2af0
 g50
 ssS'f_fechafin'
 p70
 (dp71
+<<<<<<< HEAD
 g15
+=======
+g4
+>>>>>>> c6cd7215a6dcafa34c5dd88f7fa6e113851c2af0
 I512
-sg16
+sg5
 I00
-sg17
+sg6
 I8
-sg18
+sg7
 S'DATE NOT NULL'
 p72
+<<<<<<< HEAD
 sg20
 I01
 sg21
@@ -256,34 +308,56 @@ ssS'f_comunidad'
 p73
 (dp74
 g15
+=======
+sg9
+I01
+sg10
+g23
+ssS'f_comunidad'
+p73
+(dp74
+g4
+>>>>>>> c6cd7215a6dcafa34c5dd88f7fa6e113851c2af0
 I512
-sg16
+sg5
 I00
-sg17
+sg6
 I10
-sg18
+sg7
 S'INTEGER REFERENCES t_comunidad (id) ON DELETE CASCADE'
 p75
+<<<<<<< HEAD
 sg20
+=======
+sg9
+>>>>>>> c6cd7215a6dcafa34c5dd88f7fa6e113851c2af0
 I01
-sg21
+sg10
 S'reference t_comunidad'
 p76
 ssS'f_proponente'
 p77
 (dp78
+<<<<<<< HEAD
 g15
+=======
+g4
+>>>>>>> c6cd7215a6dcafa34c5dd88f7fa6e113851c2af0
 I512
-sg16
+sg5
 I00
-sg17
+sg6
 I11
-sg18
+sg7
 S'INTEGER REFERENCES t_proponente (id) ON DELETE CASCADE'
 p79
+<<<<<<< HEAD
 sg20
+=======
+sg9
+>>>>>>> c6cd7215a6dcafa34c5dd88f7fa6e113851c2af0
 I01
-sg21
+sg10
 S'reference t_proponente'
 p80
 ssS'nversion'
@@ -312,10 +386,15 @@ p90
 ssS'f_nombre'
 p91
 (dp92
+<<<<<<< HEAD
 g15
+=======
+g4
+>>>>>>> c6cd7215a6dcafa34c5dd88f7fa6e113851c2af0
 I512
-sg16
+sg5
 I00
+<<<<<<< HEAD
 sg17
 I2
 sg18
@@ -324,23 +403,33 @@ p93
 sg20
 I01
 sg21
+=======
+sg6
+I2
+sg7
+S'CHAR(512) NOT NULL'
+p93
+sg9
+I01
+sg10
+>>>>>>> c6cd7215a6dcafa34c5dd88f7fa6e113851c2af0
 S'string'
 p94
 ssS'f_tutor'
 p95
 (dp96
-g15
+g4
 I512
-sg16
+sg5
 I00
-sg17
+sg6
 I6
-sg18
+sg7
 S'INTEGER REFERENCES t_tutor (id) ON DELETE CASCADE'
 p97
-sg20
+sg9
 I01
-sg21
+sg10
 S'reference t_tutor'
 p98
 ssS'codigo'
