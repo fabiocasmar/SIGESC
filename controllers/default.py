@@ -52,7 +52,7 @@ def proponentes():
         response.flash = 'form has errors'
     else:
         response.flash = 'please fill out the form'
-    return dict(form=form, proponentes=db().select(db.t_proponente.ALL))
+    return dict(form=form, proponentes=db().select(db.t_proponente.ALL),message=T(response.flash))
 
 
 def tutores():
@@ -73,7 +73,7 @@ def tutores():
         response.flash = 'form has errors'
     else:
         response.flash = 'please fill out the form'
-    return dict(form=form, tutores=db().select(db.t_tutor.ALL))
+    return dict(form=form, tutores=db().select(db.t_tutor.ALL),message=T(response.flash))
 
 
 @auth.requires_login()
@@ -94,7 +94,7 @@ def sedes():
         response.flash = 'form has errors'
     else:
         response.flash = 'please fill out the form'    
-    return dict(form=form, sedes=db().select(db.t_sede.ALL))
+    return dict(form=form, sedes=db().select(db.t_sede.ALL),message=T(response.flash))
 
 def areas():
     def my_form_processing(form):
@@ -107,7 +107,7 @@ def areas():
         response.flash = 'form has errors'
     else:
         response.flash = 'please fill out the form'
-    return dict(form=form, areas=db().select(db.t_area.ALL))
+    return dict(form=form, areas=db().select(db.t_area.ALL),message=T(response.flash))
 
 def proyectos():
     def my_form_processing(form):
@@ -126,7 +126,7 @@ def proyectos():
         response.flash = 'form has errors'
     else:
         response.flash = 'please fill out the form'
-    return dict(form=form, proyectos=db().select(db.t_project.ALL))
+    return dict(form=form, proyectos=db().select(db.t_project.ALL),message=T(response.flash))
 
 
 def cursa():
@@ -239,8 +239,14 @@ def sedesDetalles():
 def estudiantesDetalles():
     x = long (request.args[0])
     #return dict(rows = db(db.t_estudiante.id==x).select())
+    return dict(rows = db(db.t_estudiante.id==x).select())
+
+def estudianteProyectos():
+    x = long (request.args[0])
+    #return dict(rows = db(db.t_estudiante.id==x).select())
     return dict(rows = db(db.t_estudiante.id==x).select(),proyectos=db().select(db.t_project.ALL),estudianteID=x)
     
+
 def proponentesDetalles():
     x = long (request.args[0])
     return dict(rows = db(db.t_proponente.id==x).select())
