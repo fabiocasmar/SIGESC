@@ -475,6 +475,7 @@
 'User Logged-out': 'El usuario finalizó la sesión',
 'Username': 'Nombre de usuario',
 'Username retrieve': 'Recuperar nombre de usuario',
+'Value already in database or empty': 'Value already in database or empty',
 'value already in database or empty': 'el valor ya existe en la base de datos o está vacío',
 'value not allowed': 'valor no permitido',
 'Value not in database': 'Value not in database',

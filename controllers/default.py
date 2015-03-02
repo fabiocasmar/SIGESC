@@ -223,22 +223,13 @@ def relacionestproy_manage():
 
 def sedesDetalles():
     x = long (request.args[0])
-    #return dict(rows = db(db.t_sede.id==x).select())
-    record = db.t_sede(request.args[0])
-    form = SQLFORM(db.t_sede, record, deletable = True)
-    if form.process().accepted:
-        response.flash = 'form accepted'
-    elif form.errors:
-        response.flash = 'form has errors'
-    elif not record:
-        return dict('La sede ha sido eliminada')
-    return dict(form = form,rows = db(db.t_sede.id==x).select())
+    return dict(rows = db(db.t_sede.id==x).select())
 
 
 def estudianteProyectos():
     x = long (request.args[0])
     #return dict(rows = db(db.t_estudiante.id==x).select())
-    return dict(rows = db(db.t_estudiante.id==x).select(),estudianteID=x)
+    return dict(rows = db(db.t_estudiante.id==x).select())
 
 def estudiantesDetalles():
     x = long (request.args[0])
