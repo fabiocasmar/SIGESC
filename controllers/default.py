@@ -137,7 +137,8 @@ def cursa():
 def registrarProyectoEstudiante():
     idProyecto = long(request.args[0])
     idEstudiante = long(request.args[1])
-    db.insert()
+    db.t_cursa.insert(idProyecto,idEstudiante,'Activo')
+    return dict(proyectos=db(db.t_project.id==idProyecto))
 
 def sede_manage():
     form = SQLFORM.smartgrid(db.t_sede,onupdate=auth.archive)
