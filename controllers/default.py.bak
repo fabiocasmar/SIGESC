@@ -13,7 +13,6 @@ def error():
 
 def vista_admin():
 	return dict()
-
 def estudiantes():
     def my_form_processing(form):
         if not re.match('\d{2}-\d{5}$', form.vars.f_usbid):
@@ -25,34 +24,19 @@ def estudiantes():
         if not re.match('\d{7,13}', form.vars.f_telefono):
             form.errors.f_telefono = 'El formato válido de telefono es 08002023223'
 
-    form = SQLFORM(db.t_estudiante)
+    form = SQLFORM(db.t_estudiante,formstyle='table3cols')
+
     if form.process(onvalidation=my_form_processing).accepted:
-        response.flash = 'form accepted'
+        response.flash = '1'
+        
     elif form.errors:
-        response.flash = 'form has errors'
+        response.flash = ''
+        
     else:
-        response.flash = 'please fill out the form'
-    return dict(form=form, est=db().select(db.t_estudiante.ALL))
+        response.flash = 'Llene el formulario'
+    return dict(form=form, est=db().select(db.t_estudiante.ALL),message=T(response.flash))
 
 def proponentes():
-    def my_form_processing(form):
-        if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
-            form.errors.f_cedula = 'El formato válido de cédula es: 1232382'
-        if not re.match('(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', form.vars.f_email):
-            form.errors.f_email = 'El formato válido de email es example@example.com'
-        if not re.match('\d{7,13}', form.vars.f_telefono):
-            form.errors.f_telefono = 'El formato válido de telefono es 08002023223'
-
-    form = SQLFORM(db.t_proponente)
-    if form.process(onvalidation=my_form_processing).accepted:
-        response.flash = 'form accepted'
-    elif form.errors:
-        response.flash = 'form has errors'
-    else:
-        response.flash = 'please fill out the form'
-    return dict(form=form, proponentes=db().select(db.t_proponente.ALL))
-
-def proponenteDetalles():
     def my_form_processing(form):
         if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
             form.errors.f_cedula = 'El formato válido de cédula es: 1232382'
@@ -124,28 +108,6 @@ def areas():
     else:
         response.flash = 'please fill out the form'
     return dict(form=form, areas=db().select(db.t_area.ALL))
-
-
-def proyectos():
-    def my_form_processing(form):
-        if not re.match('\d{4}', form.vars.f_codigo):
-            form.errors.f_codigo = 'El formato válido del código son 4 dígitos'
-        if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_nombre):
-            form.errors.f_nombre = 'Sólo puede contener letras'
-        if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_descripcion):
-            form.errors.f_descripcion = 'Sólo puede contener letras'
-        if not re.match('\d{2}', form.vars.f_version):
-            form.errors.f_codigo = 'El formato válido de la versión son 2 dígitos'
-
-    form = SQLFORM(db.t_project,onupdate=auth.archive) 
-    if form.process(onvalidation=my_form_processing).accepted:
-        response.flash = 'form accepted'
-    elif form.errors:
-        response.flash = 'form has errors'
-    else:
-        response.flash = 'please fill out the form'
-    return dict(form=form, proyectos=db().select(db.t_project.ALL))
-
 
 def sede_manage():
     form = SQLFORM.smartgrid(db.t_sede,onupdate=auth.archive)
@@ -234,37 +196,19 @@ def sedesDetalles():
         return dict('La sede ha sido eliminada')
     return dict(form = form,rows = db(db.t_sede.id==x).select())
 
+
+    
 def estudiantesDetalles():
     x = long (request.args[0])
     return dict(rows = db(db.t_estudiante.id==x).select())
     
 def proponentesDetalles():
     x = long (request.args[0])
-    #return dict(rows = db(db.t_sede.id==x).select())
-    record = db.t_proponente(request.args[0])
-    form = SQLFORM(db.t_proponente, record, deletable = True)
-    if form.process().accepted:
-        response.flash = 'form accepted'
-    elif form.errors:
-        response.flash = 'form has errors'
-    elif not record:
-        return dict('La sede ha sido eliminada')
-    return dict(form = form, proyectos = db(db.t_project.f_proponente==record).select())
-
-
+    return dict(rows = db(db.t_proponente.id==x).select())
     
 def proyectosDetalles():
     x = long (request.args[0])
-    #return dict(rows = db(db.t_sede.id==x).select())
-    record = db.t_project(request.args[0])
-    form = SQLFORM(db.t_project, record, deletable = True)
-    if form.process().accepted:
-        response.flash = 'form accepted'
-    elif form.errors:
-        response.flash = 'form has errors'
-    elif not record:
-        return dict('La sede ha sido eliminada')
-    return dict(form = form)
+    return dict(rows = db(db.t_proyecto.id==x).select())
     
 def tutoresDetalles():
     x = long (request.args[0])

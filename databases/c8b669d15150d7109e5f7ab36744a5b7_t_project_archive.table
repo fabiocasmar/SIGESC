@@ -56,7 +56,7 @@ I01
 sg10
 S'reference t_area'
 p19
-ssS'f_fechaini'
+ssS'is_active'
 p20
 (dp21
 g4
@@ -64,14 +64,14 @@ I512
 sg5
 I00
 sg6
-I8
+I13
 sg7
-S'DATE NOT NULL'
+S'CHAR(1)'
 p22
 sg9
-I01
+I00
 sg10
-S'date'
+S'boolean'
 p23
 ssS'f_version'
 p24
@@ -107,7 +107,7 @@ I01
 sg10
 S'reference t_estado'
 p31
-ssS'is_active'
+ssS'f_fechaini'
 p32
 (dp33
 g4
@@ -115,14 +115,14 @@ I512
 sg5
 I00
 sg6
-I13
+I8
 sg7
-S'CHAR(1)'
+S'DATE NOT NULL'
 p34
 sg9
-I00
+I01
 sg10
-S'boolean'
+S'date'
 p35
 ssS'created_on'
 p36
@@ -141,7 +141,7 @@ I00
 sg10
 S'datetime'
 p39
-ssS'f_nombre'
+ssS'created_by'
 p40
 (dp41
 g4
@@ -149,17 +149,18 @@ I512
 sg5
 I00
 sg6
-I3
+I15
 sg7
-S'CHAR(512) NOT NULL'
+S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
 p42
 sg9
-I01
+I00
 sg10
-g27
-ssS'modified_on'
+S'reference auth_user'
 p43
-(dp44
+ssS'modified_on'
+p44
+(dp45
 g4
 I512
 sg5
@@ -168,14 +169,14 @@ sg6
 I16
 sg7
 S'TIMESTAMP'
-p45
+p46
 sg9
 I00
 sg10
 g39
 ssS'id'
-p46
-(dp47
+p47
+(dp48
 g4
 I512
 sg5
@@ -184,15 +185,15 @@ sg6
 I1
 sg7
 S'INTEGER PRIMARY KEY AUTOINCREMENT'
-p48
+p49
 sg9
 I00
 sg10
 S'id'
-p49
-ssS'f_codigo'
 p50
-(dp51
+ssS'f_codigo'
+p51
+(dp52
 g4
 I512
 sg5
@@ -201,14 +202,14 @@ sg6
 I2
 sg7
 S'CHAR(512) NOT NULL'
-p52
+p53
 sg9
 I01
 sg10
 g27
 ssS'modified_by'
-p53
-(dp54
+p54
+(dp55
 g4
 I512
 sg5
@@ -217,12 +218,11 @@ sg6
 I17
 sg7
 S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
-p55
+p56
 sg9
 I00
 sg10
-S'reference auth_user'
-p56
+g43
 ssS'f_fechafin'
 p57
 (dp58
@@ -238,7 +238,7 @@ p59
 sg9
 I01
 sg10
-g23
+g35
 ssS'f_comunidad'
 p60
 (dp61
@@ -273,7 +273,7 @@ I01
 sg10
 S'reference t_proponente'
 p67
-ssS'created_by'
+ssS'f_nombre'
 p68
 (dp69
 g4
@@ -281,14 +281,14 @@ I512
 sg5
 I00
 sg6
-I15
+I3
 sg7
-S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
+S'CHAR(512) NOT NULL'
 p70
 sg9
-I00
+I01
 sg10
-g56
+g27
 ssS'f_tutor'
 p71
 (dp72

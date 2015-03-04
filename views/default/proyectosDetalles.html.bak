@@ -125,7 +125,7 @@
 	
 			<div class="col-md-6" style="text-align: left; margin-top: 44px; width: 50%">
 				<div class="row">
-					<i class="fa fa-list-alt fa-3x" style="color: #4682B4"></i> <h class="reg">Información del proyecto</h>      
+					<i class="fa fa-list-alt fa-3x" style="color: #4682B4"></i> <h class="reg">Informacion de la sede</h>      
 				</div>
 				
 				<div class="row">
@@ -133,14 +133,7 @@
 
 							<tr>
 								<td>
-									{{=SQLTABLE(rows,headers={'t_project.id':'Id',
-																't_project.f_codigo':'Codigo',
-																't_project.is_active':'Esta activo',
-																't_project.created_on':'Fecha de creacion',
-																't_project.created_by':'Creado por',
-																't_project.modified_on':'Fecha de modificacion',
-																't_project.modified_by':'Modificado por' } ) 
-									}}
+									{{=form}}
 								</td>
 							</tr>
 						{{ pass }}
