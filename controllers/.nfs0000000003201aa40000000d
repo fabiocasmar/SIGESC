@@ -132,12 +132,22 @@ def proyectos():
 def cursa():
     idProyecto = long(request.args[0])
     idEstudiante = long(request.args[1])
-    return dict(proyectos=db(db.t_project.id==idProyecto).select(),estudianteID=idEstudiante)
+    estado = 'Activo'
+    #estado = db(db.t_relacionestproy).select().first()
+    form = SQLFORM(db.t_cursa,fields = ['f_estudiante','f_project','f_state']) 
+    form.vars.f_estudiante = idEstudiante
+    form.vars.f_project = idProyecto
+    form.vars.f_state = estado 
 
-def registrarProyectoEstudiante():
-    idProyecto = long(request.args[0])
-    idEstudiante = long(request.args[1])
-    db.insert()
+    if form.process(keepvalues=True).accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+
+    return dict(form=form,proyectos=db(db.t_project.id==idProyecto).select(),
+        estaCursando=db(db.t_cursa.f_estudiante==idEstudiante),estudianteID=idEstudiante)
 
 def sede_manage():
     form = SQLFORM.smartgrid(db.t_sede,onupdate=auth.archive)
