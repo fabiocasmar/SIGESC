@@ -82,6 +82,12 @@ def vista_estudiante():
 	        response.flash = 'please fill out the form'
 	return dict(form=form, bienvenida=msj)
 
+def proponenteProyecto():
+	msj = 'Bienvenid@ %s %s' % (auth.user.first_name,auth.user.last_name)
+	idProponente = db(db.t_proponente.f_user==auth.user).select()
+	return dict(proyectos = db(db.t_project.f_proponente==idProponente[0]).select(), bienvenida=msj)
+
+'''proyectos = db(db.t_project.f_proponente==idProponente.id).select(),'''
 @auth.requires_membership('Administrador')
 def estudiantes():
     def my_form_processing(form):
