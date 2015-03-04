@@ -352,7 +352,7 @@ def generarPdfConstanciaInicio():
 	tlf = rows[0].f_telefono
 	direccion = rows[0].f_direccion
 	
-	title = "Constancia de Inscripción de Servicio Comunitario "
+	title = "Constancia de Inicio de Servicio Comunitario "
 	heading = "Datos del estudiante:"
 	
 
