@@ -121,7 +121,7 @@
              <ul class="nav nav-stacked">
                 <li>
                       <a href="{{=URL('estudiantes')}}">
-                         <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Volver a Estudiantes</a>
+                         <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Volver a Proyectos</a>
                      <a href="{{=URL('proyectos')}}">
                       <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Áreas </a>
                       <a href="{{=URL('areas')}}">
@@ -137,10 +137,11 @@
                  </li>
              </ul>
        </div>
+        <div class="alert alert-success" role="alert">
+          <a href="{{=URL('estudiantes')}}" class="alert-link">Registro de proyecto exitoso. Volver a proyectos</a>
+        </div>
         {{if globals().get('msj', False):}} <p><strong>{{=msj}}</strong></p>
         {{else:}}
-        <h1> estudianteID : {{=estudianteID}}</h1>
-        <h1> proyectoID : {{=proyecto}}</h1>
   
         </div>
 

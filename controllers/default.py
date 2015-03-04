@@ -137,9 +137,7 @@ def cursa():
 def registrarProyectoEstudiante():
     idProyecto = long(request.args[0])
     idEstudiante = long(request.args[1])
-    #tipoEstado = db(db.t_relacionestproy.f_tipo=="Activo").select(f_tipo)
     db.t_cursa.insert(f_estudiante=idEstudiante,f_project=idProyecto,f_state="3")
-    #return dict(proyectos=db(db.t_project.id==idProyecto))
     return dict(proyecto=idProyecto,estudianteID=idEstudiante)
 
 def sede_manage():
