@@ -132,13 +132,15 @@ def proyectos():
 def cursa():
     idProyecto = long(request.args[0])
     idEstudiante = long(request.args[1])
-    return dict(proyectos=db(db.t_project.id==idProyecto).select(),estudianteID=idEstudiante)
+    return dict(proyectos=db(db.t_project.id==idProyecto).select(),estudianteID=idEstudiante,idProyecto=idProyecto)
 
 def registrarProyectoEstudiante():
     idProyecto = long(request.args[0])
     idEstudiante = long(request.args[1])
-    db.t_cursa.insert(idProyecto,idEstudiante,'Activo')
-    return dict(proyectos=db(db.t_project.id==idProyecto))
+    #tipoEstado = db(db.t_relacionestproy.f_tipo=="Activo").select(f_tipo)
+    db.t_cursa.insert(f_estudiante=idEstudiante,f_project=idProyecto,f_state="3")
+    #return dict(proyectos=db(db.t_project.id==idProyecto))
+    return dict(proyecto=idProyecto,estudianteID=idEstudiante)
 
 def sede_manage():
     form = SQLFORM.smartgrid(db.t_sede,onupdate=auth.archive)

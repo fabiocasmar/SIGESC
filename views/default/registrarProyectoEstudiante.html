@@ -133,44 +133,15 @@
                           <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Sedes</a>
                       <a href="{{=URL('tutores')}}">
                           <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Tutores</a>
-                      <a href="{{=URL(r=request,f='estudianteProyectos',args=estudianteId)}}">
-                          <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Inscribir Proyectos</a>
+                      
                  </li>
              </ul>
        </div>
         {{if globals().get('msj', False):}} <p><strong>{{=msj}}</strong></p>
         {{else:}}
-        <div class="col-md-5">
-            <div class="row">
-                <div class="panel panel-primary">
-                    <div class="panel-heading class=detalles">
-                       <b><h class="detalles" >Proyectos Inscritos</b></h>
-                    </div>
-                    <div class="panel-body">
-                        <table class="table table-striped">
-
-                            {{for proyecto in proyectos:}}
-                            <tr><td><b>Código:</b> {{=proyecto.f_codigo}}</td></tr>
-                            <tr><td><b>Nombre:</b> {{=proyecto.f_nombre}}</td></tr>
-                            <tr><td><b>Descipción:</b> {{=proyecto.f_descripcion}}</td></tr>
-                            <tr><td><b>Área:</b> {{=proyecto.f_area}}</td></tr>
-                            <tr><td><b>Estado:</b> {{=proyecto.f_estado}}</td></tr>
-                            <tr><td><b>Tutor:</b> {{=proyecto.f_tutor}}</td></tr>
-                            <tr><td><b>Fecha de Inicio:</b> {{=proyecto.f_fechaini}}</td></tr>
-                            <tr><td><b>Fecha de Finalización:</b> {{=proyecto.f_fechafin}}</td></tr>
-                            <tr><td><b>Fecha de Finalización:</b> {{=proyecto.f_fechafin}}</td></tr>
-                            <tr><td><b>Version:</b> {{=proyecto.f_version}}</td></tr>
-                            <tr><td><b>Comunidad:</b> {{=proyecto.f_comunidad}}</td></tr>
-                            <tr><td><b>Proponente:</b> {{=proyecto.f_proponente}}</td></tr>
-                          {{pass}}
-                          
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        
+        <h1> estudianteID : {{=estudianteID}}</h1>
+        <h1> proyectoID : {{=proyecto}}</h1>
+  
         </div>
 
 

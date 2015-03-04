@@ -49,7 +49,8 @@
     <script type="text/javascript">
     $(document).ready(function(){
       $('#btn-prueba').on('click', function(){
-        $(location).attr('href','{{=URL(r=request,f=registrarProyectoEstudiante,args=[proyectos,estudianteID])}}');
+        $(location).attr('href','{{=URL(r=request,f='registrarProyectoEstudiante',args=[idProyecto,estudianteID])}}');
+        //$(location).attr('href','{{=URL(r=request,f='estudianteProyectos',args=estudianteID)}}');
       });
     })
     </script>
