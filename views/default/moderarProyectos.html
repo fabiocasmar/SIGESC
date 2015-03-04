@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="{{=URL('static', 'css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{=URL('static', 'css/Pag_principal.css')}}%}">
     <link rel="stylesheet" href="{{=URL('static', 'css/proponentes.css')}}">
-    <link rel="stylesheet" href="{{=URL('static', 'css/estudianteProyecto.css')}}">
     
     <link rel="icon" href="//getbootstrap.com/favicon.ico">
     
@@ -31,6 +30,7 @@
 
     <script type="text/javascript" src="{{=URL('static', 'js/jquery-1.11.2.js')}}">
     </script>
+     
     
     <!-- Custom styles for this template -->
     
@@ -43,7 +43,7 @@
     <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.ttf', scheme='http')}}" rel="stylesheet" />
     <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.woff', scheme='http')}}" rel="stylesheet" />
     <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.woff2', scheme='http')}}" rel="stylesheet" />
-    
+
   </head>
   
   <body role="document">
@@ -64,7 +64,7 @@
             </span>
           </button>
 <a href="https://sc.cesma.usb.ve/SIGESC/default/vista_admin"><img class="home" src="/SIGESC/static/img/home.png">
-</a>/>
+</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -100,13 +100,14 @@
       </div>
     </nav>
 
+    <!-- Contenido -->
     <div class="col-sm-12">
         <div class="row">
             <div class="col-md-2">
-                <img src="{{=URL('static', 'estudiantes.png')}}" class="img-responsive" width="150" height="110"/>
+                <img src="{{=URL('static', 'proyectos.png')}}" class="img-responsive" width="150" height="110"/>
             </div>
             <div class="col-md-4" align="left">
-               <h4 style="color:#4682B4"><a href=".">Home</a> /<a href="{{=URL('vista_admin')}}"> Admin </a> / <a href="#">Estudiantes </a> </h4>
+                <h4 style="color:#4682B4"><a href=".">Home</a> /<a href="{{=URL('vista_admin')}}"> Admin </a> / <a href="#">Proyectos </a> </h4>
             </div>
             <div class="col-md-6" align="right">
                 <a href=".">Salida <img src="{{=URL('static', 'img/salida_icon.png')}}"/></a>
@@ -114,58 +115,41 @@
         </div>
         <hr>
     </div>
-
-   <div class="col-sm-12">
-       <div class="col-md-3">
-           <h4 style="color:#337AB7"><i class="glyphicon glyphicon-briefcase"></i> Menú</h4>
-            <hr>
-             <ul class="nav nav-stacked">
-                 <li>
-                      <a href="{{=URL('estudiantes')}}">
-                         <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Volver a Estudiantes</a>
-                     <a href="{{=URL('proyectos')}}">
-                         <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Proyectos </a>
-                      <a href="{{=URL('proponentes')}}">
-                         <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Proponentes </a>
-                      <a href="{{=URL('sedes')}}">
-                          <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Sedes</a>
-                     <a href="{{=URL('tutores')}}">
-                          <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Tutores</a>
-                 </li>
-             </ul>
-       </div>
-        {{if globals().get('msj', False):}} <p><strong>{{=msj}}</strong></p>
-        {{else:}}
-        
-
-      <div class="col-md-6" style="text-align: left; margin-top: 44px; width: 50%">
-        <div class="row">
-          <i class="glyphicon glyphicon-align-left" style="color: #4682B4"></i> <h class="reg">Seleccione el proyecto en el que desea inscribirse</h>      
+	{{if globals().get('msj', False):}} <p><strong>{{=msj}}</strong></p>
+	{{else:}}
+		
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <table class="table table-condensed" id="estuds">
+                <thead>
+                    <tr>
+                        <th> Solicitudes para inscripción de proyectos</i></th>
+                        <th align="right"></th>
+                        <th align="right"></th>
+                        <th align="right"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ for proyecto in proyectos:}}
+                    <tr>
+                        <td>
+                            <span>{{=proyecto.f_estudiante.f_nombre}} {{=proyecto.f_estudiante.f_apellido}}</span>
+                        </td>
+                        <td>
+                            <span>{{=proyecto.f_project.f_nombre}}</span>
+                        </td>
+                        <td>
+                         <a href="{{=URL(r=request,f='validarProyectoEstudiante',args=proyecto.id)}}"><i class="glyphicon glyphicon glyphicon-ok"></i></a>
+                        </td>
+                        <td>
+                        <a href="{{=URL(r=request,f='proyectosEditar',args=proyecto.id)}}"><i class="glyphicon glyphicon glyphicon-remove"></i></a>
+                        </td>
+                    </tr>
+                    {{ pass }}
+                </tbody>
+            </table>
+            
         </div>
-      
-        <div class="row">
-          <table id="props" class="table" >    
-              <tr >
-                <th >Nombre</th>
-                <th>Descripci&oacute;n</th>
-                <th>Fecha de inicio</th>
-                <th>Fecha de finalizaci&oacute;n</th>
-                <th>Estado</th>
-              </tr>  
-              {{ for proyecto in proyectos:}}
-              <tr >
-                <td><a href="{{=URL(r=request,f='cursa',args=[proyecto.id,estudianteID])}}">{{=proyecto.f_nombre}}</a></td>
-                <td><span>{{=proyecto.f_descripcion}}<span></td>
-                <td><span>{{=proyecto.f_fechaini}}</span></td>
-                <td><span>{{=proyecto.f_fechafin}}</span></td>
-                <td><span>{{=proyecto.f_estado}}</span></td>
-                </td>
-              </tr>
-            {{ pass }}
-          </table>
-        </div>
-      </div> 
-
     </div>
-	{{ pass }}
+    {{ pass }}
 {{ end }}
