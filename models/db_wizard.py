@@ -184,6 +184,8 @@ db.define_table('t_carrera_archive',db.t_carrera,Field('current_record','referen
 db.define_table('t_estudiante',
     Field('f_usbid', type='string', notnull=True,
           label=T('Usbid')),
+    Field('f_user', type='reference auth_user', notnull=True,
+    	label=T('Nombre de usuario')),
     Field('f_nombre', type='string', notnull=True,
           label=T('Nombre')),
     Field('f_apellido', type='string', notnull=True,

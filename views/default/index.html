@@ -98,8 +98,9 @@
     </nav>
     
     <!-- Contenido -->
-    <div class="micontainer">
-      <form method="post" action="{{=URL('vista_admin')}}">
+    <div class="micontainer">    	
+    	{{ include 'default/user.html'}}
+      <!--<form method="post" action="{{=URL('vista_admin')}}">
         <br>
         <b>
           <h class="acces" style="color:#4682B4">
@@ -122,13 +123,11 @@
         
         <BR>
         <input type="submit" class="btn btn-lg2 btn-default ini">
-        <!--<a href="{{=URL('vista_admin')}}">
-          <img class="ini" class="img-responsive" src="{{=URL('static', 'img/log.png')}}" width="120" height="25"/>
-        </a>-->
+
         <h class="clean" style="color:#808080">
           | Limpiar
         </h>        
-      </form>
+      </form>-->
 	</div>
     <div class="row">
       <div class="col-md-3"  style="color:#4682B4">
