@@ -1,4 +1,13 @@
 import re
+from reportlab.platypus import *
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.rl_config import defaultPageSize
+from reportlab.lib.units import inch, mm
+from reportlab.lib.enums import TA_LEFT, TA_RIGHT, TA_CENTER, TA_JUSTIFY
+from reportlab.lib import colors
+from uuid import uuid4
+from cgi import escape
+import os
 # -*- coding: utf-8 -*-
 ### required - do no delete
 def user(): return dict(form=auth())
@@ -329,3 +338,56 @@ def proyectosEditar():
     elif not record:
         return dict('La sede ha sido eliminada')
     return dict(form = form)
+    
+def generarPdfConstanciaInicio():
+	x = long (request.args[0])
+	rows = db(db.t_estudiante.id==x).select()
+	USBID = rows[0].f_usbid
+	Nombre = rows[0].f_nombre
+	Apellido = rows[0].f_apellido
+	Cedula = rows[0].f_cedula
+	Carrera = rows[0].f_carrera
+	Sede = rows[0].f_sede
+	Sexo = rows[0].f_sexo
+	tlf = rows[0].f_telefono
+	direccion = rows[0].f_direccion
+	
+	title = "Constancia de Inscripción de Servicio Comunitario "
+	heading = "Datos del estudiante:"
+	
+
+	styles = getSampleStyleSheet()
+	tmpfilename=os.path.join(request.folder,'private',str(uuid4()))
+	doc = SimpleDocTemplate(tmpfilename)
+	logo = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../static/img/logousb.png')
+	salto = '<br />\n'
+	
+	story = []
+	story.append(Image(logo,width=188, height=125))
+	story.append(Paragraph(salto,styles["Normal"]))
+	story.append(Paragraph(escape(title),styles["Title"]))
+	story.append(Paragraph(escape(heading),styles["Heading2"]))
+	story.append(Paragraph(escape('USBID: ' + str(USBID)),styles["Normal"]))
+	story.append(Paragraph(escape('Nombres: ' + str(Nombre)),styles["Normal"]))
+	story.append(Paragraph(escape('Apellidos: ' + str(Apellido)),styles["Normal"]))
+	story.append(Paragraph(escape('Cédula: ' + str(Cedula)),styles["Normal"]))
+	story.append(Paragraph(escape('Carrera: ' + str(Carrera)),styles["Normal"]))
+	story.append(Paragraph(escape('Sede: ' + str(Sede)),styles["Normal"]))
+	story.append(Paragraph(escape('Sexo: ' + str(Sexo)),styles["Normal"]))
+	story.append(Paragraph(escape('Teléfono: ' + str(tlf)),styles["Normal"]))
+	story.append(Paragraph(escape('Dirección: ' + str(direccion)),styles["Normal"]))
+	
+	story.append(Paragraph(salto,styles["Normal"]))
+	story.append(Paragraph(escape('Información del proyecto:'),styles["Heading2"]))
+	story.append(Paragraph(escape('Nombre del proyecto: ' + '[Nombre del proyecto]'),styles["Normal"]))
+	story.append(Paragraph(escape('Código del proyecto : ' +'[Código del proyecto]'),styles["Normal"]))
+	story.append(Paragraph(escape('Tutor Acádemico: ' + '[Nombre del tutor]'),styles["Normal"]))
+	story.append(Paragraph(escape('Tutor Comunitario: ' + '[Nombre del tutor]'),styles["Normal"]))
+	
+	
+	story.append(Spacer(1,2*inch))
+	doc.build(story)
+	data = open(tmpfilename,"rb").read()
+	os.unlink(tmpfilename)
+	response.headers['Content-Type']='application/pdf'
+	return data
