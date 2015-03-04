@@ -76,6 +76,10 @@ def tutores():
     return dict(form=form, tutores=db().select(db.t_tutor.ALL),message=T(response.flash))
 
 
+def moderarProyectos():
+    return dict(proyectos=db().select(db.t_cursa.ALL))
+
+
 @auth.requires_login()
 def estado_manage():
     form = SQLFORM.smartgrid(db.t_estado,onupdate=auth.archive)
@@ -128,6 +132,11 @@ def proyectos():
         response.flash = 'please fill out the form'
     return dict(form=form, proyectos=db().select(db.t_project.ALL),message=T(response.flash))
 
+
+def validarProyectoEstudiante():
+    idProyecto = long(request.args[0])
+    db(db.t_cursa.id==idProyecto).update(f_state="2")
+    return dict(proyecto=idProyecto)
 
 def cursa():
     idProyecto = long(request.args[0])
