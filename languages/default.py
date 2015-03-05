@@ -1,7 +1,6 @@
-# coding: utf8
+# -*- coding: utf-8 -*-
 {
-'!langcode!': 'en-us',
-'!langname!': 'English (US)',
+'!langname!': 'Español (ES)',
 '%s %%(shop)': '%s %%(shop)',
 '%s %%(shop[0])': '%s %%(shop[0])',
 '%s %%{quark[0]}': '%s %%{quark[0]}',

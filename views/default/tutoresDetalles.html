@@ -63,7 +63,7 @@
             </span>
           </button>
 <a href="https://sc.cesma.usb.ve/SIGESC/default/vista_admin"><img class="home" src="/SIGESC/static/img/home.png">
-</a>
+</a>/>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -98,63 +98,73 @@
         <!--/.nav-collapse -->
       </div>
     </nav>
-    
- <!--Content -->
-	<div class="row">
-	      <div class="col-md-2">
 
-		<img src="{{=URL('static', 'img/prop1.png')}}" class="img-responsive" id="tutores"/>
-	      </div>
-	      
-	      <div class="col-md-3 subtitulo" style="color:#4682B4">
-		<b><i>Home/Estudiantes</b></i>
-	      </div>
-	      
-	      <div class="col-md-6" align="right">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-md-2">
+                <img src="{{=URL('static', 'tutor.png')}}" class="img-responsive" width="150" height="110"/>
+            </div>
+            <div class="col-md-4" align="left">
+               <h4 style="color:#4682B4"><a href=".">Home</a> /<a href="{{=URL('vista_admin')}}"> Admin </a> / <a href="#">Tutores </a> </h4>
+            </div>
+            <div class="col-md-6" align="right">
+                <a href=".">Salida <img src="{{=URL('static', 'img/salida_icon.png')}}"/></a>
+            </div>
+        </div>
+        <hr>
+    </div>
 
-		<img class="exit" src="{{=URL('static', 'img/salida_icon.png')}}"/>
-	      </div>
-	</div>
-	
-	<div class="row" id="line">
-	   <hr>
-	</div>
-    
-	{{if globals().get('msj', False):}} <p><strong>{{=msj}}</strong></p>
-	{{else:}}
-	
-			<div class="col-md-6" style="text-align: left; margin-top: 44px; width: 50%">
-				<div class="row">
-					<i class="fa fa-list-alt fa-3x" style="color: #4682B4"></i> <h class="reg">Informacion de la sede</h>      
-				</div>
-				
-				<div class="row">
-					<table id="props" class="table table-condensed">		
+   <div class="col-sm-12">
+       <div class="col-md-3">
+           <h4 style="color:#337AB7"><i class="glyphicon glyphicon-briefcase"></i> Menú</h4>
+            <hr>
+             <ul class="nav nav-stacked">
+                <li>
+                      <a href="{{=URL('tutores')}}">
+                         <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Volver a Tutores</a>
+                     <a href="{{=URL('proyectos')}}">
+                      <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Áreas </a>
+                      <a href="{{=URL('areas')}}">
 
-							<tr>
-								<td>
-									{{=SQLTABLE(rows,headers={'t_tutor.id':'Id',
-																't_tutor.f_usbid':'USBID',
-																't_tutor.f_nombre':'Nombre',
-																't_tutor.f_apellido':'Apellido',
-																't_tutor.f_cedula':'Cedula',
-																't_tutor.f_email':'Correo electronico',
-																't_tutor.f_sexo':'Sexo',
-																't_tutor.f_sede':'Sede',
-																't_tutor.f_telefono':'Telefono',
-																't_tutor.f_direccion':'Direccion',
-																't_tutor.is_active':'Esta activo',
-																't_tutor.created_on':'Fecha de creacion',
-																't_tutor.created_by':'Creado por',
-																't_tutor.modified_on':'Fecha de modificacion',
-																't_tutor.modified_by':'Modificado por' }) 
-									}}
-								</td>
-							</tr>
-						{{ pass }}
-					</table>
-				</div>
-			</div>
-	</div>
+                         <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Proyectos </a>
+                      <a href="{{=URL('proponentes')}}">
+                         <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Proponentes </a>
+                      <a href="{{=URL('sedes')}}">
+                          <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Sedes</a>
+                     <a href="{{=URL('tutores')}}">
+                          <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Estudiantes</a>
+                 </li>
+             </ul>
+       </div>
+        {{if globals().get('msj', False):}} <p><strong>{{=msj}}</strong></p>
+        {{else:}}
+        <div class="col-md-5">
+            <div class="row">
+                <div class="panel panel-primary">
+                    <div class="panel-heading class=detalles">
+                       <b><h class="detalles" >Detalles del Tutor</b></h>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-striped">
+
+                            {{for tutor in rows:}}
+                            <tr><td><b>USBID:</b> {{=tutor.f_usbid}}</td></tr>
+                            <tr><td><b>Nombre:</b> {{=tutor.f_nombre}}</td></tr>
+                            <tr><td><b>Apellido:</b> {{=tutor.f_apellido}}</td></tr>
+                            <tr><td><b>Cédula:</b> {{=tutor.f_cedula}}</td></tr>
+                            <tr><td><b>Sede:</b> {{=tutor.f_sede}}</td></tr>
+                            <tr><td><b>Email:</b> {{=tutor.f_email}}</td></tr>
+                            <tr><td><b>Teléfono:</b> {{=tutor.f_telefono}}</td></tr>
+                            <tr><td><b>Dirección:</b> {{=tutor.f_direccion}}</td></tr>
+                          {{pass}}
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+      </div>
 	{{ pass }}
 {{ end }}

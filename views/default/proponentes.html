@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{=URL('static', 'css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{=URL('static', 'css/Pag_principal.css')}}%}">
     <link rel="stylesheet" href="{{=URL('static', 'css/proponentes.css')}}">
-    
+     <link rel="stylesheet" href="{{=URL('static', 'css/web2py.css')}}">
     <link rel="icon" href="//getbootstrap.com/favicon.ico">
     
     
@@ -31,6 +31,7 @@
     <script type="text/javascript" src="{{=URL('static', 'js/jquery-1.11.2.js')}}">
     </script>
 	
+ 
     <script type="text/javascript">
 		function mostrar_form(){
 		document.getElementById('formulario').style.display = 'block';
@@ -38,6 +39,33 @@
 		}
 	</script>
       
+     <script type="text/javascript">
+		function ocultar_mensaje(){
+		document.getElementById('exito').style.display = 'none';
+        document.getElementById('fail').style.display = 'none';
+		}
+	</script>
+      
+      
+
+    <script type="text/javascript">
+        window.onload = control_form;
+        function control_form(){
+            if (document.getElementById('mensaje').value == "0"){
+                document.getElementById('formulario').style.display = 'block';
+                document.getElementById('up').style.display = 'block';
+                document.getElementById('fail').style.display = 'block';
+                setTimeout(function(){ ocultar_mensaje(); }, 3000);
+                }
+            
+            if (document.getElementById('mensaje').value == "1"){
+                document.getElementById('exito').style.display = 'block';
+                setTimeout(function(){ ocultar_mensaje(); }, 3000);
+                }
+            }
+        
+	</script>
+
       <script type="text/javascript">
 		function ocultar_form(){
 		document.getElementById('formulario').style.display = 'none';
@@ -45,8 +73,6 @@
 		}
 	</script>	
      
-     
-    
     <!-- Custom styles for this template -->
     
     <link href="{{=URL('static', 'css/theme.css')}}" rel="stylesheet">    
@@ -143,6 +169,7 @@
                         <th align="right"></th>
                         <th align="right"></th>
                         <th align="right"></th>
+                        <th align="right"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -155,13 +182,18 @@
                          <a href="{{=URL(r=request,f='proponentesDetalles',args=proponente.id)}}"><i class="glyphicon glyphicon-search"></i></a>
                         </td>
                         <td>
-                        <a href="{{=URL(r=request,f='proponentesDetalles',args=proponente.id)}}"><i class="glyphicon glyphicon-pencil"></i></a>
+                        <a href="{{=URL(r=request,f='proponentesEditar',args=proponente.id)}}"><i class="glyphicon glyphicon-pencil"></i></a>
+                        </td>
+                         <td>
+                        <a href="{{=URL(r=request,f='proponentesEditar',args=proponente.id)}}"><i class="glyphicon glyphicon-ban-circle"></i></a>
                         </td>
                         <td>
-                        <a href="{{=URL(r=request,f='proponentesDetalles',args=proponente.id)}}"><i class="glyphicon glyphicon-trash"></i></a>
+                        <a href="{{=URL(r=request,f='proponentesEditar',args=proponente.id)}}"><i class="glyphicon glyphicon-trash"></i></a>
                         </td>
                     </tr>
                     {{ pass }}
+                     <div class="alert alert-success" id="exito" style="display:none; height:45px">
+                <b>Registro exitoso.</b> El proponente se ha agregado a la base de datos </div>
                 </tbody>
             </table>
         </div>
@@ -172,7 +204,9 @@
             </button>
                         <button class="btn btn-warning" id="up" style="width: 100px; display:none" onclick="ocultar_form()">
                  </i> <b>Ocultar </b><i class="glyphicon glyphicon-chevron-up"></i>
-            </button>
+            </button><br>
+       <div class="alert alert-danger" id="fail" style="display:none; height:45px;width:350px">
+                <b>Registro fallido.</b> El formulario contiene errores </div>
             <div class="form formulario" id="formulario" style="display:none">
                 {{=form.custom.begin}}
                 <div class="table">
@@ -192,6 +226,7 @@
                 </div> <!--cerrando tabla--> 
             </div>
     </div>
+<input type="text" id="mensaje" value="{{=message}}" style="display:none">
 </div>
 	{{ pass }}
 {{ end }}

@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{=URL('static', 'css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{=URL('static', 'css/Pag_principal.css')}}%}">
     <link rel="stylesheet" href="{{=URL('static', 'css/proponentes.css')}}">
-    
+     <link rel="stylesheet" href="{{=URL('static', 'css/web2py.css')}}">
     <link rel="icon" href="//getbootstrap.com/favicon.ico">
     
     
@@ -146,10 +146,10 @@
     <div class="col-sm-12">
         <div class="row">
             <div class="col-md-2">
-                <img src="{{=URL('static', 'estudiantes.png')}}" class="img-responsive" width="150" height="110"/>
+                <img src="{{=URL('static', 'proyects2.png')}}" class="img-responsive" width="150" height="110"/>
             </div>
             <div class="col-md-4" align="left">
-                <h4 style="color:#4682B4"><a href=".">Home</a> /<a href="{{=URL('vista_admin')}}"> Admin </a> / <a href="#">Estudiantes </a> </h4>
+                <h4 style="color:#4682B4"><a href=".">Home</a> /<a href="{{=URL('vista_admin')}}"> Admin </a> / <a href="#">Proyectos </a> </h4>
             </div>
             <div class="col-md-6" align="right">
                 <a href=".">Salida <img src="{{=URL('static', 'img/salida_icon.png')}}"/></a>
@@ -166,42 +166,42 @@
             <table class="table table-condensed" id="estuds">
                 <thead>
                     <tr>
-                        <th> Estudiantes registrados</i></th>
+                        <th> Proyectos registrados</i></th>
                         <th align="right"></th>
                         <th align="right"></th>
                         <th align="right"></th>
-                        <th align="right"></th>
+                <th align="right"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{ for estudiante in est:}}
+                    {{ for proyecto in proyectos:}}
                     <tr>
                         <td>
-                            <a href="{{=URL(r=request,f='estudiantesDetalles',args=estudiante.id)}}">{{=estudiante.f_nombre}}</a>
+                            <a href="{{=URL(r=request,f='proyectosDetalles',args=proyecto.id)}}">{{=proyecto.f_nombre}}</a>
                         </td>
                         <td>
-                         <a href="{{=URL(r=request,f='estudiantesDetalles',args=estudiante.id)}}"><i class="glyphicon glyphicon-search"></i></a>
+                         <a href="{{=URL(r=request,f='proyectosDetalles',args=proyecto.id)}}"><i class="glyphicon glyphicon-search"></i></a>
                         </td>
                         <td>
-                        <a href="{{=URL(r=request,f='estudiantesEditar',args=estudiante.id)}}"><i class="glyphicon glyphicon-pencil"></i></a>
+                        <a href="{{=URL(r=request,f='proyectosEditar',args=proyecto.id)}}"><i class="glyphicon glyphicon-pencil"></i></a>
                         </td>
                         <td>
-                        <a href="{{=URL(r=request,f='estudiantesEditar',args=estudiante.id)}}"><i class="glyphicon glyphicon-ban-circle"></i></a>
+                        <a href="{{=URL(r=request,f='proyectosEditar',args=proyecto.id)}}"><i class="glyphicon glyphicon-ban-circle"></i></a>
                         </td>
                         <td>
-                        <a href="{{=URL(r=request,f='estudiantesEditar',args=estudiante.id)}}"><i class="glyphicon glyphicon-trash"></i></a>
+                        <a href="{{=URL(r=request,f='proyectosEditar',args=proyecto.id)}}"><i class="glyphicon glyphicon-trash"></i></a>
                         </td>
                     </tr>
                     {{ pass }}
             <div class="alert alert-success" id="exito" style="display:none; height:45px">
-                <b>Registro exitoso.</b> El estudiante se ha agregado a la base de datos </div>
+                <b>Registro exitoso.</b> El proyecto se ha agregado a la base de datos </div>
                 </tbody>
             </table>
         </div>
 	
         <div class="col-md-5">
              <button class="btn btn-success" style="width: 240px;" onclick="mostrar_form()" align="right">
-                 <i class="glyphicon glyphicon-plus-sign"></i> <b>Registrar un nuevo estudiante</b>
+                 <i class="glyphicon glyphicon-plus-sign"></i> <b>Registrar un nuevo proyecto</b>
             </button>
             <button class="btn btn-warning" id="up" style="width: 100px; display:none" onclick="ocultar_form()">
                  </i> <b>Ocultar </b><i class="glyphicon glyphicon-chevron-up"></i>
@@ -211,18 +211,20 @@
             <div class="form formulario" id="formulario" style="display:none" osubmit="control_form()">
                 {{=form.custom.begin}}
                 <div class="table">
-                   
-                        <td><tr><b> USBID </b> <h class="help"> ej xx-11111</h><div class="campos">{{=form.custom.widget.f_usbid}} </tr></td></div>
-                        <td><tr><b> Nombre </b><div class="campos">{{=form.custom.widget.f_nombre}} </tr></td></div>
-                        <td><tr><b> Apellido </b><div class="campos">{{=form.custom.widget.f_apellido}}</tr></td></div>
-                        <td><tr><b> Cédula </b> <h class="help"> ej 12345678</h><div class="campos">{{=form.custom.widget.f_cedula}}</tr></td></div>
-                        <td><tr><b> Carrera </b>{{=form.custom.widget.f_carrera}}</td></tr><br><br>
-                        <tr><td><b> Sede </b>{{=form.custom.widget.f_sede}}</tr></td><br><br>
-                        <tr><td><b> E-mail </b><h class="help"> ej micorreo@xmail.com</h><div class="campos">{{=form.custom.widget.f_email}}
-                        </tr></td></div>
-                        <tr><td><b> Sexo </b>{{=form.custom.widget.f_sexo}} </tr></td><br><br>
-                        <tr><td><b> Teléfono </b><h class="help"> ej 01233333333</h><div class="campos">{{=form.custom.widget.f_telefono}}</tr></td></div>
-                        <tr><td><b> Dirección </b>{{=form.custom.widget.f_direccion}}</tr></td>
+
+                    <td><tr><b> Código </b> <h class="help"> </h><div class="campos">{{=form.custom.widget.f_codigo}} </tr></td></div>
+                    <td><tr><b> Nombre </b><div class="campos">{{=form.custom.widget.f_nombre}} </tr></td></div>
+                    <td><tr><b> Descripción </b><div class="campos"><br>{{=form.custom.widget.f_descripcion}}</tr></td></div>
+                    <td><tr><b> Área </b>{{=form.custom.widget.f_area}}</tr></td><br><br>
+                    <td><tr><b> Estado </b>{{=form.custom.widget.f_estado}}</td></tr><br><br>
+                    <tr><td><b> Tutor </b>{{=form.custom.widget.f_tutor}}</tr></td><br><br>
+                    <tr><td><b> Fecha de Inicio </b><h class="help"> DD/MM/AAAA</h><div class="campos">{{=form.custom.widget.f_fechaini}}
+                    </tr></td></div>
+                    <tr><td><b> Fecha de Finalización </b><h class="help"> DD/MM/AAAA</h><div class="campos">{{=form.custom.widget.f_fechafin}} 
+                    </tr></td></div>
+                    <tr><td><b> Version </b><h class="help"></h><div class="campos">{{=form.custom.widget.f_version}}</tr></td></div>
+                    <tr><td><b> Comunidad </b>{{=form.custom.widget.f_comunidad}}</tr></td><br><br>
+                    <tr><td><b> Proponente </b>{{=form.custom.widget.f_proponente}}</tr></td>
                 </div> <!--cerrando tabla--> 
 
                         <input class="btn btn-primary" name="guardar" type="submit" style="width:200px" value="Registrar"/>

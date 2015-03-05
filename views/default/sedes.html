@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{=URL('static', 'css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{=URL('static', 'css/Pag_principal.css')}}%}">
     <link rel="stylesheet" href="{{=URL('static', 'css/proponentes.css')}}">
-    
+     <link rel="stylesheet" href="{{=URL('static', 'css/web2py.css')}}">
     <link rel="icon" href="//getbootstrap.com/favicon.ico">
     
     
@@ -141,6 +141,7 @@
                         <th align="right"></th>
                         <th align="right"></th>
                         <th align="right"></th>
+                <th align="right"></th>
                     </tr>
                 </thead>
                 <tbody>		
@@ -153,10 +154,13 @@
                          <a href="{{=URL(r=request,f='sedesDetalles',args=sede.id)}}"><i class="glyphicon glyphicon-search"></i></a>
                         </td>
                         <td>
-                        <a href="{{=URL(r=request,f='sedesDetalles',args=sede.id)}}"><i class="glyphicon glyphicon-pencil"></i></a>
+                        <a href="{{=URL(r=request,f='sedesEditar',args=sede.id)}}"><i class="glyphicon glyphicon-pencil"></i></a>
                         </td>
                         <td>
-                        <a href="{{=URL(r=request,f='sedesDetalles',args=sede.id)}}"><i class="glyphicon glyphicon-trash"></i></a>
+                        <a href="{{=URL(r=request,f='sedesEditar',args=sede.id)}}"><i class="glyphicon glyphicon-ban-circle"></i></a>
+                        </td>
+                        <td>
+                        <a href="{{=URL(r=request,f='sedesEditar',args=sede.id)}}"><i class="glyphicon glyphicon-trash"></i></a>
                         </td>
                     </tr>
                     {{ pass }}
