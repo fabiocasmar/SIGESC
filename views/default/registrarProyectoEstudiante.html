@@ -43,6 +43,15 @@
     <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.woff', scheme='http')}}" rel="stylesheet" />
     <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.woff2', scheme='http')}}" rel="stylesheet" />
     
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('#btn-descarga').on('click', function(){
+        $(location).attr('href','{{=URL(r=request,f='generarPdfConstanciaInscripcion',args=[estudianteID,proyecto])}}');
+      });
+    })
+    </script>
+
+
   </head>
   
   <body role="document">
@@ -99,6 +108,8 @@
       </div>
     </nav>
 
+
+
     <div class="col-sm-12">
         <div class="row">
             <div class="col-md-2">
@@ -113,6 +124,8 @@
         </div>
         <hr>
     </div>
+
+
 
    <div class="col-sm-12">
        <div class="col-md-3">
@@ -137,9 +150,14 @@
                  </li>
              </ul>
        </div>
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-success col-sm-8" role="alert">
           <a href="{{=URL('estudiantes')}}" class="alert-link">Registro de proyecto exitoso. Volver a proyectos</a>
-        </div>
+      </div>
+
+      <button id="btn-descarga" class="btn btn-success" style="width: 300px;" align="right">
+           <i class="glyphicon glyphicon-plus-sign"></i> <b>Descargar constancia de inscripción</b>
+      </button>          
+
         {{if globals().get('msj', False):}} <p><strong>{{=msj}}</strong></p>
         {{else:}}
   
