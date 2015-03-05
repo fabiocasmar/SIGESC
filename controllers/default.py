@@ -392,3 +392,80 @@ def generarPdfConstanciaInicio():
 	os.unlink(tmpfilename)
 	response.headers['Content-Type']='application/pdf'
 	return data
+	
+
+def generarPdfConstanciaInscripcion():
+	x = long (request.args[0])
+	y = long (request.args[1])
+	est = db(db.t_estudiante.id==x).select()
+	proy = db(db.t_project.id==y).select()
+	
+	USBID = est[0].f_usbid
+	Nombre = est[0].f_nombre
+	Apellido = est[0].f_apellido
+	Cedula = est[0].f_cedula
+	Carrera = est[0].f_carrera
+	Sede = est[0].f_sede
+	Sexo = est[0].f_sexo
+	tlf = est[0].f_telefono
+	direccion = est[0].f_direccion
+	
+	codigo_pr = proy[0].f_codigo
+	nombre_pr = proy[0].f_nombre
+	descripcion_pr = proy[0].f_descripcion
+	area_pr = proy[0].f_area
+	estado_pr = proy[0].f_estado
+	tutor_pr = proy[0].f_tutor
+	fecha_ini = proy[0].f_fechaini
+	fecha_fin = proy[0].f_fechafin
+	version_pr = proy[0].f_version
+	comunidad_pr = proy[0].f_comunidad	
+	proponente_pr = proy[0].f_proponente
+	
+	
+	title = "Constancia de Inscripción de Proyecto "
+	heading = "Datos del estudiante:"
+	
+
+	styles = getSampleStyleSheet()
+	tmpfilename=os.path.join(request.folder,'private',str(uuid4()))
+	doc = SimpleDocTemplate(tmpfilename)
+	logo = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../static/img/logousb.png')
+	salto = '<br />\n'
+	
+	story = []
+	story.append(Image(logo,width=188, height=125))
+	story.append(Paragraph(salto,styles["Normal"]))
+	story.append(Paragraph(escape(title),styles["Title"]))
+	story.append(Paragraph(escape(heading),styles["Heading2"]))
+	story.append(Paragraph(escape('USBID: ' + str(USBID)),styles["Normal"]))
+	story.append(Paragraph(escape('Nombres: ' + str(Nombre)),styles["Normal"]))
+	story.append(Paragraph(escape('Apellidos: ' + str(Apellido)),styles["Normal"]))
+	story.append(Paragraph(escape('Cédula: ' + str(Cedula)),styles["Normal"]))
+	story.append(Paragraph(escape('Carrera: ' + str(Carrera)),styles["Normal"]))
+	story.append(Paragraph(escape('Sede: ' + str(Sede)),styles["Normal"]))
+	story.append(Paragraph(escape('Sexo: ' + str(Sexo)),styles["Normal"]))
+	story.append(Paragraph(escape('Teléfono: ' + str(tlf)),styles["Normal"]))
+	story.append(Paragraph(escape('Dirección: ' + str(direccion)),styles["Normal"]))
+	
+	story.append(Paragraph(salto,styles["Normal"]))
+	story.append(Paragraph(escape('Información del proyecto:'),styles["Heading2"]))	
+	story.append(Paragraph(escape('Código del proyecto : ' + str(codigo_pr)),styles["Normal"]))
+	story.append(Paragraph(escape('Nombre del proyecto: ' + str(nombre_pr)),styles["Normal"]))
+	story.append(Paragraph(escape('Descripción: '+ str(descripcion_pr) ),styles["Normal"]))
+	story.append(Paragraph(escape('Área:' + str(area_pr)),styles["Normal"]))
+	story.append(Paragraph(escape('Estado: ' + str(estado_pr) ),styles["Normal"]))
+	story.append(Paragraph(escape('Tutor: ' +str(tutor_pr)),styles["Normal"]))
+	story.append(Paragraph(escape('Fecha de inicio: '+str(fecha_ini) ),styles["Normal"]))
+	story.append(Paragraph(escape('Fecha de finalización: '+ str(fecha_fin) ),styles["Normal"]))
+	story.append(Paragraph(escape('Versión: ' +str(version_pr)),styles["Normal"]))
+	story.append(Paragraph(escape('Comunidad: ' +str(comunidad_pr)),styles["Normal"]))
+	story.append(Paragraph(escape('Proponente: ' +str(proponente_pr)),styles["Normal"]))
+	
+	
+	story.append(Spacer(1,2*inch))
+	doc.build(story)
+	data = open(tmpfilename,"rb").read()
+	os.unlink(tmpfilename)
+	response.headers['Content-Type']='application/pdf'
+	return data
