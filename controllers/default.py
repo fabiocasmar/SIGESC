@@ -147,6 +147,11 @@ def validarProyectoEstudiante():
     db(db.t_cursa.id==idProyecto).update(f_state="2")
     return dict(proyecto=idProyecto)
 
+def rechazarProyectoEstudiante():
+    idProyecto = long(request.args[0])
+    db(db.t_cursa.id==idProyecto).update(f_state="3")
+    return dict(proyecto=idProyecto)
+
 def cursa():
     idProyecto = long(request.args[0])
     idEstudiante = long(request.args[1])
