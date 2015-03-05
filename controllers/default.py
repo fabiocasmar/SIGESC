@@ -1,4 +1,13 @@
 import re
+from reportlab.platypus import *
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.rl_config import defaultPageSize
+from reportlab.lib.units import inch, mm
+from reportlab.lib.enums import TA_LEFT, TA_RIGHT, TA_CENTER, TA_JUSTIFY
+from reportlab.lib import colors
+from uuid import uuid4
+from cgi import escape
+import os
 # -*- coding: utf-8 -*-
 ### required - do no delete
 def user(): return dict(form=auth())
@@ -13,6 +22,10 @@ def error():
 
 def vista_admin():
 	return dict()
+
+def moderarProyectos():
+    return dict(proyectos=db().select(db.t_cursa.ALL))
+
 def estudiantes():
     def my_form_processing(form):
         if not re.match('\d{2}-\d{5}$', form.vars.f_usbid):
@@ -144,7 +157,23 @@ def cursa():
     else:
         response.flash = 'please fill out the form'
 
-    return dict(form=form,proyectos=db(db.t_project.id==idProyecto).select(),cursan=db(db.t_cursa.ALL),estudianteID=idEstudiante)
+    return dict(proyectos=db(db.t_project.id==idProyecto).select(),estudianteID=idEstudiante,idProyecto=idProyecto)
+
+def validarProyectoEstudiante():
+    idProyecto = long(request.args[0])
+    db(db.t_cursa.id==idProyecto).update(f_state="2")
+    return dict(proyecto=idProyecto)
+
+def rechazarProyectoEstudiante():
+    idProyecto = long(request.args[0])
+    db(db.t_cursa.id==idProyecto).update(f_state="3")
+    return dict(proyecto=idProyecto)
+
+def registrarProyectoEstudiante():
+    idProyecto = long(request.args[0])
+    idEstudiante = long(request.args[1])
+    db.t_cursa.insert(f_estudiante=idEstudiante,f_project=idProyecto,f_state="3")
+    return dict(proyecto=idProyecto,estudianteID=idEstudiante)
 
 def sede_manage():
     form = SQLFORM.smartgrid(db.t_sede,onupdate=auth.archive)
@@ -228,12 +257,12 @@ def sedesDetalles():
 def estudianteProyectos():
     x = long (request.args[0])
     #return dict(rows = db(db.t_estudiante.id==x).select())
-    return dict(rows = db(db.t_estudiante.id==x).select())
+    return dict(rows = db(db.t_estudiante.id==x).select(),proyectos=db().select(db.t_project.ALL),estudianteID=x)
 
 def estudiantesDetalles():
     x = long (request.args[0])
     #return dict(rows = db(db.t_estudiante.id==x).select())
-    return dict(rows = db(db.t_estudiante.id==x).select())
+    return dict(rows = db(db.t_estudiante.id==x).select(),estudianteId=x)
 
 def tutoresDetalles():
     x = long (request.args[0])
@@ -255,7 +284,7 @@ def estudiantesEditar():
     x = long (request.args[0])
     #return dict(rows = db(db.t_sede.id==x).select())
     record = db.t_estudiante(request.args[0])
-    form = SQLFORM(db.t_estudiante, record, deletable = False)
+    form = SQLFORM(db.t_estudiante, record, deletable = True)
     if form.process().accepted:
         response.flash = 'form accepted'
     elif form.errors:
@@ -268,7 +297,7 @@ def areasEditar():
     x = long (request.args[0])
     #return dict(rows = db(db.t_sede.id==x).select())
     record = db.t_area(request.args[0])
-    form = SQLFORM(db.t_area, record, deletable = False)
+    form = SQLFORM(db.t_area, record, deletable = True)
     if form.process().accepted:
         response.flash = 'form accepted'
     elif form.errors:
@@ -281,7 +310,7 @@ def sedesEditar():
     x = long (request.args[0])
     #return dict(rows = db(db.t_sede.id==x).select())
     record = db.t_sede(request.args[0])
-    form = SQLFORM(db.t_sede, record, deletable = False)
+    form = SQLFORM(db.t_sede, record, deletable = True)
     if form.process().accepted:
         response.flash = 'form accepted'
     elif form.errors:
@@ -294,7 +323,7 @@ def proponentesEditar():
     x = long (request.args[0])
     #return dict(rows = db(db.t_sede.id==x).select())
     record = db.t_proponente(request.args[0])
-    form = SQLFORM(db.t_proponente, record, deletable = False)
+    form = SQLFORM(db.t_proponente, record, deletable = True)
     if form.process().accepted:
         response.flash = 'form accepted'
     elif form.errors:
@@ -307,7 +336,7 @@ def tutoresEditar():
     x = long (request.args[0])
     #return dict(rows = db(db.t_sede.id==x).select())
     record = db.t_tutor(request.args[0])
-    form = SQLFORM(db.t_tutor, record, deletable = False)
+    form = SQLFORM(db.t_tutor, record, deletable = True)
     if form.process().accepted:
         response.flash = 'form accepted'
     elif form.errors:
@@ -320,7 +349,7 @@ def proyectosEditar():
     x = long (request.args[0])
     #return dict(rows = db(db.t_sede.id==x).select())
     record = db.t_project(request.args[0])
-    form = SQLFORM(db.t_project, record, deletable = False)
+    form = SQLFORM(db.t_project, record, deletable = True)
     if form.process().accepted:
         response.flash = 'form accepted'
     elif form.errors:
@@ -328,3 +357,134 @@ def proyectosEditar():
     elif not record:
         return dict('La sede ha sido eliminada')
     return dict(form = form)
+
+
+def generarPdfConstanciaInicio():
+    x = long (request.args[0])
+    rows = db(db.t_estudiante.id==x).select()
+    USBID = rows[0].f_usbid
+    Nombre = rows[0].f_nombre
+    Apellido = rows[0].f_apellido
+    Cedula = rows[0].f_cedula
+    Carrera = rows[0].f_carrera
+    Sede = rows[0].f_sede
+    Sexo = rows[0].f_sexo
+    tlf = rows[0].f_telefono
+    direccion = rows[0].f_direccion
+    
+    title = "Constancia de Inicio de Servicio Comunitario "
+    heading = "Datos del estudiante:"
+    
+
+    styles = getSampleStyleSheet()
+    tmpfilename=os.path.join(request.folder,'private',str(uuid4()))
+    doc = SimpleDocTemplate(tmpfilename)
+    logo = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../static/img/logousb.png')
+    salto = '<br />\n'
+    
+    story = []
+    story.append(Image(logo,width=188, height=125))
+    story.append(Paragraph(salto,styles["Normal"]))
+    story.append(Paragraph(escape(title),styles["Title"]))
+    story.append(Paragraph(escape(heading),styles["Heading2"]))
+    story.append(Paragraph(escape('USBID: ' + str(USBID)),styles["Normal"]))
+    story.append(Paragraph(escape('Nombres: ' + str(Nombre)),styles["Normal"]))
+    story.append(Paragraph(escape('Apellidos: ' + str(Apellido)),styles["Normal"]))
+    story.append(Paragraph(escape('Cédula: ' + str(Cedula)),styles["Normal"]))
+    story.append(Paragraph(escape('Carrera: ' + str(Carrera)),styles["Normal"]))
+    story.append(Paragraph(escape('Sede: ' + str(Sede)),styles["Normal"]))
+    story.append(Paragraph(escape('Sexo: ' + str(Sexo)),styles["Normal"]))
+    story.append(Paragraph(escape('Teléfono: ' + str(tlf)),styles["Normal"]))
+    story.append(Paragraph(escape('Dirección: ' + str(direccion)),styles["Normal"]))
+    
+    story.append(Paragraph(salto,styles["Normal"]))
+    story.append(Paragraph(escape('Información del proyecto:'),styles["Heading2"]))
+    story.append(Paragraph(escape('Nombre del proyecto: ' + '[Nombre del proyecto]'),styles["Normal"]))
+    story.append(Paragraph(escape('Código del proyecto : ' +'[Código del proyecto]'),styles["Normal"]))
+    story.append(Paragraph(escape('Tutor Acádemico: ' + '[Nombre del tutor]'),styles["Normal"]))
+    story.append(Paragraph(escape('Tutor Comunitario: ' + '[Nombre del tutor]'),styles["Normal"]))
+    
+    
+    story.append(Spacer(1,2*inch))
+    doc.build(story)
+    data = open(tmpfilename,"rb").read()
+    os.unlink(tmpfilename)
+    response.headers['Content-Type']='application/pdf'
+    return data
+    
+
+def generarPdfConstanciaInscripcion():
+    x = long (request.args[0])
+    y = long (request.args[1])
+    est = db(db.t_estudiante.id==x).select()
+    proy = db(db.t_project.id==y).select()
+    
+    USBID = est[0].f_usbid
+    Nombre = est[0].f_nombre
+    Apellido = est[0].f_apellido
+    Cedula = est[0].f_cedula
+    Carrera = est[0].f_carrera
+    Sede = est[0].f_sede
+    Sexo = est[0].f_sexo
+    tlf = est[0].f_telefono
+    direccion = est[0].f_direccion
+    
+    codigo_pr = proy[0].f_codigo
+    nombre_pr = proy[0].f_nombre
+    descripcion_pr = proy[0].f_descripcion
+    area_pr = proy[0].f_area
+    estado_pr = proy[0].f_estado
+    tutor_pr = proy[0].f_tutor
+    fecha_ini = proy[0].f_fechaini
+    fecha_fin = proy[0].f_fechafin
+    version_pr = proy[0].f_version
+    comunidad_pr = proy[0].f_comunidad  
+    proponente_pr = proy[0].f_proponente
+    
+    
+    title = "Constancia de Inscripción de Proyecto "
+    heading = "Datos del estudiante:"
+    
+
+    styles = getSampleStyleSheet()
+    tmpfilename=os.path.join(request.folder,'private',str(uuid4()))
+    doc = SimpleDocTemplate(tmpfilename)
+    logo = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../static/img/logousb.png')
+    salto = '<br />\n'
+    
+    story = []
+    story.append(Image(logo,width=188, height=125))
+    story.append(Paragraph(salto,styles["Normal"]))
+    story.append(Paragraph(escape(title),styles["Title"]))
+    story.append(Paragraph(escape(heading),styles["Heading2"]))
+    story.append(Paragraph(escape('USBID: ' + str(USBID)),styles["Normal"]))
+    story.append(Paragraph(escape('Nombres: ' + str(Nombre)),styles["Normal"]))
+    story.append(Paragraph(escape('Apellidos: ' + str(Apellido)),styles["Normal"]))
+    story.append(Paragraph(escape('Cédula: ' + str(Cedula)),styles["Normal"]))
+    story.append(Paragraph(escape('Carrera: ' + str(Carrera)),styles["Normal"]))
+    story.append(Paragraph(escape('Sede: ' + str(Sede)),styles["Normal"]))
+    story.append(Paragraph(escape('Sexo: ' + str(Sexo)),styles["Normal"]))
+    story.append(Paragraph(escape('Teléfono: ' + str(tlf)),styles["Normal"]))
+    story.append(Paragraph(escape('Dirección: ' + str(direccion)),styles["Normal"]))
+    
+    story.append(Paragraph(salto,styles["Normal"]))
+    story.append(Paragraph(escape('Información del proyecto:'),styles["Heading2"])) 
+    story.append(Paragraph(escape('Código del proyecto : ' + str(codigo_pr)),styles["Normal"]))
+    story.append(Paragraph(escape('Nombre del proyecto: ' + str(nombre_pr)),styles["Normal"]))
+    story.append(Paragraph(escape('Descripción: '+ str(descripcion_pr) ),styles["Normal"]))
+    story.append(Paragraph(escape('Área:' + str(area_pr)),styles["Normal"]))
+    story.append(Paragraph(escape('Estado: ' + str(estado_pr) ),styles["Normal"]))
+    story.append(Paragraph(escape('Tutor: ' +str(tutor_pr)),styles["Normal"]))
+    story.append(Paragraph(escape('Fecha de inicio: '+str(fecha_ini) ),styles["Normal"]))
+    story.append(Paragraph(escape('Fecha de finalización: '+ str(fecha_fin) ),styles["Normal"]))
+    story.append(Paragraph(escape('Versión: ' +str(version_pr)),styles["Normal"]))
+    story.append(Paragraph(escape('Comunidad: ' +str(comunidad_pr)),styles["Normal"]))
+    story.append(Paragraph(escape('Proponente: ' +str(proponente_pr)),styles["Normal"]))
+    
+    
+    story.append(Spacer(1,2*inch))
+    doc.build(story)
+    data = open(tmpfilename,"rb").read()
+    os.unlink(tmpfilename)
+    response.headers['Content-Type']='application/pdf'
+    return data

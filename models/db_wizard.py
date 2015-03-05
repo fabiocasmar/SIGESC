@@ -153,9 +153,12 @@ db.define_table('t_proponente',
 db.define_table('t_proponente_archive',db.t_proponente,Field('current_record','reference t_proponente',readable=False,writable=False))
 
 ########################################
+
+
+
 db.define_table('t_project',
-    Field('f_codigo',notnull=True,
-          label=T('Codigo')),
+    Field('f_codigo',notnull=True, unique = True,
+          label=T('Código')),
    # Field('f_proyecto', type='reference t_proyecto', notnull=True,
     #      label=T('Proyecto')),
     Field('f_nombre', type='string', notnull=True,

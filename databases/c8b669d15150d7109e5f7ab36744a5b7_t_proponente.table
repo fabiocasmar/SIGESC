@@ -1,5 +1,5 @@
 (dp1
-S'f_sexo'
+S'f_email'
 p2
 (dp3
 S'length'
@@ -10,17 +10,17 @@ p5
 I00
 sS'sortable'
 p6
-I7
+I6
 sS'sql'
 p7
-S'INTEGER REFERENCES t_sexo (id) ON DELETE CASCADE'
+S'CHAR(512) NOT NULL'
 p8
 sS'notnull'
 p9
 I01
 sS'type'
 p10
-S'reference t_sexo'
+S'string'
 p11
 ssS'modified_by'
 p12
@@ -30,7 +30,7 @@ I512
 sg5
 I00
 sg6
-I13
+I14
 sg7
 S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
 p14
@@ -54,27 +54,10 @@ p18
 sg9
 I01
 sg10
-S'string'
+g11
+ssS'f_estado'
 p19
-ssS'created_by'
-p20
-(dp21
-g4
-I512
-sg5
-I00
-sg6
-I11
-sg7
-S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
-p22
-sg9
-I00
-sg10
-g15
-ssS'is_active'
-p23
-(dp24
+(dp20
 g4
 I512
 sg5
@@ -82,16 +65,32 @@ I00
 sg6
 I9
 sg7
+S'CHAR(512) NOT NULL'
+p21
+sg9
+I01
+sg10
+g11
+ssS'is_active'
+p22
+(dp23
+g4
+I512
+sg5
+I00
+sg6
+I10
+sg7
 S'CHAR(1)'
-p25
+p24
 sg9
 I00
 sg10
 S'boolean'
-p26
+p25
 ssS'f_nombre'
-p27
-(dp28
+p26
+(dp27
 g4
 I512
 sg5
@@ -100,27 +99,28 @@ sg6
 I4
 sg7
 S'CHAR(512) NOT NULL'
-p29
+p28
 sg9
 I01
 sg10
-g19
-ssS'f_email'
-p30
-(dp31
+g11
+ssS'f_sexo'
+p29
+(dp30
 g4
 I512
 sg5
 I00
 sg6
-I6
+I7
 sg7
-S'CHAR(512) NOT NULL'
-p32
+S'INTEGER REFERENCES t_sexo (id) ON DELETE CASCADE'
+p31
 sg9
 I01
 sg10
-g19
+S'reference t_sexo'
+p32
 ssS'created_on'
 p33
 (dp34
@@ -129,7 +129,7 @@ I512
 sg5
 I00
 sg6
-I10
+I11
 sg7
 S'TIMESTAMP'
 p35
@@ -138,7 +138,7 @@ I00
 sg10
 S'datetime'
 p36
-ssS'f_cedula'
+ssS'created_by'
 p37
 (dp38
 g4
@@ -146,14 +146,14 @@ I512
 sg5
 I00
 sg6
-I3
+I12
 sg7
-S'CHAR(512) NOT NULL'
+S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
 p39
 sg9
-I01
+I00
 sg10
-g19
+g15
 ssS'modified_on'
 p40
 (dp41
@@ -162,7 +162,7 @@ I512
 sg5
 I00
 sg6
-I12
+I13
 sg7
 S'TIMESTAMP'
 p42
@@ -202,7 +202,7 @@ p49
 sg9
 I01
 sg10
-g19
+g11
 ssS'id'
 p50
 (dp51
@@ -218,5 +218,22 @@ p52
 sg9
 I00
 sg10
-g50
+S'id'
+p53
+ssS'f_cedula'
+p54
+(dp55
+g4
+I512
+sg5
+I00
+sg6
+I3
+sg7
+S'CHAR(512) NOT NULL'
+p56
+sg9
+I01
+sg10
+g11
 ss.

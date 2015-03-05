@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{=URL('static', 'css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{=URL('static', 'css/Pag_principal.css')}}%}">
     <link rel="stylesheet" href="{{=URL('static', 'css/proponentes.css')}}">
-    
+     <link rel="stylesheet" href="{{=URL('static', 'css/web2py.css')}}">
     <link rel="icon" href="//getbootstrap.com/favicon.ico">
     
     
@@ -32,18 +32,18 @@
     </script>
 
     <script type="text/javascript">
-		function mostrar_form(){
-		document.getElementById('formulario').style.display = 'block';
-		document.getElementById('up').style.display = 'block';
-		}
-	</script>
+        function mostrar_form(){
+        document.getElementById('formulario').style.display = 'block';
+        document.getElementById('up').style.display = 'block';
+        }
+    </script>
       
      <script type="text/javascript">
-		function ocultar_mensaje(){
-		document.getElementById('exito').style.display = 'none';
+        function ocultar_mensaje(){
+        document.getElementById('exito').style.display = 'none';
         document.getElementById('fail').style.display = 'none';
-		}
-	</script>
+        }
+    </script>
       
       
 
@@ -63,14 +63,14 @@
                 }
             }
         
-	</script>
+    </script>
 
       <script type="text/javascript">
-		function ocultar_form(){
-		document.getElementById('formulario').style.display = 'none';
-		document.getElementById('up').style.display = 'none';
-		}
-	</script>	
+        function ocultar_form(){
+        document.getElementById('formulario').style.display = 'none';
+        document.getElementById('up').style.display = 'none';
+        }
+    </script>  
      
      
     
@@ -112,7 +112,7 @@
           <ul class="nav navbar-nav">
             <li>
               <a href="http://getbootstrap.com/examples/theme/#">
-                ¿Qui&eacute;nes somos?
+                ¿Quiénes somos?
               </a>
             </li>
             <li>
@@ -130,7 +130,7 @@
                 Decanato de extensión
               </a>
             </li>
-			<li>
+            <li>
               <a href="http://getbootstrap.com/examples/theme/#contact">
                 Proyectos
               </a>
@@ -146,7 +146,7 @@
     <div class="col-sm-12">
         <div class="row">
             <div class="col-md-2">
-                <img src="{{=URL('static', 'proyectos.png')}}" class="img-responsive" width="150" height="110"/>
+                <img src="{{=URL('static', 'proyects2.png')}}" class="img-responsive" width="150" height="110"/>
             </div>
             <div class="col-md-4" align="left">
                 <h4 style="color:#4682B4"><a href=".">Home</a> /<a href="{{=URL('vista_admin')}}"> Admin </a> / <a href="#">Proyectos </a> </h4>
@@ -157,9 +157,9 @@
         </div>
         <hr>
     </div>
-	{{if globals().get('msj', False):}} <p><strong>{{=msj}}</strong></p>
-	{{else:}}
-		
+    {{if globals().get('msj', False):}} <p><strong>{{=msj}}</strong></p>
+    {{else:}}
+        
     <div class="col-sm-12">
     <div class="row">
         <div class="col-md-7">
@@ -170,6 +170,7 @@
                         <th align="right"></th>
                         <th align="right"></th>
                         <th align="right"></th>
+                <th align="right"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -191,7 +192,7 @@
                 </tbody>
             </table>
         </div>
-	
+    
         <div class="col-md-5">
              <button class="btn btn-success" style="width: 240px;" onclick="mostrar_form()" align="right">
                  <i class="glyphicon glyphicon-plus-sign"></i> <b>Registrar un nuevo proyecto</b>
@@ -207,15 +208,16 @@
 
                     <td><tr><b> Código </b> <h class="help"> </h><div class="campos">{{=form.custom.widget.f_codigo}} </tr></td></div>
                     <td><tr><b> Nombre </b><div class="campos">{{=form.custom.widget.f_nombre}} </tr></td></div>
-                    <td><tr><b> Descripción </b><div class="campos">{{=form.custom.widget.f_descripcion}}</tr></td></div>
-                    <td><tr><b> Área </b> <h class="help"></h><div class="campos">{{=form.custom.widget.f_area}}</tr></td></div>
+                    <td><tr><b> Descripción </b><div class="campos"><br>{{=form.custom.widget.f_descripcion}}</tr></td></div>
+                    <td><tr><b> Área </b>{{=form.custom.widget.f_area}}</tr></td><br><br>
                     <td><tr><b> Estado </b>{{=form.custom.widget.f_estado}}</td></tr><br><br>
                     <tr><td><b> Tutor </b>{{=form.custom.widget.f_tutor}}</tr></td><br><br>
                     <tr><td><b> Fecha de Inicio </b><h class="help"> DD/MM/AAAA</h><div class="campos">{{=form.custom.widget.f_fechaini}}
                     </tr></td></div>
-                    <tr><td><b> Fecha de Finalización </b>{{=form.custom.widget.f_fechafin}} </tr></td><br><br>
-                    <tr><td><b> Version </b><h class="help"></h><div class="campos">{{=form.custom.widget.f_version}}</tr></td></div>
-                    <tr><td><b> Comunidad </b>{{=form.custom.widget.f_comunidad}}</tr></td>
+                    <tr><td><b> Fecha de Finalización </b><h class="help"> DD/MM/AAAA</h><div class="campos">{{=form.custom.widget.f_fechafin}} 
+                    </tr></td></div>
+                    <tr><td><b> Versión </b><h class="help"></h><div class="campos">{{=form.custom.widget.f_version}}</tr></td></div>
+                    <tr><td><b> Comunidad </b>{{=form.custom.widget.f_comunidad}}</tr></td><br><br>
                     <tr><td><b> Proponente </b>{{=form.custom.widget.f_proponente}}</tr></td>
                 </div> <!--cerrando tabla--> 
 
@@ -224,5 +226,5 @@
             </div>
       </div>
       <input type="text" id="mensaje" value="{{=message}}" style="display:none">
-	{{ pass }}
+    {{ pass }}
 {{ end }}

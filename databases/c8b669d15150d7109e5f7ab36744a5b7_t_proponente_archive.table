@@ -1,5 +1,5 @@
 (dp1
-S'f_sexo'
+S'f_email'
 p2
 (dp3
 S'length'
@@ -10,17 +10,17 @@ p5
 I00
 sS'sortable'
 p6
-I7
+I6
 sS'sql'
 p7
-S'INTEGER REFERENCES t_sexo (id) ON DELETE CASCADE'
+S'CHAR(512) NOT NULL'
 p8
 sS'notnull'
 p9
 I01
 sS'type'
 p10
-S'reference t_sexo'
+S'string'
 p11
 ssS'modified_by'
 p12
@@ -30,7 +30,7 @@ I512
 sg5
 I00
 sg6
-I13
+I14
 sg7
 S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
 p14
@@ -47,7 +47,7 @@ I512
 sg5
 I00
 sg6
-I14
+I15
 sg7
 S'INTEGER REFERENCES t_proponente (id) ON DELETE CASCADE'
 p18
@@ -71,27 +71,10 @@ p22
 sg9
 I01
 sg10
-S'string'
+g11
+ssS'f_estado'
 p23
-ssS'created_by'
-p24
-(dp25
-g4
-I512
-sg5
-I00
-sg6
-I11
-sg7
-S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
-p26
-sg9
-I00
-sg10
-g15
-ssS'is_active'
-p27
-(dp28
+(dp24
 g4
 I512
 sg5
@@ -99,45 +82,62 @@ I00
 sg6
 I9
 sg7
+S'CHAR(512) NOT NULL'
+p25
+sg9
+I01
+sg10
+g11
+ssS'is_active'
+p26
+(dp27
+g4
+I512
+sg5
+I00
+sg6
+I10
+sg7
 S'CHAR(1)'
-p29
+p28
 sg9
 I00
 sg10
 S'boolean'
+p29
+ssS'created_by'
 p30
-ssS'f_nombre'
-p31
-(dp32
+(dp31
 g4
 I512
 sg5
 I00
 sg6
-I4
+I12
 sg7
-S'CHAR(512) NOT NULL'
+S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
+p32
+sg9
+I00
+sg10
+g15
+ssS'f_sexo'
 p33
-sg9
-I01
-sg10
-g23
-ssS'f_email'
-p34
-(dp35
+(dp34
 g4
 I512
 sg5
 I00
 sg6
-I6
+I7
 sg7
-S'CHAR(512) NOT NULL'
-p36
+S'INTEGER REFERENCES t_sexo (id) ON DELETE CASCADE'
+p35
 sg9
 I01
 sg10
-g23
+S'reference t_sexo'
+p36
 ssS'created_on'
 p37
 (dp38
@@ -146,7 +146,7 @@ I512
 sg5
 I00
 sg6
-I10
+I11
 sg7
 S'TIMESTAMP'
 p39
@@ -155,7 +155,7 @@ I00
 sg10
 S'datetime'
 p40
-ssS'f_cedula'
+ssS'f_nombre'
 p41
 (dp42
 g4
@@ -163,14 +163,14 @@ I512
 sg5
 I00
 sg6
-I3
+I4
 sg7
 S'CHAR(512) NOT NULL'
 p43
 sg9
 I01
 sg10
-g23
+g11
 ssS'modified_on'
 p44
 (dp45
@@ -179,7 +179,7 @@ I512
 sg5
 I00
 sg6
-I12
+I13
 sg7
 S'TIMESTAMP'
 p46
@@ -219,7 +219,7 @@ p53
 sg9
 I01
 sg10
-g23
+g11
 ssS'id'
 p54
 (dp55
@@ -235,5 +235,22 @@ p56
 sg9
 I00
 sg10
-g54
+S'id'
+p57
+ssS'f_cedula'
+p58
+(dp59
+g4
+I512
+sg5
+I00
+sg6
+I3
+sg7
+S'CHAR(512) NOT NULL'
+p60
+sg9
+I01
+sg10
+g11
 ss.

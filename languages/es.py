@@ -125,6 +125,7 @@
 'currently saved or': 'actualmente guardado o',
 'Cursa': 'Cursa',
 'customize me!': '¡Adáptame!',
+'Código': 'Código',
 'data uploaded': 'datos subidos',
 'Database': 'Base de datos',
 'Database %s select': 'selección en base de datos %s',
