@@ -1,10 +1,10 @@
 import re
-#from reportlab.platypus import *
-#from reportlab.lib.styles import getSampleStyleSheet
-#from reportlab.rl_config import defaultPageSize
-#from reportlab.lib.units import inch, mm
-#from reportlab.lib.enums import TA_LEFT, TA_RIGHT, TA_CENTER, TA_JUSTIFY
-#from reportlab.lib import colors
+from reportlab.platypus import *
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.rl_config import defaultPageSize
+from reportlab.lib.units import inch, mm
+from reportlab.lib.enums import TA_LEFT, TA_RIGHT, TA_CENTER, TA_JUSTIFY
+from reportlab.lib import colors
 from uuid import uuid4
 from cgi import escape
 import os
