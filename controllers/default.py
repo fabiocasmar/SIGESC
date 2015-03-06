@@ -65,7 +65,9 @@ def vista_estudiante():
     msj = 'Bienvenid@ %s %s' % (auth.user.first_name,auth.user.last_name)
     user = db.auth_user[auth.user.id]
     usuario =  db(db.t_estudiante.f_estado=="Activo" and db.t_estudiante.f_user==auth.user.id).select()
-    proyecto = db(db.t_cursa.f_estudiante=="Activo" and db.t_estudiante.f_user==auth.user.id).select()
+    proyectos = db(db.t_estudiante.id==db.t_cursa.f_estudiante).select()
+    for x in proyectos:
+        print x
     areas=db(db.t_area.f_estado=="Activo").select()
     if request.env.request_method =='POST':
         if form.process(onvalidation=my_form_processing, keepvalues=True).accepted:
@@ -74,7 +76,7 @@ def vista_estudiante():
             response.flash = 'form has errors'
         else:
             response.flash = 'please fill out the form'
-    return dict(rows=usuario, bienvenida=msj,estudianteId=usuario[0].id,proyecto)
+    return dict(rows=usuario, bienvenida=msj,estudianteId=usuario[0].id,proyecto=proyectos[0].t_cursa.f_project)
 
  
 def proponenteProyecto():
@@ -489,6 +491,30 @@ def estudiantesEditar():
     elif not record:
         return dict('La sede ha sido eliminada')
     return dict(form = form)
+
+
+def estudiantesEditarPerfil():
+    def my_form_processing(form):
+        if not re.match('\d{2}-\d{5}$', form.vars.f_usbid):
+            form.errors.f_usbid = 'El formato válido de carnet es: 00-00000'
+        if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
+            form.errors.f_cedula = 'El formato válido de cédula es: 1232382'
+        if not re.match('(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', form.vars.f_email):
+            form.errors.f_email = 'El formato válido de email es example@example.com'
+        if not re.match('\d{7,13}', form.vars.f_telefono):
+            form.errors.f_telefono = 'El formato válido de telefono es 08002023223'
+    x = long (request.args[0])
+    #return dict(rows = db(db.t_sede.id==x).select())
+    record = db.t_estudiante(request.args[0])
+    form = SQLFORM(db.t_estudiante, record, deletable = True)
+    if form.process(onvalidation=my_form_processing).accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    elif not record:
+        return dict('La sede ha sido eliminada')
+    return dict(form = form)
+
 
 def areasEditar():
     def my_form_processing(form):

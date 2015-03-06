@@ -126,8 +126,12 @@
                           <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Proponer Proyecto</a>
                       <a href="{{=URL('generarPdfConstanciaInicio',args=estudianteId)}}">
                           <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Constancia de Inicio de Proyecto</a>
-                      <a href="{{=URL('generarPdfConstanciaInicio',args=estudianteId,proyecto)}}">
+                      <a href="{{=URL('generarPdfConstanciaInscripcion',args=[estudianteId,proyecto])}}">
                           <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Constancia de Inscripcion</a>
+                      <a href="{{=URL('solicitarValidacionEstudiante',args=proyecto)}}">
+                          <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Solicitar Validacion</a>
+                      <a href="{{=URL(r=request,f='estudiantesEditarPerfil',args=estudianteId)}}">
+                          <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Editar Perfil</a>
                       <a href="{{=URL(r=request,f='estudianteInscribeProyectos',args=estudianteId)}}">
                           <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Inscribir Proyectos</a>
                  </li>
