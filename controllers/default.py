@@ -15,17 +15,92 @@ def download(): return response.download(request,db)
 def call(): return service()
 ### end requires
 def index():
+    form=auth.login()
     return dict()
 
 def error():
     return dict()
 
-def vista_admin():
-	return dict()
+@auth.requires_login()
+def vista_admin():    
+    msj= 'Bienvenid@ %s %s' % (auth.user.first_name,auth.user.last_name)
 
+    if auth.has_membership('Proponentes'):      
+        redirect(URL('vista_proponente'))
+
+    if auth.has_membership('Estudiantes'):
+        redirect(URL('vista_estudiante'))
+
+    return dict(bienvenida=msj)
+
+@auth.requires_membership('Proponentes')
+def vista_proponente():
+    def my_form_processing(form):
+        if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
+            form.errors.f_cedula = 'El formato válido de cédula es: 1232382'
+        if not re.match('(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', form.vars.f_email):
+            form.errors.f_email = 'El formato válido de email es example@example.com'
+        if not re.match('\d{7,13}', form.vars.f_telefono):
+            form.errors.f_telefono = 'El formato válido de telefono es 08002023223'
+
+    msj = 'Bienvenid@ %s %s' % (auth.user.first_name,auth.user.last_name)
+    form = SQLFORM(db.t_proponente,
+        fields = ['f_tipoprop','f_cedula', 'f_sexo', 'f_telefono'], formstyle='table3cols')
+
+    user = db.auth_user[auth.user.id]
+    form.vars.f_user = user
+    form.vars.f_email = auth.user.email
+    form.vars.f_nombre = auth.user.first_name
+    form.vars.f_apellido = auth.user.last_name
+    if form.process(onvalidation=my_form_processing, keepvalues=True).accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+    return dict(form=form, bienvenida=msj)
+
+@auth.requires_membership('Estudiantes')
+def vista_estudiante():
+    def my_form_processing(form):
+        if not re.match('\d{2}-\d{5}$', form.vars.f_usbid):
+            form.errors.f_usbid = 'El formato válido de carnet es: 00-00000'
+        if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
+            form.errors.f_cedula = 'El formato válido de cédula es: 1232382'
+        if not re.match('(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', form.vars.f_email):
+            form.errors.f_email = 'El formato válido de email es example@example.com'
+        if not re.match('\d{7,13}', form.vars.f_telefono):
+            form.errors.f_telefono = 'El formato válido de telefono es 08002023223'
+
+    msj = 'Bienvenid@ %s %s' % (auth.user.first_name,auth.user.last_name)
+    form = SQLFORM(db.t_estudiante,
+        fields = ['f_usbid','f_cedula', 'f_carrera', 'f_sede', 'f_sexo', 'f_telefono', 'f_direccion'], formstyle='table3cols')
+
+    user = db.auth_user[auth.user.id]
+    form.vars.f_user = user
+    form.vars.f_email = auth.user.email
+    form.vars.f_nombre = auth.user.first_name
+    form.vars.f_apellido = auth.user.last_name
+    if request.env.request_method =='POST':
+        if form.process(onvalidation=my_form_processing, keepvalues=True).accepted:
+            response.flash = 'form accepted'
+        elif form.errors:
+            response.flash = 'form has errors'
+        else:
+            response.flash = 'please fill out the form'
+    return dict(form=form, bienvenida=msj)
+
+ 
+def proponenteProyecto():
+    msj = 'Bienvenid@ %s %s' % (auth.user.first_name,auth.user.last_name)
+    idProponente = db(db.t_proponente.f_user==auth.user).select()
+    return dict(proyectos = db(db.t_project.f_proponente==idProponente[0]).select(), bienvenida=msj)
+   
+@auth.requires_membership('Administrador')
 def moderarProyectos():
     return dict(proyectos=db().select(db.t_cursa.ALL))
 
+@auth.requires_membership('Administrador')
 def estudiantes():
     def my_form_processing(form):
         if not re.match('\d{2}-\d{5}$', form.vars.f_usbid):
@@ -49,6 +124,7 @@ def estudiantes():
         response.flash = 'Llene el formulario'
     return dict(form=form, est=db(db.t_estudiante.f_estado=="Activo").select(),message=T(response.flash))
 
+@auth.requires_membership('Administrador')
 def proponentes():
     def my_form_processing(form):
         if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
@@ -67,7 +143,7 @@ def proponentes():
         response.flash = 'please fill out the form'
     return dict(form=form, proponentes=db(db.t_proponente.f_estado=="Activo").select(),message=T(response.flash))
 
-
+@auth.requires_membership('Administrador')
 def tutores():
     def my_form_processing(form):
         if form.vars.f_usbid:
@@ -89,13 +165,14 @@ def tutores():
     return dict(form=form, tutores=db(db.t_tutor.f_estado=="Activo").select(),message=T(response.flash))
 
 
+
 @auth.requires_login()
 def estado_manage():
     form = SQLFORM.smartgrid(db.t_estado,onupdate=auth.archive)
     return dict(form=form)
 
 #@auth.requires_login()
-
+@auth.requires_membership('Administrador')
 def sedes():
     def my_form_processing(form):
         if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_nombre):
@@ -109,6 +186,7 @@ def sedes():
         response.flash = 'please fill out the form'    
     return dict(form=form, sedes=db(db.t_sede.f_estado=="Activo").select(),message=T(response.flash))
 
+@auth.requires_membership('Administrador')
 def areas():
     def my_form_processing(form):
         if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_nombre):
@@ -122,6 +200,7 @@ def areas():
         response.flash = 'please fill out the form'
     return dict(form=form, areas=db(db.t_area.f_estado=="Activo").select(),message=T(response.flash))
 
+@auth.requires_membership('Administrador')
 def proyectos():
     def my_form_processing(form):
         if not re.match('\d{4}', form.vars.f_codigo):
@@ -159,6 +238,7 @@ def cursa():
 
     return dict(proyectos=db(db.t_project.id==idProyecto).select(),estudianteID=idEstudiante,idProyecto=idProyecto)
 
+@auth.requires_membership('Administrador')
 def validarProyectoEstudiante():
     idProyecto = long(request.args[0])
     db(db.t_cursa.id==idProyecto).update(f_state="2",f_valido="Valido")
@@ -190,24 +270,27 @@ def registrarProyectoEstudiante():
 
     return dict(proyecto=idProyecto,estudianteID=idEstudiante,mensaje=mensaje)
 
+
+@auth.requires_membership('Administrador')
 def sede_manage():
     form = SQLFORM.smartgrid(db.t_sede,onupdate=auth.archive)
     return locals()
 
-@auth.requires_login()
+@auth.requires_membership('Administrador')
 def comunidad_manage():
     form = SQLFORM.smartgrid(db.t_comunidad,onupdate=auth.archive)
     return locals()
 
-@auth.requires_login()
+@auth.requires_membership('Administrador')
 def area_manage():
     form = SQLFORM.smartgrid(db.t_area,onupdate=auth.archive)
     return locals()
 
-@auth.requires_login()
+@auth.requires_membership('Administrador')
 def sexo_manage():
     form = SQLFORM.smartgrid(db.t_sexo,onupdate=auth.archive)
     return locals()
+
 
 def estudiante_manage():
     form = SQLFORM.smartgrid(db.t_estudiante.id==request.args(0))
@@ -219,22 +302,18 @@ def estudiante_manage():
         response.flash = 'please fill out the form'
     return locals()
 
-@auth.requires_login()
 def proponente_manage():
     form = SQLFORM.smartgrid(db.t_proponente,onupdate=auth.archive)
     return locals()
 
-@auth.requires_login()
 def tutor_manage():
     form = SQLFORM.smartgrid(db.t_tutor,onupdate=auth.archive)
     return locals()
 
-@auth.requires_login()
 def proyecto_manage():
     form = SQLFORM.smartgrid(db.t_proyecto,onupdate=auth.archive)
     return locals()
 
-@auth.requires_login()
 def condicion_manage():
     form = SQLFORM.smartgrid(db.t_condicion,onupdate=auth.archive)
     return locals()
