@@ -150,13 +150,19 @@
                  </li>
              </ul>
        </div>
-        <div class="alert alert-success col-sm-8" role="alert">
-          <a href="{{=URL('estudiantes')}}" class="alert-link">Registro de proyecto exitoso. Volver a proyectos</a>
-      </div>
+       {{if mensaje=="Usted ya tiene un proyecto inscrito. Volver a proyectos":}}
+          <div class="alert alert-danger col-sm-8" role="alert">
+            <a href="{{=URL('estudiantes')}}" class="alert-link">{{=mensaje}}</a>
+         </div>
+       {{else:}}
+         <div class="alert alert-success col-sm-8" role="alert">
+            <a href="{{=URL('estudiantes')}}" class="alert-link">{{=mensaje}}</a>
+         </div>
+          <button id="btn-descarga" class="btn btn-success" style="width: 300px;" align="right">
+               <i class="glyphicon glyphicon-plus-sign"></i> <b>Descargar constancia de inscripción</b>
+          </button>          
+       {{pass}}
 
-      <button id="btn-descarga" class="btn btn-success" style="width: 300px;" align="right">
-           <i class="glyphicon glyphicon-plus-sign"></i> <b>Descargar constancia de inscripción</b>
-      </button>          
 
         {{if globals().get('msj', False):}} <p><strong>{{=msj}}</strong></p>
         {{else:}}

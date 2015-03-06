@@ -172,8 +172,14 @@ def rechazarProyectoEstudiante():
 def registrarProyectoEstudiante():
     idProyecto = long(request.args[0])
     idEstudiante = long(request.args[1])
-    db.t_cursa.insert(f_estudiante=idEstudiante,f_project=idProyecto,f_state="3")
-    return dict(proyecto=idProyecto,estudianteID=idEstudiante)
+    proyectoInscrito = db(db.t_cursa.f_estudiante==idEstudiante).select()
+    if not proyectoInscrito:
+        db.t_cursa.insert(f_estudiante=idEstudiante,f_project=idProyecto,f_state="3")
+        mensaje = "Registro de proyecto exitoso. Volver a proyectos"
+    else:
+        mensaje = "Usted ya tiene un proyecto inscrito. Volver a proyectos"
+
+    return dict(proyecto=idProyecto,estudianteID=idEstudiante,mensaje=mensaje)
 
 def sede_manage():
     form = SQLFORM.smartgrid(db.t_sede,onupdate=auth.archive)
