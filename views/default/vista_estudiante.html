@@ -1,0 +1,32 @@
+{{ extend 'default/vista_admin.html' }}
+{{ block vista_actores_detalles }}
+<h4 style="color:#4682B4">Home</h4>
+<h4 style="color:#4682B4">{{=bienvenida}}</h4>
+{{ end }}
+
+{{ block funciones_vista_actores }}
+<div class="col-md-2 botones">
+	<div class="row">
+	<button type="button" align="left" class="btn btn-lg0 btn-default perfil">
+	<h class="tittle-accion">Configurar perfil
+	</button>
+	</div><br>
+
+	<div class="row">
+	<button type="button" align="left" class="btn btn-lg1 btn-default">
+	<h class="tittle-accion">Incribir proyecto
+	</button>
+	</div><br> 
+
+	<div class="row">
+	<button type="button" align="left" class="btn btn-lg2 btn-default">
+	<h class="tittle-accion"> Consultar estado de proyecto
+	</button>
+	</div><br>
+
+</div>
+
+<div class="col-md-9" align="left" >
+	{{=form}}		
+</div>
+{{ end }}
