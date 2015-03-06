@@ -127,6 +127,7 @@
                         <th align="right"></th>
                         <th align="right"></th>
                         <th align="right"></th>
+                        <th align="right"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -143,6 +144,9 @@
                         </td>
                         <td>
                         <a href="{{=URL(r=request,f='rechazarProyectoEstudiante',args=proyecto.id)}}"><i class="glyphicon glyphicon glyphicon-remove"></i></a>
+                        </td>
+                        <td>
+                        <a href="{{=URL(r=request,f='validacionProyectoEstudiante',args=proyecto.id)}}"><i class="glyphicon glyphicon-saved"></i></a>
                         </td>
                     </tr>
                     {{ pass }}

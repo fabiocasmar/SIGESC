@@ -161,7 +161,16 @@ def cursa():
 
 def validarProyectoEstudiante():
     idProyecto = long(request.args[0])
-    db(db.t_cursa.id==idProyecto).update(f_state="2")
+    db(db.t_cursa.id==idProyecto).update(f_state="2",f_valido="Valido")
+    return dict(proyecto=idProyecto)
+
+def validacionProyectoEstudiante():
+    idProyecto = long(request.args[0])
+    db(db.t_cursa.id==idProyecto).update(f_valido="Activo")
+    return dict(proyecto=idProyecto)
+
+def solicitarValidacion():
+    idProyecto = long(request.args[0])
     return dict(proyecto=idProyecto)
 
 def rechazarProyectoEstudiante():
@@ -174,7 +183,7 @@ def registrarProyectoEstudiante():
     idEstudiante = long(request.args[1])
     proyectoInscrito = db(db.t_cursa.f_estudiante==idEstudiante).select()
     if not proyectoInscrito:
-        db.t_cursa.insert(f_estudiante=idEstudiante,f_project=idProyecto,f_state="3")
+        db.t_cursa.insert(f_estudiante=idEstudiante,f_project=idProyecto,f_state="2")
         mensaje = "Registro de proyecto exitoso. Volver a proyectos"
     else:
         mensaje = "Usted ya tiene un proyecto inscrito. Volver a proyectos"

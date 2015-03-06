@@ -251,6 +251,7 @@ db.define_table('t_cursa',
           label=T('Project')),
     Field('f_state', type='reference t_relacionestproy', notnull=True,
           label=T('State')),
+    Field('f_valido', type='string', notnull=True, label=T('Valido'), default='Invalido'),
     auth.signature,
     format='%(f_estudiante)s',
     migrate=settings.migrate)

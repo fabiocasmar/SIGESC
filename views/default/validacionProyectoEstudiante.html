@@ -43,23 +43,6 @@
     <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.woff', scheme='http')}}" rel="stylesheet" />
     <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.woff2', scheme='http')}}" rel="stylesheet" />
     
-    <script type="text/javascript">
-    $(document).ready(function(){
-      $('#btn-descarga').on('click', function(){
-        $(location).attr('href','{{=URL(r=request,f='generarPdfConstanciaInscripcion',args=[estudianteID,proyecto])}}');
-      });
-    })
-    </script>
-
-    <script type="text/javascript">
-    $(document).ready(function(){
-      $('#btn-validar').on('click', function(){
-        $(location).attr('href','{{=URL(r=request,f='solicitarValidacion',args=proyecto)}}');
-      });
-    })
-    </script>
-
-
   </head>
   
   <body role="document">
@@ -116,8 +99,6 @@
       </div>
     </nav>
 
-
-
     <div class="col-sm-12">
         <div class="row">
             <div class="col-md-2">
@@ -132,8 +113,6 @@
         </div>
         <hr>
     </div>
-
-
 
    <div class="col-sm-12">
        <div class="col-md-3">
@@ -158,26 +137,9 @@
                  </li>
              </ul>
        </div>
-       {{if mensaje=="Usted ya tiene un proyecto inscrito. Volver a proyectos":}}
-          <div class="alert alert-danger col-sm-8" role="alert">
-            <a href="{{=URL('estudiantes')}}" class="alert-link">{{=mensaje}}</a>
-         </div>
-         <button id="btn-validar" class="btn btn-success" style="width: 300px;" align="right">
-              <i class="glyphicon glyphicon-plus-sign"></i> <b>Solicitar validación de proyecto al tutor</b>
-         </button>
-       {{else:}}
-         <div class="alert alert-success col-sm-8" role="alert">
-            <a href="{{=URL('estudiantes')}}" class="alert-link">{{=mensaje}}</a>
-         </div>
-          <button id="btn-descarga" class="btn btn-success" style="width: 300px;" align="right">
-               <i class="glyphicon glyphicon-plus-sign"></i> <b>Descargar constancia de inscripción</b>
-          </button>
-          <button id="btn-validar" class="btn btn-success" style="width: 300px;" align="right">
-               <i class="glyphicon glyphicon-plus-sign"></i> <b>Solicitar validación de proyecto al tutor</b>
-          </button>
-       {{pass}}
-
-
+        <div class="alert alert-success col-sm-8" role="alert">
+          <a href="{{=URL('proyectos')}}" class="alert-link">Validación de proyecto exitosa. Volver a proyectos</a>
+        </div>
         {{if globals().get('msj', False):}} <p><strong>{{=msj}}</strong></p>
         {{else:}}
   
