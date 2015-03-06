@@ -76,11 +76,13 @@ def vista_tutor():
         if not re.match('\d{7,13}', form.vars.f_telefono):
             form.errors.f_telefono = 'El formato válido de telefono es 08002023223'
 
+
     msj = 'Bienvenid@ %s %s' % (auth.user.first_name,auth.user.last_name)
     form = SQLFORM(db.t_tutor,
         fields = ['f_usbid','f_cedula', 'f_sexo', 'f_telefono', 'f_sede', 'f_direccion', 'f_estado'], formstyle='table3cols')
 
     user = db.auth_user[auth.user.id]
+    usuario = db(db.t_tutor.f_estado =="Activo" and db.t_tutor.f_user==auth.user).select()
     form.vars.f_user = user
     form.vars.f_email = auth.user.email
     form.vars.f_nombre = auth.user.first_name
@@ -91,7 +93,7 @@ def vista_tutor():
         response.flash = 'form has errors'
     else:
         response.flash = 'please fill out the form'
-    return dict(form=form, bienvenida=msj)
+    return dict(form=form, rows=usuario, bienvenida=msj, tutorId=usuario[0].id)
 
 @auth.requires_membership('Estudiantes')
 def vista_estudiante():
@@ -255,6 +257,7 @@ def proyectos():
         response.flash = 'please fill out the form'
     return dict(form=form, proyectos=db(db.t_project.f_estado_del=="Activo").select(),message=T(response.flash))
 
+
 @auth.requires_membership('Administrador')
 def comunidades():
     def my_form_processing(form):
@@ -295,6 +298,14 @@ def validarProyectoEstudiante():
     idProyecto = long(request.args[0])
     db(db.t_cursa.id==idProyecto).update(f_state="2",f_valido="Valido")
     return dict(proyecto=idProyecto)
+
+@auth.requires_membership('Tutores')
+def validarProyectoEstudianteTutor():
+    idTutor = db(db.t_tutor.f_user==auth.user).select()    
+    msj= 'Bienvenid@ %s %s' % (auth.user.first_name,auth.user.last_name)
+    return dict(proyectos = db(db.t_project.f_tutor==idTutor[0]).select(), bienvenida=msj)
+   
+
 
 def validacionProyectoEstudiante():
     idProyecto = long(request.args[0])
