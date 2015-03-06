@@ -62,25 +62,11 @@ def vista_proponente():
 
 @auth.requires_membership('Estudiantes')
 def vista_estudiante():
-    def my_form_processing(form):
-        if not re.match('\d{2}-\d{5}$', form.vars.f_usbid):
-            form.errors.f_usbid = 'El formato válido de carnet es: 00-00000'
-        if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
-            form.errors.f_cedula = 'El formato válido de cédula es: 1232382'
-        if not re.match('(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', form.vars.f_email):
-            form.errors.f_email = 'El formato válido de email es example@example.com'
-        if not re.match('\d{7,13}', form.vars.f_telefono):
-            form.errors.f_telefono = 'El formato válido de telefono es 08002023223'
-
     msj = 'Bienvenid@ %s %s' % (auth.user.first_name,auth.user.last_name)
-    form = SQLFORM(db.t_estudiante,
-        fields = ['f_usbid','f_cedula', 'f_carrera', 'f_sede', 'f_sexo', 'f_telefono', 'f_direccion'], formstyle='table3cols')
-
     user = db.auth_user[auth.user.id]
-    form.vars.f_user = user
-    form.vars.f_email = auth.user.email
-    form.vars.f_nombre = auth.user.first_name
-    form.vars.f_apellido = auth.user.last_name
+    usuario =  db(db.t_estudiante.f_estado=="Activo" and db.t_estudiante.f_user==auth.user.id).select()
+    proyecto = db(db.t_cursa.f_estudiante=="Activo" and db.t_estudiante.f_user==auth.user.id).select()
+    areas=db(db.t_area.f_estado=="Activo").select()
     if request.env.request_method =='POST':
         if form.process(onvalidation=my_form_processing, keepvalues=True).accepted:
             response.flash = 'form accepted'
@@ -88,7 +74,7 @@ def vista_estudiante():
             response.flash = 'form has errors'
         else:
             response.flash = 'please fill out the form'
-    return dict(form=form, bienvenida=msj)
+    return dict(rows=usuario, bienvenida=msj,estudianteId=usuario[0].id,proyecto)
 
  
 def proponenteProyecto():
@@ -136,11 +122,13 @@ def proponentes():
 
     form = SQLFORM(db.t_proponente)
     if form.process(onvalidation=my_form_processing).accepted:
-        response.flash = 'form accepted'
+        response.flash = '1'
+        
     elif form.errors:
-        response.flash = 'form has errors'
+        response.flash = '0'
+        
     else:
-        response.flash = 'please fill out the form'
+        response.flash = 'Llene el formulario'
     return dict(form=form, proponentes=db(db.t_proponente.f_estado=="Activo").select(),message=T(response.flash))
 
 
@@ -159,11 +147,13 @@ def tutores():
             form.errors.f_telefono = 'El formato válido de telefono es 08002023223'
     form = SQLFORM(db.t_tutor)
     if form.process(onvalidation=my_form_processing).accepted:
-        response.flash = 'form accepted'
+        response.flash = '1'
+        
     elif form.errors:
-        response.flash = 'form has errors'
+        response.flash = '0'
+        
     else:
-        response.flash = 'please fill out the form'
+        response.flash = 'Llene el formulario'
     return dict(form=form, tutores=db(db.t_tutor.f_estado=="Activo").select(),message=T(response.flash))
 
 
@@ -181,11 +171,13 @@ def sedes():
             form.errors.f_nombre = 'Sólo puede contener letras'
     form = SQLFORM(db.t_sede)
     if form.process(onvalidation=my_form_processing).accepted:
-        response.flash = 'form accepted'
+        response.flash = '1'
+        
     elif form.errors:
-        response.flash = 'form has errors'
+        response.flash = '0'
+        
     else:
-        response.flash = 'please fill out the form'    
+        response.flash = 'Llene el formulario'  
     return dict(form=form, sedes=db(db.t_sede.f_estado=="Activo").select(),message=T(response.flash))
 
 @auth.requires_membership('Administrador')
@@ -195,11 +187,13 @@ def areas():
             form.errors.f_nombre = 'Sólo puede contener letras'
     form = SQLFORM(db.t_area,onupdate=auth.archive)
     if form.process(onvalidation=my_form_processing).accepted:
-        response.flash = 'form accepted'
+        response.flash = '1'
+        
     elif form.errors:
-        response.flash = 'form has errors'
+        response.flash = '0'
+        
     else:
-        response.flash = 'please fill out the form'
+        response.flash = 'Llene el formulario'
     return dict(form=form, areas=db(db.t_area.f_estado=="Activo").select(),message=T(response.flash))
 
 @auth.requires_membership('Administrador')
@@ -211,33 +205,84 @@ def proyectos():
             form.errors.f_nombre = 'Sólo puede contener letras'
         if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_descripcion):
             form.errors.f_descripcion = 'Sólo puede contener letras'
-        if not re.match('\d{2}', form.vars.f_version):
-            form.errors.f_codigo = 'El formato válido de la versión son 2 dígitos'
+        if not re.match('\d+', form.vars.f_version):
+            form.errors.f_version = 'El formato válido de la versión son 2 dígitos'
+        if form.vars.f_fechaini > form.vars.f_fechafin:
+            form.errors.f_fechaini = 'La fecha final del proyecto es menor que la inicial'
+            form.errors.f_fechafin = 'La fecha final del proyecto es menor que la inicial'
     form = SQLFORM(db.t_project,onupdate=auth.archive) 
     if form.process(onvalidation=my_form_processing).accepted:
-        response.flash = 'form accepted'
+        response.flash = '1'
+        
     elif form.errors:
-        response.flash = 'form has errors'
+        response.flash = '0'
+        
     else:
-        response.flash = 'please fill out the form'
+        response.flash = 'Llene el formulario'
     return dict(form=form, proyectos=db(db.t_project.f_estado_del=="Activo").select(),message=T(response.flash))
+
+@auth.requires_membership('Estudiantes')
+def proyectosEstudiante():
+    def my_form_processing(form):
+        if not re.match('\d{4}', form.vars.f_codigo):
+            form.errors.f_codigo = 'El formato válido del código son 4 dígitos'
+        if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_nombre):
+            form.errors.f_nombre = 'Sólo puede contener letras'
+        if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_descripcion):
+            form.errors.f_descripcion = 'Sólo puede contener letras'
+        if not re.match('\d+', form.vars.f_version):
+            form.errors.f_version = 'El formato válido de la versión son 2 dígitos'
+        if form.vars.f_fechaini > form.vars.f_fechafin:
+            form.errors.f_fechaini = 'La fecha final del proyecto es menor que la inicial'
+            form.errors.f_fechafin = 'La fecha final del proyecto es menor que la inicial'
+    form = SQLFORM(db.t_project,onupdate=auth.archive) 
+    if form.process(onvalidation=my_form_processing).accepted:
+        response.flash = '1'
+        
+    elif form.errors:
+        response.flash = '0'
+        
+    else:
+        response.flash = 'Llene el formulario'
+    return dict(form=form, proyectos=db(db.t_project.f_estado_del=="Activo").select(),message=T(response.flash))
+
 
 @auth.requires_membership('Administrador')
 def comunidades():
     def my_form_processing(form):
         if not re.match('\d', form.vars.f_cantidadbeneficiados):
-            form.errors.f_codigo = 'Debe ser un número'
+            form.errors.f_cantidadbeneficiados = 'Debe ser un número'
         if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_nombre):
             form.errors.f_nombre = 'Sólo puede contener letras'
-    form = SQLFORM(db.t_project,onupdate=auth.archive) 
+    form = SQLFORM(db.t_comunidad,onupdate=auth.archive) 
     if form.process(onvalidation=my_form_processing).accepted:
+        response.flash = '1'
+        
+    elif form.errors:
+        response.flash = '0'
+        
+    else:
+        response.flash = 'Llene el formulario'
+    return dict(form=form, comunidades=db(db.t_comunidad.f_estado_del=="Activo").select(),message=T(response.flash))
+
+
+def estudianteCursa():
+    idProyecto = long(request.args[0])
+    idEstudiante = long(request.args[1])
+    estado = db(db.t_relacionestproy).select().first()
+    form = SQLFORM(db.t_cursa,fields = ['f_estudiante','f_project','f_state']) 
+    form.vars.f_estudiante = idEstudiante
+    form.vars.f_project = idProyecto
+    form.vars.f_state = estado 
+
+    if form.process(keepvalues=True).accepted:
         response.flash = 'form accepted'
     elif form.errors:
         response.flash = 'form has errors'
     else:
         response.flash = 'please fill out the form'
-    return dict(form=form, comunidades=db(db.t_comunidad.f_estado_del=="Activo").select(),message=T(response.flash))
 
+    return dict(proyectos=db(db.t_project.id==idProyecto).select(),estudianteID=idEstudiante,idProyecto=idProyecto)
 
 def cursa():
     idProyecto = long(request.args[0])
@@ -272,6 +317,10 @@ def solicitarValidacion():
     idProyecto = long(request.args[0])
     return dict(proyecto=idProyecto)
 
+def solicitarValidacionEstudiante():
+    idProyecto = long(request.args[0])
+    return dict(proyecto=idProyecto)
+
 def rechazarProyectoEstudiante():
     idProyecto = long(request.args[0])
     db(db.t_cursa.id==idProyecto).update(f_state="3")
@@ -289,6 +338,17 @@ def registrarProyectoEstudiante():
 
     return dict(proyecto=idProyecto,estudianteID=idEstudiante,mensaje=mensaje)
 
+def registrarProyectoComoEstudiante():
+    idProyecto = long(request.args[0])
+    idEstudiante = long(request.args[1])
+    proyectoInscrito = db(db.t_cursa.f_estudiante==idEstudiante).select()
+    if not proyectoInscrito:
+        db.t_cursa.insert(f_estudiante=idEstudiante,f_project=idProyecto,f_state="2")
+        mensaje = "Registro de proyecto exitoso. Volver a proyectos"
+    else:
+        mensaje = "Usted ya tiene un proyecto inscrito. Volver a proyectos"
+
+    return dict(proyecto=idProyecto,estudianteID=idEstudiante,mensaje=mensaje)
 
 @auth.requires_membership('Administrador')
 def sede_manage():
@@ -372,6 +432,12 @@ def estudianteProyectos():
     #return dict(rows = db(db.t_estudiante.id==x).select())
     return dict(rows = db(db.t_estudiante.id==x).select(),proyectos=db().select(db.t_project.ALL),estudianteID=x)
 
+def estudianteInscribeProyectos():
+    x = long (request.args[0])
+    #return dict(rows = db(db.t_estudiante.id==x).select())
+    return dict(rows = db(db.t_estudiante.id==x).select(),proyectos=db().select(db.t_project.ALL),estudianteID=x)
+
+
 def estudiantesDetalles():
     x = long (request.args[0])
     #return dict(rows = db(db.t_estudiante.id==x).select())
@@ -381,9 +447,14 @@ def tutoresDetalles():
     x = long (request.args[0])
     return dict(rows = db(db.t_tutor.id==x).select())
 
+
 def proyectosDetalles():
     x = long (request.args[0])
     return dict(rows = db(db.t_project.id==x).select())    
+
+def proyectosDetallesEstudiantes():
+    x = long (request.args[0])
+    return dict(rows = db(db.t_project.id==x).select()) 
 
 def proponentesDetalles():
     x = long (request.args[0])
@@ -398,11 +469,20 @@ def comunidadesDetalles():
     return dict(rows = db(db.t_comunidad.id==x).select()) 
 
 def estudiantesEditar():
+    def my_form_processing(form):
+        if not re.match('\d{2}-\d{5}$', form.vars.f_usbid):
+            form.errors.f_usbid = 'El formato válido de carnet es: 00-00000'
+        if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
+            form.errors.f_cedula = 'El formato válido de cédula es: 1232382'
+        if not re.match('(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', form.vars.f_email):
+            form.errors.f_email = 'El formato válido de email es example@example.com'
+        if not re.match('\d{7,13}', form.vars.f_telefono):
+            form.errors.f_telefono = 'El formato válido de telefono es 08002023223'
     x = long (request.args[0])
     #return dict(rows = db(db.t_sede.id==x).select())
     record = db.t_estudiante(request.args[0])
     form = SQLFORM(db.t_estudiante, record, deletable = True)
-    if form.process().accepted:
+    if form.process(onvalidation=my_form_processing).accepted:
         response.flash = 'form accepted'
     elif form.errors:
         response.flash = 'form has errors'
@@ -411,11 +491,14 @@ def estudiantesEditar():
     return dict(form = form)
 
 def areasEditar():
+    def my_form_processing(form):
+        if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_nombre):
+            form.errors.f_nombre = 'Sólo puede contener letras'
     x = long (request.args[0])
     #return dict(rows = db(db.t_sede.id==x).select())
     record = db.t_area(request.args[0])
     form = SQLFORM(db.t_area, record, deletable = True)
-    if form.process().accepted:
+    if form.process(onvalidation=my_form_processing).accepted:
         response.flash = 'form accepted'
     elif form.errors:
         response.flash = 'form has errors'
@@ -424,11 +507,14 @@ def areasEditar():
     return dict(form = form)
 
 def sedesEditar():
+    def my_form_processing(form):
+        if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_nombre):
+            form.errors.f_nombre = 'Sólo puede contener letras'
     x = long (request.args[0])
     #return dict(rows = db(db.t_sede.id==x).select())
     record = db.t_sede(request.args[0])
     form = SQLFORM(db.t_sede, record, deletable = True)
-    if form.process().accepted:
+    if form.process(onvalidation=my_form_processing).accepted:
         response.flash = 'form accepted'
     elif form.errors:
         response.flash = 'form has errors'
@@ -437,11 +523,18 @@ def sedesEditar():
     return dict(form = form)
 
 def proponentesEditar():
+    def my_form_processing(form):
+        if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
+            form.errors.f_cedula = 'El formato válido de cédula es: 1232382'
+        if not re.match('(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', form.vars.f_email):
+            form.errors.f_email = 'El formato válido de email es example@example.com'
+        if not re.match('\d{7,13}', form.vars.f_telefono):
+            form.errors.f_telefono = 'El formato válido de telefono es 08002023223'
     x = long (request.args[0])
     #return dict(rows = db(db.t_sede.id==x).select())
     record = db.t_proponente(request.args[0])
     form = SQLFORM(db.t_proponente, record, deletable = True)
-    if form.process().accepted:
+    if form.process(onvalidation=my_form_processing).accepted:
         response.flash = 'form accepted'
     elif form.errors:
         response.flash = 'form has errors'
@@ -450,11 +543,21 @@ def proponentesEditar():
     return dict(form = form)
 
 def tutoresEditar():
+    def my_form_processing(form):
+        if form.vars.f_usbid:
+            if not re.match('\d{2}-\d{5}$', form.vars.f_usbid) and not re.match('[a-zA-Z0-9_.+-]+', form.vars.f_usbid):
+                form.errors.f_usbid = 'usbid invalido'
+        if not re.match('[1-9][0-9]{0,8}$', form.vars.f_cedula):
+            form.errors.f_cedula = 'El formato válido de cédula es: 1232382'
+        if not re.match('(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)', form.vars.f_email):
+            form.errors.f_email = 'El formato válido de email es example@example.com'
+        if not re.match('\d{7,13}', form.vars.f_telefono):
+            form.errors.f_telefono = 'El formato válido de telefono es 08002023223'
     x = long (request.args[0])
     #return dict(rows = db(db.t_sede.id==x).select())
     record = db.t_tutor(request.args[0])
     form = SQLFORM(db.t_tutor, record, deletable = True)
-    if form.process().accepted:
+    if form.process(onvalidation=my_form_processing).accepted:
         response.flash = 'form accepted'
     elif form.errors:
         response.flash = 'form has errors'
@@ -463,11 +566,23 @@ def tutoresEditar():
     return dict(form = form)
 
 def proyectosEditar():
+    def my_form_processing(form):
+        if not re.match('\d{4}', form.vars.f_codigo):
+            form.errors.f_codigo = 'El formato válido del código son 4 dígitos'
+        if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_nombre):
+            form.errors.f_nombre = 'Sólo puede contener letras'
+        if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_descripcion):
+            form.errors.f_descripcion = 'Sólo puede contener letras'
+        if not re.match('\d+', form.vars.f_version):
+            form.errors.f_version = 'El formato válido de la versión son 2 dígitos'
+        if form.vars.f_fechaini > form.vars.f_fechafin:
+            form.errors.f_fechaini = 'La fecha final del proyecto es menor que la inicial'
+            form.errors.f_fechafin = 'La fecha final del proyecto es menor que la inicial'    
     x = long (request.args[0])
     #return dict(rows = db(db.t_sede.id==x).select())
     record = db.t_project(request.args[0])
     form = SQLFORM(db.t_project, record, deletable = True)
-    if form.process().accepted:
+    if form.process(onvalidation=my_form_processing).accepted:
         response.flash = 'form accepted'
     elif form.errors:
         response.flash = 'form has errors'
@@ -476,11 +591,16 @@ def proyectosEditar():
     return dict(form = form)
 
 def comunidadesEditar():
+    def my_form_processing(form):
+        if not re.match('\d', form.vars.f_cantidadbeneficiados):
+            form.errors.f_cantidadbeneficiados = 'Debe ser un número'
+        if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_nombre):
+            form.errors.f_nombre = 'Sólo puede contener letras'
     x = long (request.args[0])
     #return dict(rows = db(db.t_sede.id==x).select())
     record = db.t_comunidad(request.args[0])
     form = SQLFORM(db.t_comunidad, record, deletable = True)
-    if form.process().accepted:
+    if form.process(nvalidation=my_form_processing).accepted:
         response.flash = 'form accepted'
     elif form.errors:
         response.flash = 'form has errors'

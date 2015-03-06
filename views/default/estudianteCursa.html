@@ -30,6 +30,9 @@
 
     <script type="text/javascript" src="{{=URL('static', 'js/jquery-1.11.2.js')}}">
     </script>
+    <script type="text/javascript" src="{{=URL('static', 'js/web2py.js')}}">
+    </script>
+
     
     <!-- Custom styles for this template -->
     
@@ -42,6 +45,14 @@
     <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.ttf', scheme='http')}}" rel="stylesheet" />
     <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.woff', scheme='http')}}" rel="stylesheet" />
     <link href="{{=URL('static', 'fonts/glyphicons-halflings-regular.woff2', scheme='http')}}" rel="stylesheet" />
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('#btn-prueba').on('click', function(){
+        $(location).attr('href','{{=URL(r=request,f='registrarProyectoComoEstudiante',args=[idProyecto,estudianteID])}}');
+      });
+    })
+    </script>
     
   </head>
   
@@ -102,7 +113,7 @@
     <div class="col-sm-12">
         <div class="row">
             <div class="col-md-2">
-                <img src="{{=URL('static', 'proyects2.png')}}" class="img-responsive" width="150" height="110"/>
+                <img src="{{=URL('static', 'estudiantes.png')}}" class="img-responsive" width="150" height="110"/>
             </div>
             <div class="col-md-4" align="left">
                <h4 style="color:#4682B4"><a href=".">Home</a> /<a href="{{=URL('vista_admin')}}"> Admin </a> / <a href="#">Proyectos </a> </h4>
@@ -120,10 +131,10 @@
             <hr>
              <ul class="nav nav-stacked">
                  <li>
-                      <a href="{{=URL('proyectos')}}">
-                         <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Volver a Proyectos</a>
-                     <a href="{{=URL('estudiantes')}}">
-                         <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Estudiantes </a>
+                      <a href="{{=URL('estudiantes')}}">
+                         <span class="glyphicon glyphicon-circle-arrow-left" aria-hidden="true"></span> Volver a Estudiantes</a>
+                     <a href="{{=URL('proyectos')}}">
+                         <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Proyectos </a>
                      <a href="{{=URL('areas')}}">
                          <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Áreas </a>
                       <a href="{{=URL('proponentes')}}">
@@ -132,8 +143,6 @@
                           <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Sedes</a>
                      <a href="{{=URL('tutores')}}">
                           <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Tutores</a>
-                     <a href="{{=URL('comunidades')}}">
-                          <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"></span> Ir a Comunidades</a>
                  </li>
              </ul>
        </div>
@@ -148,7 +157,7 @@
                     <div class="panel-body">
                         <table class="table table-striped">
 
-                            {{for proyecto in rows:}}
+                            {{for proyecto in proyectos:}}
                             <tr><td><b>Código:</b> {{=proyecto.f_codigo}}</td></tr>
                             <tr><td><b>Nombre:</b> {{=proyecto.f_nombre}}</td></tr>
                             <tr><td><b>Descipción:</b> {{=proyecto.f_descripcion}}</td></tr>
@@ -157,7 +166,8 @@
                             <tr><td><b>Tutor:</b> {{=proyecto.f_tutor}}</td></tr>
                             <tr><td><b>Fecha de Inicio:</b> {{=proyecto.f_fechaini}}</td></tr>
                             <tr><td><b>Fecha de Finalización:</b> {{=proyecto.f_fechafin}}</td></tr>
-                            <tr><td><b>Versión:</b> {{=proyecto.f_version}}</td></tr>
+                            <tr><td><b>Fecha de Finalización:</b> {{=proyecto.f_fechafin}}</td></tr>
+                            <tr><td><b>Version:</b> {{=proyecto.f_version}}</td></tr>
                             <tr><td><b>Comunidad:</b> {{=proyecto.f_comunidad}}</td></tr>
                             <tr><td><b>Proponente:</b> {{=proyecto.f_proponente}}</td></tr>
                           {{pass}}
@@ -166,6 +176,9 @@
                     </div>
                 </div>
             </div>
+            <button id="btn-prueba" class="btn btn-success" style="width: 240px;" align="right">
+                 <i class="glyphicon glyphicon-plus-sign"></i> <b>Inscribir este proyecto</b>
+            </button>          
         </div>
 
       </div>
