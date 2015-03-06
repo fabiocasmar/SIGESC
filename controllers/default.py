@@ -16,7 +16,7 @@ def call(): return service()
 ### end requires
 def index():
     form=auth.login()
-    return dict()
+    return dict(form=form)
 
 def error():
     return dict()

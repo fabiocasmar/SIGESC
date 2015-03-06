@@ -7,13 +7,13 @@ p4
 I512
 sS'unique'
 p5
-I00
+I01
 sS'sortable'
 p6
 I2
 sS'sql'
 p7
-S'CHAR(512) NOT NULL'
+S'CHAR(512) NOT NULL UNIQUE'
 p8
 sS'notnull'
 p9
@@ -30,7 +30,7 @@ I512
 sg5
 I00
 sg6
-I17
+I18
 sg7
 S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
 p14
@@ -181,7 +181,7 @@ I512
 sg5
 I00
 sg6
-I13
+I14
 sg7
 S'CHAR(1)'
 p48
@@ -215,7 +215,7 @@ I512
 sg5
 I00
 sg6
-I14
+I15
 sg7
 S'TIMESTAMP'
 p56
@@ -232,7 +232,7 @@ I512
 sg5
 I00
 sg6
-I15
+I16
 sg7
 S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE'
 p60
@@ -240,7 +240,7 @@ sg9
 I00
 sg10
 g15
-ssS'modified_on'
+ssS'f_estado_del'
 p61
 (dp62
 g4
@@ -248,17 +248,33 @@ I512
 sg5
 I00
 sg6
-I16
+I13
+sg7
+S'CHAR(512) NOT NULL'
+p63
+sg9
+I01
+sg10
+g11
+ssS'modified_on'
+p64
+(dp65
+g4
+I512
+sg5
+I00
+sg6
+I17
 sg7
 S'TIMESTAMP'
-p63
+p66
 sg9
 I00
 sg10
 g57
 ssS'id'
-p64
-(dp65
+p67
+(dp68
 g4
 I512
 sg5
@@ -267,14 +283,14 @@ sg6
 I1
 sg7
 S'INTEGER PRIMARY KEY AUTOINCREMENT'
-p66
+p69
 sg9
 I00
 sg10
-g64
+g67
 ssS'f_fechafin'
-p67
-(dp68
+p70
+(dp71
 g4
 I512
 sg5
@@ -283,7 +299,7 @@ sg6
 I9
 sg7
 S'DATE NOT NULL'
-p69
+p72
 sg9
 I01
 sg10
