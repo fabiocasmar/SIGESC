@@ -205,6 +205,7 @@
 'file saved on %s': 'archivo guardado %s',
 'First name': 'Nombre',
 'Forgot username?': '¿Olvidó el nombre de usuario?',
+'form accepted': 'form accepted',
 'form has errors': 'form has errors',
 'Forms and Validators': 'Formularios y validadores',
 'Free Applications': 'Aplicaciones Libres',

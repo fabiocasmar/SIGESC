@@ -166,7 +166,7 @@
             <table class="table table-condensed" id="estuds">
                 <thead>
                     <tr>
-                        <th> Áreas registrados</i></th>
+                        <th> Áreas registradas</i></th>
                         <th align="right"></th>
                         <th align="right"></th>
                         <th align="right"></th>
@@ -194,7 +194,7 @@
     
         <div class="col-md-5">
              <button class="btn btn-success" style="width: 240px;" onclick="mostrar_form()" align="right">
-                 <i class="glyphicon glyphicon-plus-sign"></i> <b>Registrar un nuevo esudiante</b>
+                 <i class="glyphicon glyphicon-plus-sign"></i> <b>Registrar Área</b>
             </button>
             <button class="btn btn-warning" id="up" style="width: 100px; display:none" onclick="ocultar_form()">
                  </i> <b>Ocultar </b><i class="glyphicon glyphicon-chevron-up"></i>
@@ -207,7 +207,7 @@
                    
                         
                         <td><tr><b> Nombre </b><div class="campos">{{=form.custom.widget.f_nombre}} </tr></td></div>
-                        
+                        <tr><td><b> Estado </b>{{=form.custom.widget.f_estado}}</tr></td>
                 </div> <!--cerrando tabla--> 
 
                         <input class="btn btn-primary" name="guardar" type="submit" style="width:200px" value="Registrar"/>

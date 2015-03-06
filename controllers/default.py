@@ -143,6 +143,8 @@ def proponentes():
         response.flash = 'please fill out the form'
     return dict(form=form, proponentes=db(db.t_proponente.f_estado=="Activo").select(),message=T(response.flash))
 
+
+
 @auth.requires_membership('Administrador')
 def tutores():
     def my_form_processing(form):
@@ -219,6 +221,23 @@ def proyectos():
     else:
         response.flash = 'please fill out the form'
     return dict(form=form, proyectos=db(db.t_project.f_estado_del=="Activo").select(),message=T(response.flash))
+
+@auth.requires_membership('Administrador')
+def comunidades():
+    def my_form_processing(form):
+        if not re.match('\d', form.vars.f_cantidadbeneficiados):
+            form.errors.f_codigo = 'Debe ser un número'
+        if not re.match('[A-ZÁÉÍÓÚÑ]|[A-ZÁÉÍÓÚÑa]|[a-zñáéíóúäëïöü]*$', form.vars.f_nombre):
+            form.errors.f_nombre = 'Sólo puede contener letras'
+    form = SQLFORM(db.t_project,onupdate=auth.archive) 
+    if form.process(onvalidation=my_form_processing).accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill out the form'
+    return dict(form=form, comunidades=db(db.t_comunidad.f_estado_del=="Activo").select(),message=T(response.flash))
+
 
 def cursa():
     idProyecto = long(request.args[0])
@@ -374,6 +393,10 @@ def areasDetalles():
     x = long (request.args[0])
     return dict(rows = db(db.t_area.id==x).select())    
 
+def comunidadesDetalles():
+    x = long (request.args[0])
+    return dict(rows = db(db.t_comunidad.id==x).select()) 
+
 def estudiantesEditar():
     x = long (request.args[0])
     #return dict(rows = db(db.t_sede.id==x).select())
@@ -449,9 +472,21 @@ def proyectosEditar():
     elif form.errors:
         response.flash = 'form has errors'
     elif not record:
-        return dict('La sede ha sido eliminada')
+        return dict('El proyecto ha sido eliminada')
     return dict(form = form)
 
+def comunidadesEditar():
+    x = long (request.args[0])
+    #return dict(rows = db(db.t_sede.id==x).select())
+    record = db.t_comunidad(request.args[0])
+    form = SQLFORM(db.t_comunidad, record, deletable = True)
+    if form.process().accepted:
+        response.flash = 'form accepted'
+    elif form.errors:
+        response.flash = 'form has errors'
+    elif not record:
+        return dict('La comunidad ha sido eliminada')
+    return dict(form = form)
 
 def generarPdfConstanciaInicio():
     x = long (request.args[0])
